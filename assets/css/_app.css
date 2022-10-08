@@ -56,7 +56,7 @@
 }
 
 .product-item:hover .product-item__name {
-	color: #7186ff;
+	color: var(--primary-color);
 }
 
 .product-item__price {
