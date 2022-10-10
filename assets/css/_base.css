@@ -10,6 +10,11 @@
 	--red-color: #f63d30;
 	--star-color: #ffc107;
 
+	--success-color: #47d864;
+	--info-color: #2f86eb;
+	--warning-color: #ffc021;
+	--error-color: #ff623d;
+
 	--top-header-height: 80px;
 	--bottom-header-height: 45px;
 	--slider-height: calc(
@@ -30,9 +35,9 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	position: relative;
 	background-color: var(--main-bg-color);
 	overflow-x: hidden;
+	position: relative;
 }
 
 button {
@@ -442,6 +447,115 @@ table tbody tr:hover {
 }
 /* end tooltip */
 
+/* toast */
+#toast {
+	position: fixed;
+	top: 15px;
+	right: 15px;
+	z-index: 99;
+}
+
+.toast {
+	display: flex;
+	align-items: center;
+	background-color: var(--white-color);
+
+	border-radius: 2px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+	padding: 20px 0;
+	overflow: hidden;
+	position: relative;
+
+	min-width: 300px;
+	max-width: 350px;
+	transition: all 0.3s linear;
+}
+
+.toast + .toast {
+	margin-top: 20px;
+}
+
+.toast__icon {
+	font-size: 25px;
+	margin: 0 10px;
+
+	display: flex;
+	align-items: center;
+}
+
+.toast__msg {
+	color: #333;
+}
+
+.toast__close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+
+	color: #555;
+	font-size: 20px;
+	transition: all 0.2s ease;
+}
+
+.toast__progress {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	height: 3px;
+	width: 100%;
+	background-color: var(--white-color);
+}
+
+.toast__progress-timing {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	right: 0;
+
+	height: 100%;
+	width: 100%;
+}
+
+.toast__close:hover {
+	cursor: pointer;
+	color: var(--primary-color);
+}
+
+.toast--success .toast__icon {
+	color: var(--success-color);
+}
+
+.toast--success .toast__progress-timing {
+	background-color: var(--success-color);
+}
+
+.toast--info .toast__icon {
+	color: var(--info-color);
+}
+
+.toast--info .toast__progress-timing {
+	background-color: var(--info-color);
+}
+
+.toast--warning .toast__icon {
+	color: var(--warning-color);
+}
+
+.toast--warning .toast__progress-timing {
+	background-color: var(--warning-color);
+}
+
+.toast--error .toast__icon {
+	color: var(--error-color);
+}
+
+.toast--error .toast__progress-timing {
+	background-color: var(--error-color);
+}
+/* end toast */
+
 /* animation */
 @keyframes growth {
 	from {
@@ -451,6 +565,29 @@ table tbody tr:hover {
 	to {
 		opacity: 1;
 		transform: scale(1);
+	}
+}
+
+@keyframes slideInLeft {
+	from {
+		transform: translateX(calc(100% + 15px));
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes progressing {
+	to {
+		right: 100%;
 	}
 }
 /* end animation */
