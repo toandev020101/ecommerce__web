@@ -94,11 +94,11 @@
 /* end search */
 
 /* cart */
-.cart {
+.action__cart {
 	position: relative;
 }
 
-.cart:hover .cart__list {
+.action__cart:hover .cart__list {
 	display: block;
 }
 

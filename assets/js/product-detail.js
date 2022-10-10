@@ -2,6 +2,9 @@
 const imgShow = $('.product-detail__img-item:first-child > img')
 const imgList = $$('.product-detail__img-item:not(:first-child) > img')
 
+const copyInput = $('.product-detail__info-copy-text')
+const copyBtn = $('.product-detail__info-copy')
+
 const colorBtnList = $$('.product-detail__info-color-item > button')
 const descriptionBtn = $('.product-detail__description-btn')
 const description = $('.product-detail__description')
@@ -154,6 +157,17 @@ const showHideDescription = (descriptionBtn) => {
 	}
 }
 
+const copyClick = (copyBtn, copyInput) => {
+	copyBtn.onclick = () => {
+		const text = copyInput.value
+		copyInput.select()
+		navigator.clipboard.writeText(text)
+
+		copyInput.value = 'Copied!'
+		setTimeout(() => (copyInput.value = text), 1500)
+	}
+}
+
 const renderProductList = (products) => {
 	products.forEach((product) => {
 		let prod = `<a href="#" class="link product-item">
@@ -210,6 +224,9 @@ changeColorImgShow(imgShow, colorBtnList)
 
 // show hide description
 showHideDescription(descriptionBtn)
+
+// copy voucher
+copyClick(copyBtn, copyInput)
 
 // render product
 renderProductList(products)

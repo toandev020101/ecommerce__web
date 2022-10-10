@@ -107,8 +107,29 @@
 	width: 20%;
 }
 
-.product-detail__info-code {
+.product-detail__info-copy-text {
+	outline: 0;
+	border: 0;
+	background-color: var(--white-color);
+
+	font-size: 16px;
 	color: var(--primary-color);
+	font-weight: 500;
+
+	width: 100px;
+}
+
+.product-detail__info-copy {
+	margin-left: 10px;
+}
+
+.product-detail__info-copy > i {
+	color: var(--white-color);
+	background-color: var(--primary-color);
+
+	border-radius: 5px;
+	padding: 5px;
+	cursor: pointer;
 }
 
 .product-detail__info-color-list {

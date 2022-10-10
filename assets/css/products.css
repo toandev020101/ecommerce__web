@@ -129,6 +129,11 @@
 
 .products-sort__price {
 	margin-left: 10px;
+	width: 220px;
+}
+
+.products-sort__price-list {
+	width: 100%;
 }
 /* end sort */
 

@@ -1,0 +1,167 @@
+.cart {
+	margin-top: 40px;
+}
+
+.cart__no {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.cart__no-img {
+	width: 22%;
+	display: none;
+}
+
+.cart__no-text {
+	margin: 15px 0;
+	display: none;
+}
+
+.cart__no-btn {
+	display: none;
+}
+
+.cart__no .cart__no-img,
+.cart__no .cart__no-text,
+.cart__no .cart__no-btn {
+	display: block;
+}
+
+.cart__checkbox,
+.cart__checkbox-input:checked + .cart__checkbox {
+	border-color: var(--white-color);
+}
+
+table tbody tr.active {
+	background-color: #f9f9f9;
+}
+
+.cart__product {
+	display: flex;
+	align-items: center;
+}
+
+.cart__product-img {
+	width: 100px;
+	border-radius: 3px;
+	border: 1px solid #f0f0f0;
+
+	margin-right: 10px;
+	background-color: var(--white-color);
+}
+
+.cart__product-name {
+	max-width: 300px;
+}
+
+.cart__color {
+	padding: 5px 10px;
+}
+
+.cart__old-price {
+	color: #777;
+	text-decoration: line-through;
+	font-size: 14px;
+	margin-right: 5px;
+}
+
+.cart__current-price,
+.cart__price {
+	color: var(--primary-color);
+	font-weight: 500;
+}
+
+.cart__icon {
+	font-size: 24px;
+	transition: color 0.2s ease;
+}
+
+.cart__icon:hover {
+	color: var(--primary-color);
+	cursor: pointer;
+}
+
+.cart__total {
+	margin-top: 30px;
+	border: 1px solid var(--primary-color);
+	border-radius: 3px;
+
+	padding: 20px;
+	background-color: var(--white-color);
+}
+
+.cart__voucher {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px dashed #ccc;
+}
+
+.cart__voucher-input {
+	margin-right: 10px;
+	width: 250px;
+}
+
+.cart__voucher-btn {
+	height: 44px;
+}
+
+.cart__action {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.cart__action-table {
+	display: flex;
+	align-items: center;
+}
+
+.cart__action-table-remove {
+	font-size: 22px;
+	margin-left: 20px;
+	transition: color 0.2s ease;
+
+	display: flex;
+	align-items: center;
+}
+
+.cart__action-table-remove:hover {
+	color: var(--primary-color);
+	cursor: pointer;
+}
+
+.cart__action-order {
+	display: flex;
+	align-items: center;
+}
+
+.cart__action-price-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.cart__action-voucher-price {
+	display: flex;
+	justify-content: flex-end;
+
+	font-size: 15px;
+	font-weight: 500;
+	color: var(--primary-color);
+}
+
+.cart__action-total-price {
+	font-size: 18px;
+	font-weight: 500;
+	color: var(--primary-color);
+	margin-left: 10px;
+}
+
+.cart__action-order-btn {
+	margin-left: 20px;
+}

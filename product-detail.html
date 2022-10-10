@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PKShop: Sản phẩm chi tiết</title>
+  <title>PKShop: Chi tiết sản phẩm</title>
   <!-- google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,7 +71,7 @@
         <!-- action -->
         <ul class="action">
           <li class="action__item">
-            <div class="link cart">
+            <div class="link action__cart">
               <a href="./cart.html" class="link badge">
                 <i class='bx bx-cart action__icon'></i>
                 <span class="badge__count badge__count--primary">3</span>
@@ -439,8 +439,11 @@
                 Mã giảm giá
               </span>
               <span class="product-detail__info-line-content">
-                <span class="product-detail__info-code">
-                  DJFGS975K
+                <span class="product-detail__info-voucher">
+                  <input type="text" class="product-detail__info-copy-text" value="DJFGS975K" readonly />
+                  <span class="tooltip product-detail__info-copy" tooltip-title="Copy">
+                    <i class='bx bx-copy'></i>
+                  </span>
                 </span>
               </span>
             </div>
