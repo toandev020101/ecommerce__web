@@ -1,0 +1,80 @@
+.address__btn {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.address {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 50px;
+}
+
+.address__info-name {
+	border-right: 1px solid #ccc;
+	padding-right: 10px;
+	margin-right: 10px;
+}
+
+.address__info-phone {
+	font-size: 14px;
+	color: #888;
+}
+
+.address__info > p {
+	font-size: 15px;
+	color: #888;
+	margin-top: 5px;
+}
+
+.address__action > div {
+	margin-left: 10px;
+}
+
+.address__action-icon {
+	font-size: 22px;
+	transition: color 0.2s ease;
+}
+
+.address__action-icon:hover {
+	color: var(--primary-color);
+	cursor: pointer;
+}
+
+.address__modal {
+	width: 500px;
+	padding: 20px;
+}
+
+.address__modal-title {
+	font-weight: 400;
+	font-size: 20px;
+}
+
+.address__modal-input-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.address__modal-input-wrapper .address__modal-input {
+	width: 48%;
+}
+
+.address__modal-input {
+	margin-top: 5px;
+}
+
+.address__modal-dropdown-list {
+	width: 100%;
+}
+
+.address__modal-btn-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.address__modal-btn-wrapper > button {
+	margin-left: 10px;
+}

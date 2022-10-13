@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PKShop: Hồ sơ của tôi</title>
+  <!-- google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
+  <!-- google font -->
+
+  <!-- boxicons -->
+  <link rel="stylesheet" href="../assets/boxicons-2.1.0/css/boxicons.min.css">
+  <!-- end boxicons -->
+
+  <!-- main css -->
+  <link rel="stylesheet" href="../assets/css/_base.css">
+  <link rel="stylesheet" href="../assets/css/_app.css">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/user/user-bar.css">
+  <link rel="stylesheet" href="../assets/css/user/profile.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <!-- main css -->
+</head>
+
+<body>
+  <header>
+    <!-- top header -->
+    <div class="bg-main">
+      <div class="container top-header">
+        <!-- logo -->
+        <a href="/" class="link logo">
+          <i class='bx bx-shopping-bag logo__icon'></i>
+          <span class="logo__text">PKShop</span>
+        </a>
+        <!-- end logo -->
+
+        <!-- search -->
+        <div class="search">
+          <div class="input-field search__input-wrapper">
+            <input type="text" class="input-field__input search__input" placeholder=" ">
+            <label class="input-field__label">Tìm kiếm</label>
+
+            <!-- history search -->
+            <div class="history">
+              <h3 class="history__title">
+                Lịch sử tìm kiếm
+              </h3>
+              <ul class="history__list">
+                <li class="history__item">
+                  <a href="#" class="link">Tai nghe</a>
+                </li>
+                <li class="history__item">
+                  <a href="#" class="link">Bàn phím</a>
+                </li>
+                <li class="history__item">
+                  <a href="#" class="link">Cáp sạc</a>
+                </li>
+              </ul>
+            </div>
+            <!-- end history search -->
+          </div>
+          <i class='bx bx-search-alt search__icon'></i>
+        </div>
+        <!-- end search -->
+
+        <!-- action -->
+        <ul class="action">
+          <li class="action__item">
+            <div class="link action__cart">
+              <a href="../cart.html" class="link badge">
+                <i class='bx bx-cart action__icon'></i>
+                <span class="badge__count badge__count--primary">3</span>
+              </a>
+
+              <!-- cart menu -->
+              <div class="cart__list">
+                <!-- no cart: ul class cart__list--no-cart -->
+                <div class="cart__item--no-cart cart__item--arrow">
+                  <img src="../assets/images/no-cart.png" alt="no-cart" class="cart__item--no-cart-img">
+                  <span class="cart__item--no-cart-text">Chưa có sản phẩm</span>
+                </div>
+                <!-- end no cart -->
+
+                <h4 class="cart__item-title cart__item--arrow">
+                  Sản phẩm đã thêm
+                </h4>
+                <ul class="cart__list-item">
+                  <!-- cart item -->
+                  <li class="cart__item">
+                    <img src="../assets/images/avatar.jpg" alt="cart__item-img" class="cart__item-img">
+                    <div class="cart__item-info">
+                      <div class="cart__item-head">
+                        <h5 class="cart__item-name">
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, labore modi reprehenderit
+                        </h5>
+                        <div class="cart__item-price-wrapper">
+                          <span class="cart__item-price">2.000.000đ</span>
+                          <span class="cart__item-multiply">x</span>
+                          <span class="cart__item-quantity">2</span>
+                        </div>
+                      </div>
+
+                      <div class="cart__item-body">
+                        <div class="cart__item-description">
+                          <span>Nhãn hiệu: JBL</span>
+                          <span>Màu sắc: Đỏ</span>
+                        </div>
+                        <span class="cart__item-remove">Xóa</span>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- end cart item -->
+
+                  <!-- cart item -->
+                  <li class="cart__item">
+                    <img src="../assets/images/avatar.jpg" alt="cart__item-img" class="cart__item-img">
+                    <div class="cart__item-info">
+                      <div class="cart__item-head">
+                        <h5 class="cart__item-name">
+                          JBL_E55BT_KEY_BLACK
+                        </h5>
+                        <div class="cart__item-price-wrapper">
+                          <span class="cart__item-price">2.000.000đ</span>
+                          <span class="cart__item-multiply">x</span>
+                          <span class="cart__item-quantity">2</span>
+                        </div>
+                      </div>
+
+                      <div class="cart__item-body">
+                        <div class="cart__item-description">
+                          <span>Nhãn hiệu: JBL</span>
+                          <span>Màu sắc: Đỏ</span>
+                        </div>
+                        <span class="cart__item-remove">Xóa</span>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- end cart item -->
+
+                  <!-- cart item -->
+                  <li class="cart__item">
+                    <img src="../assets/images/avatar.jpg" alt="cart__item-img" class="cart__item-img">
+                    <div class="cart__item-info">
+                      <div class="cart__item-head">
+                        <h5 class="cart__item-name">
+                          JBL_E55BT_KEY_BLACK
+                        </h5>
+                        <div class="cart__item-price-wrapper">
+                          <span class="cart__item-price">2.000.000đ</span>
+                          <span class="cart__item-multiply">x</span>
+                          <span class="cart__item-quantity">2</span>
+                        </div>
+                      </div>
+
+                      <div class="cart__item-body">
+                        <div class="cart__item-description">
+                          <span>Nhãn hiệu: JBL</span>
+                          <span>Màu sắc: Đỏ</span>
+                        </div>
+                        <span class="cart__item-remove">Xóa</span>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- end cart item -->
+                </ul>
+
+                <a href="../cart.html" class="link btn btn--primary cart__view">
+                  Xem giỏ hàng
+                </a>
+              </div>
+              <!-- end cart menu -->
+            </div>
+          </li>
+          <li class="action__item">
+            <div class="badge">
+              <i class='bx bx-bell action__icon'></i>
+              <span class="badge__count badge__count--primary">3</span>
+            </div>
+          </li>
+          <li class="action__item">
+            <div class="auth">
+              <!-- <a href="../login.html" class="link auth__login">Đăng nhập</a>
+              <span class="auth_slash">/</span>
+              <a href="../register.html" class="link auth__register">Đăng ký</a> -->
+
+              <a href="../user.html" class="link auth__info">
+                <img src="../assets/images/avatar.jpg" alt="avatar" class="auth__info-avatar">
+                <span class="auth__info-fullname">Đức Toàn</span>
+              </a>
+
+              <!-- user menu -->
+              <ul class="dropdown__list auth__dropdown-list">
+                <!-- dropdown item -->
+                <li class="dropdown__item">
+                  <a href="#" class="link auth__link">
+                    <i class='bx bx-cog dropdown__icon'></i>
+                    <span class="dropdown__text">Thông tin tài khoản</span>
+                  </a>
+                </li>
+                <!-- end dropdown item -->
+
+                <!-- dropdown item -->
+                <li class="dropdown__item">
+                  <a href="#" class="link auth__link">
+                    <i class='bx bx-detail dropdown__icon'></i>
+                    <span class="dropdown__text">Theo dõi đơn hàng</span>
+                  </a>
+                </li>
+                <!-- end dropdown item -->
+
+                <!-- dropdown item -->
+                <li class="dropdown__item">
+                  <a href="#" class="link auth__link">
+                    <i class='bx bx-log-out dropdown__icon'></i>
+                    <span class="dropdown__text">Đăng xuất</span>
+                  </a>
+                </li>
+                <!-- end dropdown item -->
+              </ul>
+              <!-- end user menu -->
+            </div>
+          </li>
+        </ul>
+        <!-- end action -->
+      </div>
+    </div>
+    <!-- end top header -->
+    <!-- bottom header -->
+    <div class="bg-second">
+      <nav class="container bottom-header">
+        <ul class="main-menu__list">
+          <li class="main-menu__item">
+            <a href="/" class="link main-menu__item-link">Trang chủ</a>
+          </li>
+          <li class="main-menu__item mega-dropdown">
+            <a href="../products.html" class="link main-menu__item-link">
+              Sản phẩm
+              <i class='bx bx-chevron-down main-menu__item-icon'></i>
+            </a>
+            <div class="mega-content">
+              <!-- mega content item -->
+              <div class="mega-content__item">
+                <h3 class="mega-content__title">
+                  Phụ kiện di động
+                </h3>
+                <ul class="mega-content__menu-list">
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Sạc dự phòng
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Sạc,cáp
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Ốp lưng điện thoại
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Miếng dán điện thoại
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Gậy chụp ảnh
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Đế, móc điện thoại
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Giá đỡ điện thoại
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- end mega content item -->
+
+              <!-- mega content item -->
+              <div class="mega-content__item">
+                <h3 class="mega-content__title">
+                  Phụ kiện laptop
+                </h3>
+                <ul class="mega-content__menu-list">
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Chuột, bàn phím
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Balo, túi chống sốc
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Giá đỡ laptop
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Phần mềm
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- end mega content item -->
+
+              <!-- mega content item -->
+              <div class="mega-content__item">
+                <h3 class="mega-content__title">
+                  Thiết bị âm thanh
+                </h3>
+                <ul class="mega-content__menu-list">
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Tai nghe
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Loa
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- end mega content item -->
+
+              <!-- mega content item -->
+              <div class="mega-content__item">
+                <h3 class="mega-content__title">
+                  Thiết bị lưu trữ
+                </h3>
+                <ul class="mega-content__menu-list">
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Ổ cứng di động
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      Thẻ nhớ
+                    </a>
+                  </li>
+                  <li class="mega-content__menu-item">
+                    <a href="#" class="link mega-content__menu-item-link">
+                      USB
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- end mega content item -->
+            </div>
+          </li>
+          <li class="main-menu__item">
+            <a href="../news.html" class="link main-menu__item-link">Tin tức</a>
+          </li>
+          <li class="main-menu__item">
+            <a href="../about.html" class="link main-menu__item-link">Giới thiệu</a>
+          </li>
+          <li class="main-menu__item">
+            <a href="../contact.html" class="link main-menu__item-link">Liên hệ</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- end bottom header -->
+  </header>
+
+  <!-- profile content -->
+  <div class="bg-main">
+    <div class="container">
+      <!-- breadcumb -->
+      <div class="breadcumb">
+        <a href="/" class="link">Trang chủ</a>
+        <span><i class="bx bxs-chevrons-right"></i></span>
+        <a href="../profile.html" class="link active">Hồ sơ của tôi</a>
+      </div>
+      <!-- end breadcumb -->
+
+      <div class="user">
+        <!-- user bar -->
+        <div class="user__bar">
+          <div class="user__bar-head">
+            <img src="../assets/images/avatar.jpg" alt="" class="user__bar-avatar">
+            <span class="user__bar-username">toan020101</span>
+          </div>
+
+          <div class="user__bar-body">
+            <ul>
+              <li class="user__bar-item active">
+                <a href="./profile.html" class="link user__bar-link">
+                  <i class='bx bx-user-pin'></i>
+                  <span>Hồ sơ của tôi</span>
+                </a>
+              </li>
+
+              <li class="user__bar-item">
+                <a href="#" class="link user__bar-link">
+                  <i class='bx bxs-bank'></i>
+                  <span>Ngân hàng</span>
+                </a>
+              </li>
+
+              <li class="user__bar-item">
+                <a href="./address.html" class="link user__bar-link">
+                  <i class='bx bx-map'></i>
+                  <span>Địa chỉ</span>
+                </a>
+              </li>
+
+              <li class="user__bar-item">
+                <a href="./change-password.html" class="link user__bar-link">
+                  <i class='bx bx-cog'></i>
+                  <span>Đổi mật khẩu</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end user bar -->
+
+        <!-- user content -->
+        <div class="user__content">
+          <div class="user__content-head">
+            <h4 class="user__content-title">Hồ sơ của tôi</h4>
+            <p class="user__content-description">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+          </div>
+
+          <form action="#" class="user__content-body profile">
+            <div class="profile__info">
+              <!-- profile item -->
+              <div class="profile__info-item">
+                <span class="profile__info-name">
+                  Tên đăng nhập
+                </span>
+                <input type="text" class="profile__info-input" value="toan020101" readonly>
+              </div>
+              <!-- end profile item -->
+
+              <!-- profile item -->
+              <div class="profile__info-item">
+                <span class="profile__info-name">
+                  Họ và tên
+                </span>
+                <input type="text" class="profile__info-input" value="Đức Toàn">
+              </div>
+              <!-- end profile item -->
+
+              <!-- profile item -->
+              <div class="profile__info-item">
+                <span class="profile__info-name">
+                  Email
+                </span>
+                <input type="email" class="profile__info-input" value="toan@gmail.com">
+              </div>
+              <!-- end profile item -->
+
+              <!-- profile item -->
+              <div class="profile__info-item">
+                <span class="profile__info-name">
+                  Số điện thoại
+                </span>
+                <input type="tel" class="profile__info-input" value="092421***">
+              </div>
+              <!-- end profile item -->
+
+              <!-- profile item -->
+              <div class="profile__info-item">
+                <span class="profile__info-name">
+                  Giới tính
+                </span>
+                <span class="profile__info-radio-group">
+                  <label for="male" class="profile__info-radio radio">
+                    <input type="radio" id="male" name="gender" class="radio__input" value="0" checked>
+                    <div class="radio__box"></div>
+                    Nam
+                  </label>
+                  <label for="female" class="profile__info-radio radio">
+                    <input type="radio" id="female" name="gender" class="radio__input" value="1">
+                    <div class="radio__box"></div>
+                    Nữ
+                  </label>
+                </span>
+              </div>
+              <!-- end profile item -->
+
+              <!-- profile item -->
+              <div class="profile__info-item">
+                <span class="profile__info-name">
+                  Ngày sinh
+                </span>
+                <span class="profile__info-dropdown-birthday">
+                  <div class="dropdown profile__info-dropdown">
+                    <div class="dropdown__select">
+                      <span class="dropdown__selected">Ngày</span>
+                      <i class='bx bxs-chevron-down'></i>
+                    </div>
+                    <ul class="dropdown__list profile__info-dropdown-list">
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          01
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          02
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          03
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          04
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="dropdown profile__info-dropdown">
+                    <div class="dropdown__select">
+                      <span class="dropdown__selected">Tháng</span>
+                      <i class='bx bxs-chevron-down'></i>
+                    </div>
+                    <ul class="dropdown__list profile__info-dropdown-list">
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          Tháng 1
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          Tháng 2
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          Tháng 3
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          Tháng 4
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          Tháng 5
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="dropdown profile__info-dropdown">
+                    <div class="dropdown__select">
+                      <span class="dropdown__selected">Năm</span>
+                      <i class='bx bxs-chevron-down'></i>
+                    </div>
+                    <ul class="dropdown__list profile__info-dropdown-list">
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          2022
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          2021
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          2020
+                        </span>
+                      </li>
+                      <li class="dropdown__item">
+                        <span class="dropdown__text">
+                          2019
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </span>
+              </div>
+              <!-- end profile item -->
+
+              <button class="btn btn--primary profile__info-btn">Lưu lại</button>
+            </div>
+
+            <div class="profile__avatar-wrapper">
+              <img src="../assets/images/avatar.jpg" alt="" class="profile__avatar">
+              <button type="button" class="btn profile__avatar-btn">Chọn ảnh</button>
+              <p class="profile__avatar-description">
+                Dụng lượng file tối đa 1 MB
+                Định dạng:.JPEG, .PNG
+              </p>
+            </div>
+          </form>
+        </div>
+        <!-- end  user content -->
+      </div>
+    </div>
+  </div>
+  <!-- end profile content -->
+
+  <!-- footer -->
+  <footer>
+    <div class="bg-second">
+      <div class="container footer">
+        <!-- footer column -->
+        <div class="footer-col">
+          <h4 class="footer-col__title">Công ty</h4>
+          <ul class="footer-col__list">
+            <li class="footer-col__item">
+              <a href="#" class="link">Về chúng tôi</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Dịch vụ của chúng tôi</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Chính sách bảo mật</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Chương trình liên kết</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end footer column -->
+
+        <!-- footer column -->
+        <div class="footer-col">
+          <h4 class="footer-col__title">Trợ giúp</h4>
+          <ul class="footer-col__list">
+            <li class="footer-col__item">
+              <a href="#" class="link">Câu hỏi thường gặp</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Giao hàng</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Trả hàng</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Tình trạng đặt hàng</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Các lựa chọn thanh toán</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end footer column -->
+
+        <!-- footer column -->
+        <div class="footer-col">
+          <h4 class="footer-col__title">Cửa hàng trực tuyến</h4>
+          <ul class="footer-col__list">
+            <li class="footer-col__item">
+              <a href="#" class="link">Đồng hồ</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Túi đồ</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Dày</a>
+            </li>
+            <li class="footer-col__item">
+              <a href="#" class="link">Quần áo</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end footer column -->
+
+        <!-- footer column -->
+        <div class="footer-col">
+          <h4 class="footer-col__title">Theo dõi chúng tôi</h4>
+          <ul class="footer-col__socials">
+            <li class="footer-col__social-icon">
+              <a href="https://www.facebook.com" target="_blank" class="link">
+                <i class='bx bxl-facebook'></i>
+              </a>
+            </li>
+            <li class="footer-col__social-icon">
+              <a href="https://www.youtube.com" target="_blank" class="link">
+                <i class='bx bxl-youtube'></i>
+              </a>
+            </li>
+            <li class="footer-col__social-icon">
+              <a href="https://www.instagram.com" target="_blank" class="link">
+                <i class='bx bxl-instagram-alt'></i>
+              </a>
+            </li>
+            <li class="footer-col__social-icon">
+              <a href="https://www.linkedin.com" target="_blank" class="link">
+                <i class='bx bxl-linkedin'></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- end footer column -->
+      </div>
+
+      <div class="footer__copyright">
+        &copy; 2022. TKL - HTML CSS Javascript PHP MySQL
+      </div>
+    </div>
+  </footer>
+  <!-- end footer -->
+
+  <!-- js -->
+  <script src="../assets/js/_base.js"></script>
+  <script src="../assets/js/_app.js"></script>
+  <script src="../assets/js/user/profile.js"></script>
+  <!-- end js -->
+</body>
+
+</html>
