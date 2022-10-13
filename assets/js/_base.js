@@ -2,17 +2,38 @@
 const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
 
-const dropdownSelected = $('.dropdown__selected')
-const dropdownItemList = $$('.dropdown__item')
-
+const dropdownList = $$('.dropdown')
 const toastMain = $('#toast')
+const modal = $('.modal')
+const modalOverlay = $('.modal__overlay')
+const modalBtnOpen = $('.modal__btn-open')
+const modalBtnClose = $('.modal__btn-close')
 // end let - const
 
 // function
-const removeActiveDropdownItem = (dropdownItemList) => {
-	dropdownItemList.forEach((dropdownItem) =>
-		dropdownItem.classList.remove('active'),
-	)
+const removeActive = (list) => {
+	list.forEach((item) => item.classList.remove('active'))
+}
+
+const showDropdown = (dropdownList) => {
+	dropdownList.forEach((dropdown, index) => {
+		dropdown.onclick = (e) => {
+			dropdownList.forEach((item, idx) => {
+				if (idx !== index) {
+					item.classList.remove('active')
+				}
+			})
+
+			dropdown.classList.toggle('active')
+			const dropdownSelected = dropdown.querySelector('.dropdown__selected')
+			const dropdownItemList = dropdown.querySelectorAll('.dropdown__item')
+			dropdownSelectedClick(dropdownSelected, dropdownItemList)
+
+			if (e.target.classList.contains('dropdown__item')) {
+				dropdown.classList.remove('active')
+			}
+		}
+	})
 }
 
 const dropdownSelectedClick = (dropdownSelected, dropdownItemList) => {
@@ -20,10 +41,25 @@ const dropdownSelectedClick = (dropdownSelected, dropdownItemList) => {
 		dropdownItem.onclick = () => {
 			const dropdownItemText = dropdownItem.querySelector('.dropdown__text')
 			dropdownSelected.textContent = dropdownItemText.textContent
-			removeActiveDropdownItem(dropdownItemList)
+			removeActive(dropdownItemList)
 			dropdownItem.classList.add('active')
 		}
 	})
+}
+
+const closeDropdown = (dropdownList) => {
+	window.onclick = (e) => {
+		if (
+			!e.target.classList.contains('dropdown') &&
+			!e.target.classList.contains('dropdown__select') &&
+			!e.target.classList.contains('dropdown__selected') &&
+			!e.target.classList.contains('bx') &&
+			!e.target.classList.contains('dropdown__list') &&
+			!e.target.classList.contains('dropdown__item')
+		) {
+			removeActive(dropdownList)
+		}
+	}
 }
 
 const toast = ({ type = 'success', message = '', duration = 4000 }) => {
@@ -98,10 +134,29 @@ const toast = ({ type = 'success', message = '', duration = 4000 }) => {
 		}
 	}
 }
+
+const openModal = (modal, modalBtnOpen) => {
+	modalBtnOpen.onclick = () => {
+		modal.classList.add('active')
+	}
+}
+
+const closeModal = (modal, modalOverlay, modalBtnClose) => {
+	modalOverlay.onclick = () => {
+		modal.classList.remove('active')
+	}
+
+	modalBtnClose.onclick = () => {
+		modal.classList.remove('active')
+	}
+}
 // end function
 
-// run click dropdown
-dropdownSelectedClick(dropdownSelected, dropdownItemList)
+// show dropdown
+showDropdown(dropdownList)
+
+// close dropdown
+closeDropdown(dropdownList)
 
 // run toast
 toast({
@@ -109,3 +164,13 @@ toast({
 	message: 'Xin chào, Đức Toàn',
 	duration: 4000,
 })
+
+if (modalBtnOpen) {
+	// open modal
+	openModal(modal, modalBtnOpen)
+}
+
+if (modalOverlay && modalBtnClose) {
+	// close modal
+	closeModal(modal, modalOverlay, modalBtnClose)
+}

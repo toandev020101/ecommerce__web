@@ -23,6 +23,11 @@
 	padding: 5px 15px;
 	border-radius: 5px;
 	position: relative;
+	transition: border-color 0.2s ease;
+}
+
+.products-category__item:hover {
+	border-color: var(--primary-color);
 }
 
 .products-category__img {

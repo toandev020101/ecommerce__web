@@ -178,3 +178,42 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.payment-address__modal {
+	width: 500px;
+	padding: 20px;
+}
+
+.payment-address__modal-title {
+	font-weight: 400;
+	font-size: 20px;
+}
+
+.payment-address__modal-input-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.payment-address__modal-input-wrapper .payment-address__modal-input {
+	width: 48%;
+}
+
+.payment-address__modal-input {
+	margin-top: 5px;
+}
+
+.payment-address__modal-dropdown-list {
+	width: 100%;
+}
+
+.payment-address__modal-btn-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.payment-address__modal-btn-wrapper > button {
+	margin-left: 10px;
+}

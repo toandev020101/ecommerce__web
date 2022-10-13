@@ -404,7 +404,7 @@
               <span class="payment-address__text-address">35 Tạ Hiện, Phường Hòa Cường Bắc, Quận Hải Châu, Đà
                 Nẵng</span>
             </div>
-            <button class="payment-address__btn">Thay đổi</button>
+            <button class="payment-address__btn modal__btn-open">Thay đổi</button>
           </div>
         </div>
 
@@ -709,6 +709,113 @@
     </div>
   </footer>
   <!-- end footer -->
+
+  <!-- modal address -->
+  <div class="modal">
+    <div class="modal__overlay">
+    </div>
+    <div class="modal__body">
+      <div class="payment-address__modal">
+        <h3 class="payment-address__modal-title">
+          Địa chỉ nhận hàng
+        </h3>
+
+        <form action="">
+          <div class="payment-address__modal-input-wrapper">
+            <div class="input-field payment-address__modal-input">
+              <input type="text" class="input-field__input" placeholder=" ">
+              <label class="input-field__label">Họ và tên</label>
+            </div>
+            <div class="input-field payment-address__modal-input">
+              <input type="text" class="input-field__input" placeholder=" ">
+              <label class="input-field__label">Số điện thoại</label>
+            </div>
+          </div>
+
+          <div class="payment-address__modal-input-wrapper">
+            <div class="dropdown payment-address__modal-input">
+              <div class="dropdown__select">
+                <span class="dropdown__selected">Tỉnh/Thành phố</span>
+                <i class='bx bxs-chevron-down'></i>
+              </div>
+              <ul class="dropdown__list payment-address__modal-dropdown-list">
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Hồ Chí Minh
+                  </span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Hà Nội
+                  </span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Đà Nẵng
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="dropdown payment-address__modal-input">
+              <div class="dropdown__select">
+                <span class="dropdown__selected">Quận/Huyện</span>
+                <i class='bx bxs-chevron-down'></i>
+              </div>
+              <ul class="dropdown__list payment-address__modal-dropdown-list">
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Quận 1
+                  </span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Quận 3
+                  </span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Quận 4
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="payment-address__modal-input-wrapper">
+            <div class="dropdown payment-address__modal-input">
+              <div class="dropdown__select">
+                <span class="dropdown__selected">Phường/Xã</span>
+                <i class='bx bxs-chevron-down'></i>
+              </div>
+              <ul class="dropdown__list payment-address__modal-dropdown-list">
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Xã 1
+                  </span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">
+                    Xã 2
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="input-field payment-address__modal-input">
+              <input type="text" class="input-field__input" placeholder=" ">
+              <label class="input-field__label">Số nhà, tên đường</label>
+            </div>
+          </div>
+
+          <div class="payment-address__modal-btn-wrapper">
+            <button type="button" class="btn modal__btn-close">Trở lại</button>
+            <button class="btn btn--primary">Lưu lại</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- end modal address -->
 
   <!-- js -->
   <script src="./assets/js/_base.js"></script>

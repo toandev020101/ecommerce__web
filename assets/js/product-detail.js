@@ -97,10 +97,10 @@ const productList = $('.product-list')
 // end let - const
 
 // function
-const removeActiveAllImgBtn = (imgList) => {
-	imgList.forEach((img) => {
-		const imgBtn = img.parentNode
-		imgBtn.classList.remove('active')
+const removeActiveBtn = (list) => {
+	list.forEach((item) => {
+		const itemBtn = item.parentNode
+		itemBtn.classList.remove('active')
 	})
 }
 
@@ -109,16 +109,9 @@ const changeImgShow = (imgShow, imgList) => {
 		const imgBtn = img.parentNode
 		img.onclick = () => {
 			imgShow.src = img.src
-			removeActiveAllImgBtn(imgList)
+			removeActiveBtn(imgList)
 			imgBtn.classList.add('active')
 		}
-	})
-}
-
-const removeActiveAllColorImgBtn = (colorBtnList) => {
-	colorBtnList.forEach((colorBtn) => {
-		const colorImgBtn = colorBtn.parentNode
-		colorImgBtn.classList.remove('active')
 	})
 }
 
@@ -138,7 +131,7 @@ const changeColorImgShow = (imgShow, colorBtnList) => {
 
 		colorBtn.onclick = () => {
 			if (!colorBtn.closest('.disabled')) {
-				removeActiveAllColorImgBtn(colorBtnList)
+				removeActiveBtn(colorBtnList)
 				colorImgBtn.classList.add('active')
 			}
 		}
