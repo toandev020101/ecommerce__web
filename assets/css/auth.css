@@ -1,0 +1,113 @@
+.auth {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100vh;
+	background-color: var(--primary-color);
+	color: var(--white-color);
+}
+
+.auth__wrapper {
+	width: 70%;
+	height: 70vh;
+	display: flex;
+	align-items: center;
+}
+
+.auth__info {
+	width: 50%;
+	font-size: 25px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.auth__info-logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.auth__info-icon {
+	font-size: 200px;
+}
+
+.auth__info-name {
+	font-size: 50px;
+	margin-bottom: 40px;
+	font-weight: 500;
+}
+
+.auth__info-description {
+	text-align: center;
+}
+
+.auth__form-wrapper {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.auth__form {
+	width: 400px;
+	background-color: var(--white-color);
+	color: #131313;
+
+	padding: 25px;
+	border-radius: 3px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.auth__form-title {
+	font-size: 18px;
+	font-weight: 400;
+	margin-bottom: 30px;
+}
+
+.auth__form-input + .auth__form-input {
+	margin-top: 20px;
+}
+
+.auth__form-name {
+	margin-right: 20px;
+	color: #888;
+}
+
+.auth__form-radio + .auth__form-radio {
+	margin-left: 15px;
+}
+
+.auth__form-btn {
+	margin-top: 20px;
+	width: 100%;
+}
+
+.auth__form-forgot-password {
+	display: block;
+	margin-top: 10px;
+	text-align: right;
+	text-decoration: none;
+
+	font-size: 15px;
+	color: #0f6fdc;
+}
+
+.auth__form-link-wrapper {
+	display: block;
+	text-align: center;
+	margin-top: 40px;
+
+	color: #999;
+	font-size: 15px;
+}
+
+.auth__form-link {
+	margin-left: 5px;
+	font-size: 16px;
+	color: var(--primary-color);
+}

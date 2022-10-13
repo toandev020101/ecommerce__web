@@ -124,6 +124,21 @@ img {
 	color: var(--primary-color);
 }
 
+.input-field__icon {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 15px;
+
+	font-size: 18px;
+	transition: color 0.2s ease;
+}
+
+.input-field__icon:hover {
+	cursor: pointer;
+	color: var(--primary-color);
+}
+
 /* end input custom*/
 
 /* badge */

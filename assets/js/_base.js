@@ -4,10 +4,13 @@ const $$ = document.querySelectorAll.bind(document)
 
 const dropdownList = $$('.dropdown')
 const toastMain = $('#toast')
+
 const modal = $('.modal')
 const modalOverlay = $('.modal__overlay')
 const modalBtnOpen = $('.modal__btn-open')
 const modalBtnClose = $('.modal__btn-close')
+
+const inputPasswordIconList = $$('.input-field__icon')
 // end let - const
 
 // function
@@ -150,6 +153,24 @@ const closeModal = (modal, modalOverlay, modalBtnClose) => {
 		modal.classList.remove('active')
 	}
 }
+
+const showHidePassword = (inputPasswordIconList) => {
+	inputPasswordIconList.forEach((icon) => {
+		icon.onclick = () => {
+			const input = icon.parentNode.querySelector('.input-field__input')
+
+			if (input.type === 'password') {
+				input.type = 'text'
+				icon.classList.remove('bx-hide')
+				icon.classList.add('bx-show-alt')
+			} else {
+				input.type = 'password'
+				icon.classList.remove('bx-show-alt')
+				icon.classList.add('bx-hide')
+			}
+		}
+	})
+}
 // end function
 
 // show dropdown
@@ -173,4 +194,9 @@ if (modalBtnOpen) {
 if (modalOverlay && modalBtnClose) {
 	// close modal
 	closeModal(modal, modalOverlay, modalBtnClose)
+}
+
+if (inputPasswordIconList) {
+	// show hide password
+	showHidePassword(inputPasswordIconList)
 }
