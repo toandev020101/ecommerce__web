@@ -756,6 +756,27 @@ table tbody tr:hover {
 
 /* end tabs */
 
+/* box status */
+.box__status {
+	padding: 5px 8px;
+	border-radius: 3px;
+	font-size: 15px;
+	color: var(--white-color);
+}
+
+.box--pending {
+	background-color: var(--warning-color);
+}
+
+.box--shipping {
+	background-color: var(--info-color);
+}
+
+.box--delivered {
+	background-color: var(--success-color);
+}
+/* box status */
+
 /* animation */
 @keyframes growth {
 	from {

@@ -11,6 +11,10 @@ const modalBtnOpen = $('.modal__btn-open')
 const modalBtnClose = $('.modal__btn-close')
 
 const inputPasswordIconList = $$('.input-field__icon')
+const tabItemList = $$('.tab__item')
+const tabPaneList = $$('.tab__pane')
+const tabItemActive = $('.tab__item.active')
+const tabLine = $('.tab__line')
 // end let - const
 
 // function
@@ -171,6 +175,26 @@ const showHidePassword = (inputPasswordIconList) => {
 		}
 	})
 }
+
+const activeLine = (tabLine, tabItemActive) => {
+	tabLine.style.left = tabItemActive.offsetLeft + 'px'
+	tabLine.style.width = tabItemActive.offsetWidth + 'px'
+}
+
+const activeTab = (tabItemList, tabPaneList, tabLine) => {
+	tabItemList.forEach((tabItem, index) => {
+		tabItem.onclick = () => {
+			const tabPane = tabPaneList[index]
+
+			removeActive(tabItemList)
+			removeActive(tabPaneList)
+
+			tabItem.classList.add('active')
+			activeLine(tabLine, tabItem)
+			tabPane.classList.add('active')
+		}
+	})
+}
 // end function
 
 // show dropdown
@@ -199,4 +223,14 @@ if (modalOverlay && modalBtnClose) {
 if (inputPasswordIconList) {
 	// show hide password
 	showHidePassword(inputPasswordIconList)
+}
+
+if (tabLine) {
+	// default active line
+	activeLine(tabLine, tabItemActive)
+}
+
+if (tabItemList && tabPaneList) {
+	// active tab
+	activeTab(tabItemList, tabPaneList, tabLine)
 }

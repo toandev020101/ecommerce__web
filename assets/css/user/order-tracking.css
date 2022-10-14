@@ -1,0 +1,53 @@
+.order-tracking__table {
+	margin-top: 20px;
+}
+
+.order-tracking__product {
+	display: flex;
+	align-items: center;
+}
+
+.order-tracking__product-img {
+	width: 100px;
+	border-radius: 3px;
+	border: 1px solid #f0f0f0;
+
+	margin-right: 10px;
+	background-color: var(--white-color);
+}
+
+.order-tracking__product-name-wrapper {
+	max-width: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+.order-tracking__product-color,
+.order-tracking__product-quantity {
+	font-size: 15px;
+	margin-top: 5px;
+	color: #888;
+}
+
+.order-tracking__old-price {
+	color: #777;
+	text-decoration: line-through;
+	font-size: 14px;
+	margin-right: 5px;
+}
+
+.order-tracking__current-price,
+.order-tracking__price {
+	color: var(--primary-color);
+	font-weight: 500;
+}
+
+.order-tracking__icon {
+	font-size: 24px;
+	transition: color 0.2s ease;
+}
+
+.order-tracking__icon:hover {
+	color: var(--primary-color);
+	cursor: pointer;
+}
