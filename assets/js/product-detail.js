@@ -2,12 +2,9 @@
 const imgShow = $('.product-detail__img-item:first-child > img')
 const imgList = $$('.product-detail__img-item:not(:first-child) > img')
 
-const copyInput = $('.product-detail__info-copy-text')
-const copyBtn = $('.product-detail__info-copy')
-
 const colorBtnList = $$('.product-detail__info-color-item > button')
-const descriptionBtn = $('.product-detail__description-btn')
-const description = $('.product-detail__description')
+const descriptionBtn = $('.product-detail__description-btn > button')
+const descriptionContent = $('.product-detail__description-content')
 
 const products = [
 	{
@@ -138,26 +135,15 @@ const changeColorImgShow = (imgShow, colorBtnList) => {
 	})
 }
 
-const showHideDescription = (descriptionBtn) => {
+const showHideDescription = (descriptionBtn, descriptionContent) => {
 	descriptionBtn.onclick = () => {
-		description.classList.toggle('active')
+		descriptionContent.classList.toggle('active')
 		const descriptionBtnContent = descriptionBtn.textContent
 		if (descriptionBtnContent === 'Xem thêm') {
 			descriptionBtn.textContent = 'Rút gọn'
 		} else {
 			descriptionBtn.textContent = 'Xem thêm'
 		}
-	}
-}
-
-const copyClick = (copyBtn, copyInput) => {
-	copyBtn.onclick = () => {
-		const text = copyInput.value
-		copyInput.select()
-		navigator.clipboard.writeText(text)
-
-		copyInput.value = 'Copied!'
-		setTimeout(() => (copyInput.value = text), 1500)
 	}
 }
 
@@ -216,10 +202,7 @@ changeImgShow(imgShow, imgList)
 changeColorImgShow(imgShow, colorBtnList)
 
 // show hide description
-showHideDescription(descriptionBtn)
-
-// copy voucher
-copyClick(copyBtn, copyInput)
+showHideDescription(descriptionBtn, descriptionContent)
 
 // render product
 renderProductList(products)

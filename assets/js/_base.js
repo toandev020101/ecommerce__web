@@ -58,6 +58,7 @@ const closeDropdown = (dropdownList) => {
 	window.onclick = (e) => {
 		if (
 			!e.target.classList.contains('dropdown') &&
+			!e.target.classList.contains('dropdown__select-default') &&
 			!e.target.classList.contains('dropdown__select') &&
 			!e.target.classList.contains('dropdown__selected') &&
 			!e.target.classList.contains('bx') &&

@@ -21,9 +21,9 @@
 		100vh - (var(--top-header-height) + var(--bottom-header-height))
 	);
 
-	--sidebar-height: 250px;
+	--sidebar-width: 250px;
 	--sidebar-header-height: 80px;
-	--admin-header-height: 80px;
+	--admin-header-height: 70px;
 }
 
 * {
@@ -151,6 +151,7 @@ img {
 	top: -8px;
 	right: -8px;
 	border-radius: 50%;
+	z-index: 1;
 
 	--size: 20px;
 	min-width: var(--size);

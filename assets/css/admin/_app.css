@@ -1,0 +1,45 @@
+.container {
+	margin-left: var(--sidebar-width);
+}
+
+.content {
+	min-height: calc(100vh - var(--admin-header-height));
+	padding: 0 20px 20px;
+}
+
+.title {
+	font-weight: 400;
+}
+
+.box {
+	background-color: var(--white-color);
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+	padding: 20px;
+}
+
+.search {
+	width: 350px;
+}
+
+.img {
+	--size: 80px;
+	width: var(--size);
+	height: var(--size);
+	border-radius: 3px;
+	border: 1px solid #f0f0f0;
+}
+
+.action__btn + .action__btn {
+	margin-left: 10px;
+}
+
+.action__icon {
+	font-size: 24px;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+.action__icon:hover {
+	color: var(--primary-color);
+}

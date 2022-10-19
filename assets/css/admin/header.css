@@ -1,0 +1,24 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	height: var(--admin-header-height);
+}
+
+.header__icon {
+	font-size: 25px;
+}
+
+.header__user {
+	margin: 0 50px 0 20px;
+	display: flex;
+	align-items: center;
+}
+
+.header__avatar {
+	--size: 35px;
+	width: var(--size);
+	height: var(--size);
+	border-radius: 50%;
+	margin-right: 5px;
+}

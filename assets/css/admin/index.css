@@ -1,0 +1,24 @@
+.statistical__box {
+	display: inline-flex;
+	align-items: center;
+	width: calc((100% - 80px) / 4);
+
+	margin: 20px 0;
+	border-radius: 10px;
+	padding: 30px 20px;
+}
+
+.statistical__box + .statistical__box {
+	margin-left: 20px;
+}
+
+.statistical__box-icon {
+	width: 40%;
+	text-align: center;
+	font-size: 45px;
+}
+
+.statistical__box-number {
+	font-size: 22px;
+	margin-bottom: 5px;
+}
