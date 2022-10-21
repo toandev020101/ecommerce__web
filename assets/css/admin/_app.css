@@ -23,6 +23,10 @@
 	width: 350px;
 }
 
+div.search--right {
+	justify-content: flex-end;
+}
+
 .img {
 	--size: 80px;
 	width: var(--size);
