@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PKShop: Thêm tài khoản</title>
+  <!-- google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
+  <!-- google font -->
+
+  <!-- boxicons -->
+  <link rel="stylesheet" href="../assets/boxicons-2.1.0/css/boxicons.min.css">
+  <!-- end boxicons -->
+
+  <!-- main css -->
+  <link rel="stylesheet" href="../assets/css/_base.css">
+  <link rel="stylesheet" href="../assets/css/admin/_app.css">
+  <link rel="stylesheet" href="../assets/css/admin/sidebar.css">
+  <link rel="stylesheet" href="../assets/css/admin/header.css">
+  <!-- main css -->
+</head>
+
+<body>
+  <div class="bg-main">
+    <!-- sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar__head">
+        <a href="/admin/index.html" class="link sidebar__logo-wrapper">
+          <i class='bx bx-shopping-bag sidebar__logo-icon'></i>
+          <span>PKShop</span>
+        </a>
+      </div>
+
+      <ul class="sidebar__menu-list">
+        <li class="sidebar__menu-item">
+          <a href="./index.html" class="link sidebar__menu-link" tooltip-title="Thống kê">
+            <i class='bx bx-bar-chart-alt sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Thống kê</span>
+          </a>
+        </li>
+        <li class="sidebar__menu-item">
+          <a href="./categories.html" class="link sidebar__menu-link" tooltip-title="Danh mục">
+            <i class='bx bx-category-alt sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Danh mục</span>
+          </a>
+        </li>
+        <li class="sidebar__menu-item">
+          <a href="./categories.html" class="link sidebar__menu-link" tooltip-title="Sản phẩm">
+            <i class='bx bx-package sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Sản phẩm</span>
+          </a>
+        </li>
+        <li class="sidebar__menu-item">
+          <a href="./orders.html" class="link sidebar__menu-link" tooltip-title="Đơn hàng">
+            <i class='bx bx-clipboard sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Đơn hàng</span>
+          </a>
+        </li>
+        <li class="sidebar__menu-item">
+          <a href="./address.html" class="link sidebar__menu-link" tooltip-title="Địa chỉ">
+            <i class='bx bx-map sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Địa chỉ</span>
+          </a>
+        </li>
+        <li class="sidebar__menu-item">
+          <a href="./discount.html" class="link sidebar__menu-link" tooltip-title="Địa chỉ">
+            <i class='bx bxs-discount'></i>
+            <span class="sidebar__menu-text">Khuyến mãi</span>
+          </a>
+        </li>
+        <li class="sidebar__menu-item">
+          <a href="./users.html" class="link sidebar__menu-link" tooltip-title="Hiển thị">
+            <i class='bx bx-user sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Tài khoản</span>
+          </a>
+        </li>
+        <li class="sidebar__menu-item">
+          <a href="./display.html" class="link sidebar__menu-link" tooltip-title="Hiển thị">
+            <i class='bx bx-laptop sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Hiển thị</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar__logout sidebar__menu-item">
+        <span class="sidebar__menu-link" tooltip-title="Đăng xuất">
+          <i class='bx bx-log-out sidebar__menu-icon'></i>
+          <span class="sidebar__menu-text">Đăng xuất</span>
+        </span>
+      </div>
+    </nav>
+    <!-- end sidebar -->
+  </div>
+
+  <div class="bg-second container">
+    <!-- header -->
+    <header class="header">
+      <div class="badge">
+        <a href="#" class="link">
+          <i class='bx bx-bell header__icon'></i>
+        </a>
+        <span class="badge__count badge__count--primary">3</sp>
+      </div>
+
+      <div class="header__user">
+        <img src="../assets/images/avatar.jpg" alt="avatar" class="header__avatar">
+        <span class="header__fullname">Đức Toàn</span>
+      </div>
+    </header>
+    <!-- end header -->
+
+    <!-- content -->
+    <div class="content">
+      <h2 class="title">Thêm tài khoản</h2>
+
+      <form class="box">
+        <div class="read-add-edit__line">
+          <div class="read-add-edit__name">
+            Ảnh đại diện <span class="required">*</span>
+          </div>
+          <div class="upload">
+            <img src="" alt="" class="upload__img">
+            <div class="upload__content">
+              <i class='bx bx-cloud-upload upload__icon'></i>
+              <span class='upload__text'>Tải ảnh lên</span>
+            </div>
+            <input type="file" class="upload__input">
+            <i class='bx bx-x upload__close'></i>
+            <div class="upload__name"></div>
+          </div>
+        </div>
+
+        <div class="read-add-edit__row">
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Họ và tên<span class="required">*</span>
+            </div>
+            <input type="text" class="input read-add-edit__input" placeholder="Họ và tên">
+          </div>
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Số điện thoại <span class="required">*</span>
+            </div>
+            <input type="tel" class="input read-add-edit__input" placeholder="Số điện thoại">
+          </div>
+        </div>
+
+        <div class="read-add-edit__row">
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Tên đăng nhập <span class="required">*</span>
+            </div>
+            <input type="text" class="input read-add-edit__input" placeholder="Tên đăng nhập">
+          </div>
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Mật khẩu <span class="required">*</span>
+            </div>
+            <input type="password" class="input read-add-edit__input" placeholder="Mật khẩu">
+          </div>
+        </div>
+
+        <div class="read-add-edit__row">
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Giới tính <span class="required">*</span>
+            </div>
+
+            <span>
+              <label for="male" class="radio">
+                <input type="radio" id="male" name="gender" class="radio__input" value="0" checked>
+                <div class="radio__box"></div>
+                Nam
+              </label>
+              <label for="female" class="radio">
+                <input type="radio" id="female" name="gender" class="radio__input" value="1">
+                <div class="radio__box"></div>
+                Nữ
+              </label>
+            </span>
+          </div>
+
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Tỉnh/Thành phố <span class="required">*</span>
+            </div>
+            <div class="dropdown">
+              <div class="dropdown__select">
+                <span class="dropdown__selected">
+                  -- Chọn tỉnh/thành phố --
+                </span>
+                <i class='bx bxs-chevron-down dropdown__select-icon'></i>
+              </div>
+
+              <ul class="dropdown__list read-add-edit__dropdown-list">
+                <li class="dropdown__item active">
+                  <span class="dropdown__text">-- Chọn tỉnh/thành phố --</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Đà Nẵng</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Hồ Chí Minh</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Hà Nội</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="read-add-edit__row">
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Quận/Huyện <span class="required">*</span>
+            </div>
+            <div class="dropdown">
+              <div class="dropdown__select">
+                <span class="dropdown__selected">
+                  -- Chọn quận/huyện --
+                </span>
+                <i class='bx bxs-chevron-down dropdown__select-icon'></i>
+              </div>
+
+              <ul class="dropdown__list read-add-edit__dropdown-list">
+                <li class="dropdown__item active">
+                  <span class="dropdown__text">-- Chọn quận/huyện --</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Quận 1</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Quận 2</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Quận 3</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Phường/Xã <span class="required">*</span>
+            </div>
+            <div class="dropdown">
+              <div class="dropdown__select">
+                <span class="dropdown__selected">
+                  -- Chọn phường/xã --
+                </span>
+                <i class='bx bxs-chevron-down dropdown__select-icon'></i>
+              </div>
+
+              <ul class="dropdown__list read-add-edit__dropdown-list">
+                <li class="dropdown__item active">
+                  <span class="dropdown__text">-- Chọn phường/xã --</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Phường 1</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Phường 2</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Phường 3</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="read-add-edit__line">
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Vai trò <span class="required">*</span>
+            </div>
+            <div class="dropdown">
+              <div class="dropdown__select">
+                <span class="dropdown__selected">
+                  Khách hàng
+                </span>
+                <i class='bx bxs-chevron-down dropdown__select-icon'></i>
+              </div>
+
+              <ul class="dropdown__list read-add-edit__dropdown-list">
+                <li class="dropdown__item active">
+                  <span class="dropdown__text">Khách hàng</span>
+                </li>
+                <li class="dropdown__item">
+                  <span class="dropdown__text">Admin</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-wrapper read-add-edit__line">
+          <button type="reset" class="btn reset__btn">Làm mới</button>
+          <button class="btn btn--primary">Thêm mới</button>
+        </div>
+      </form>
+    </div>
+    <!-- end content -->
+  </div>
+
+  <!-- js -->
+  <script src="../assets/js/_base.js"></script>
+  <script src="../assets/js/admin/_app.js"></script>
+  <!-- end js -->
+</body>
+
+</html>

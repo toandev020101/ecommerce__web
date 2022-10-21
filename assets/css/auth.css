@@ -78,10 +78,6 @@
 	color: #888;
 }
 
-.auth__form-radio + .auth__form-radio {
-	margin-left: 15px;
-}
-
 .auth__form-btn {
 	margin-top: 20px;
 	width: 100%;

@@ -373,6 +373,10 @@ img {
 	position: relative;
 }
 
+.radio + .radio {
+	margin-left: 15px;
+}
+
 .radio__input {
 	position: absolute;
 	top: 3px;
