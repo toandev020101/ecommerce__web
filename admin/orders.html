@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PKShop: Danh mục</title>
+  <title>PKShop: Đơn hàng</title>
   <!-- google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +44,7 @@
             <span class="sidebar__menu-text">Thống kê</span>
           </a>
         </li>
-        <li class="sidebar__menu-item active">
+        <li class="sidebar__menu-item">
           <a href="./categories.html" class="link sidebar__menu-link" tooltip-title="Danh mục">
             <i class='bx bx-category-alt sidebar__menu-icon'></i>
             <span class="sidebar__menu-text">Danh mục</span>
@@ -56,7 +56,7 @@
             <span class="sidebar__menu-text">Sản phẩm</span>
           </a>
         </li>
-        <li class="sidebar__menu-item">
+        <li class="sidebar__menu-item active">
           <a href="./orders.html" class="link sidebar__menu-link" tooltip-title="Đơn hàng">
             <i class='bx bx-clipboard sidebar__menu-icon'></i>
             <span class="sidebar__menu-text">Đơn hàng</span>
@@ -69,15 +69,15 @@
           </a>
         </li>
         <li class="sidebar__menu-item">
-          <a href="./display.html" class="link sidebar__menu-link" tooltip-title="Hiển thị">
-            <i class='bx bx-laptop sidebar__menu-icon'></i>
-            <span class="sidebar__menu-text">Hiển thị</span>
+          <a href="./user.html" class="link sidebar__menu-link" tooltip-title="Hiển thị">
+            <i class='bx bx-user sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Tài khoản</span>
           </a>
         </li>
         <li class="sidebar__menu-item">
           <a href="./display.html" class="link sidebar__menu-link" tooltip-title="Hiển thị">
-            <i class='bx bx-user sidebar__menu-icon'></i>
-            <span class="sidebar__menu-text">Tài khoản</span>
+            <i class='bx bx-laptop sidebar__menu-icon'></i>
+            <span class="sidebar__menu-text">Hiển thị</span>
           </a>
         </li>
       </ul>
@@ -111,7 +111,7 @@
 
     <!-- content -->
     <div class="content">
-      <h2 class="title">Danh mục</h2>
+      <h2 class="title">Đơn hàng</h2>
 
       <div class="box">
         <div class="table__head">
@@ -120,7 +120,7 @@
             <label class="input-field__label">Tìm kiếm theo tên</label>
           </div>
 
-          <a href="./add-edit-category.html" class="link btn btn--primary">Thêm mới</a>
+          <a href="./read-add-edit-order.html" class="link btn btn--primary">Thêm mới</a>
         </div>
 
 
@@ -128,29 +128,43 @@
         <table>
           <thead>
             <tr>
-              <th>Ảnh danh mục</th>
-              <th>Tên danh mục</th>
-              <th>Slug dường dẫn</th>
-              <th>Danh mục cha</th>
+              <th>Tên khách hàng</th>
+              <th>Số điện thoại</th>
+              <th>Số lượng</th>
+              <th>Tổng tiền (VNĐ)</th>
+              <th>Ngày đặt</th>
+              <th>Trạng thái</th>
               <th>Thao tác</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <img src="../assets/images/phu-kien-di-dong.png" alt="" class="img">
+                Hoàng Long
               </td>
               <td>
-                Phụ kiện di động
+                098xxxxx
               </td>
               <td>
-                phu-kien-di-dong
+                1
               </td>
               <td>
+                5,030,000
+              </td>
+              <td>
+                20/10/2022
+              </td>
+              <td>
+                <div class="box__status box--pending">
+                  Chờ xử lý
+                </div>
               </td>
               <td>
                 <div class="action">
-                  <a href="./add-edit-category.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Xem chi tiết">
+                    <i class='bx bx-detail action__icon'></i>
+                  </a>
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
                     <i class='bx bx-edit-alt action__icon'></i>
                   </a>
                   <span class="tooltip action__btn" tooltip-title="Xóa">
@@ -161,20 +175,31 @@
             </tr>
             <tr>
               <td>
-                <img src="../assets/images/phu-kien-di-dong.png" alt="" class="img">
+                Hoàng Long
               </td>
               <td>
-                Sạc dự phòng
+                098xxxxx
               </td>
               <td>
-                phu-kien-di-dong
+                1
               </td>
               <td>
-                Phụ kiện di động
+                5,030,000
+              </td>
+              <td>
+                20/10/2022
+              </td>
+              <td>
+                <div class="box__status box--pending">
+                  Chờ xử lý
+                </div>
               </td>
               <td>
                 <div class="action">
-                  <a href="./add-edit-category.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Xem chi tiết">
+                    <i class='bx bx-detail action__icon'></i>
+                  </a>
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
                     <i class='bx bx-edit-alt action__icon'></i>
                   </a>
                   <span class="tooltip action__btn" tooltip-title="Xóa">
@@ -185,19 +210,31 @@
             </tr>
             <tr>
               <td>
-                <img src="../assets/images/phu-kien-di-dong.png" alt="" class="img">
+                Hoàng Long
               </td>
               <td>
-                Phụ kiện di động
+                098xxxxx
               </td>
               <td>
-                phu-kien-di-dong
+                1
               </td>
               <td>
+                5,030,000
+              </td>
+              <td>
+                20/10/2022
+              </td>
+              <td>
+                <div class="box__status box--pending">
+                  Chờ xử lý
+                </div>
               </td>
               <td>
                 <div class="action">
-                  <a href="./add-edit-category.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Xem chi tiết">
+                    <i class='bx bx-detail action__icon'></i>
+                  </a>
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
                     <i class='bx bx-edit-alt action__icon'></i>
                   </a>
                   <span class="tooltip action__btn" tooltip-title="Xóa">
@@ -208,20 +245,31 @@
             </tr>
             <tr>
               <td>
-                <img src="../assets/images/phu-kien-di-dong.png" alt="" class="img">
+                Hoàng Long
               </td>
               <td>
-                Sạc dự phòng
+                098xxxxx
               </td>
               <td>
-                phu-kien-di-dong
+                1
               </td>
               <td>
-                Phụ kiện di động
+                5,030,000
+              </td>
+              <td>
+                20/10/2022
+              </td>
+              <td>
+                <div class="box__status box--pending">
+                  Chờ xử lý
+                </div>
               </td>
               <td>
                 <div class="action">
-                  <a href="./add-edit-category.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Xem chi tiết">
+                    <i class='bx bx-detail action__icon'></i>
+                  </a>
+                  <a href="./read-add-edit-order.html" class="link tooltip action__btn" tooltip-title="Chỉnh sửa">
                     <i class='bx bx-edit-alt action__icon'></i>
                   </a>
                   <span class="tooltip action__btn" tooltip-title="Xóa">

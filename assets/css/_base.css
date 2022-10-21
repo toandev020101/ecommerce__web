@@ -59,6 +59,10 @@ img {
 	max-height: 100%;
 }
 
+.required {
+	color: var(--red-color);
+}
+
 /* background */
 .bg-main {
 	background-color: var(--main-bg-color);
@@ -194,6 +198,7 @@ img {
 .dropdown__select-icon {
 	margin-left: 10px;
 	font-size: 18px;
+	color: #999;
 }
 
 .dropdown__list {
@@ -208,7 +213,6 @@ img {
 	width: max-content;
 
 	max-height: 200px;
-	overflow-y: auto;
 	display: none;
 }
 
@@ -759,13 +763,15 @@ table tbody tr:hover {
 
 /* box status */
 .box__status {
-	padding: 5px 8px;
+	display: inline-block;
+	padding: 5px 10px;
 	border-radius: 3px;
 	font-size: 15px;
 	color: var(--white-color);
 }
 
-.box--pending {
+.box--pending,
+.box--warning {
 	background-color: var(--warning-color);
 }
 
@@ -775,6 +781,10 @@ table tbody tr:hover {
 
 .box--delivered {
 	background-color: var(--success-color);
+}
+
+.box--error {
+	background-color: var(--error-color);
 }
 /* box status */
 

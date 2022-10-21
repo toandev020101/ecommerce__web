@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PKShop: Thống kê</title>
+  <title>PKShop: Thêm danh mục</title>
   <!-- google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,6 @@
   <link rel="stylesheet" href="../assets/css/admin/_app.css">
   <link rel="stylesheet" href="../assets/css/admin/sidebar.css">
   <link rel="stylesheet" href="../assets/css/admin/header.css">
-  <link rel="stylesheet" href="../assets/css/admin/index.css">
   <!-- main css -->
 </head>
 
@@ -39,7 +38,7 @@
       </div>
 
       <ul class="sidebar__menu-list">
-        <li class="sidebar__menu-item active">
+        <li class="sidebar__menu-item">
           <a href="./index.html" class="link sidebar__menu-link" tooltip-title="Thống kê">
             <i class='bx bx-bar-chart-alt sidebar__menu-icon'></i>
             <span class="sidebar__menu-text">Thống kê</span>
@@ -52,7 +51,7 @@
           </a>
         </li>
         <li class="sidebar__menu-item">
-          <a href="./products.html" class="link sidebar__menu-link" tooltip-title="Sản phẩm">
+          <a href="./categories.html" class="link sidebar__menu-link" tooltip-title="Sản phẩm">
             <i class='bx bx-package sidebar__menu-icon'></i>
             <span class="sidebar__menu-text">Sản phẩm</span>
           </a>
@@ -112,38 +111,77 @@
 
     <!-- content -->
     <div class="content">
-      <h2 class="title">Thống kê</h2>
+      <h2 class="title">Thêm danh mục</h2>
 
-      <div class="statistical">
-        <div class="box statistical__box">
-          <i class='bx bx-package statistical__box-icon'></i>
-          <div>
-            <h3 class="statistical__box-number">1,000</h3>
-            <span class="statistical__box-name">Tổng doanh số</span>
+      <form class="box">
+        <div class="read-add-edit__line">
+          <div class="read-add-edit__name">
+            Ảnh danh mục <span class="required">*</span>
+          </div>
+          <div class="upload">
+            <img src="" alt="" class="upload__img">
+            <div class="upload__content">
+              <i class='bx bx-cloud-upload upload__icon'></i>
+              <span class='upload__text'>Tải ảnh lên</span>
+            </div>
+            <input type="file" class="upload__input">
+            <i class='bx bx-x upload__close'></i>
+            <div class="upload__name"></div>
           </div>
         </div>
-        <div class="box statistical__box">
-          <i class='bx bx-receipt statistical__box-icon'></i>
-          <div>
-            <h3 class="statistical__box-number">800</h3>
-            <span class="statistical__box-name">Tổng đơn hàng</span>
+
+        <div class="read-add-edit__row">
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Tên danh mục <span class="required">*</span>
+            </div>
+            <input type="text" class="input read-add-edit__input" placeholder="Tên danh mục">
+          </div>
+          <div class="read-add-edit__col">
+            <div class="read-add-edit__name">
+              Slug đường dẫn <span class="required">*</span>
+            </div>
+            <input type="text" class="input read-add-edit__input" placeholder="Slug đường dẫn">
           </div>
         </div>
-        <div class="box statistical__box">
-          <i class='bx bx-dollar-circle statistical__box-icon'></i>
-          <div>
-            <h3 class="statistical__box-number">10,000,000</h3>
-            <span class="statistical__box-name">Tổng thu nhập</span>
+
+        <div class="read-add-edit__line">
+          <div class="read-add-edit__name">
+            Danh mục cha
+          </div>
+          <div class="dropdown">
+            <div class="dropdown__select">
+              <span class="dropdown__selected">
+                -- Chọn danh mục --
+              </span>
+              <i class='bx bxs-chevron-down dropdown__select-icon'></i>
+            </div>
+
+            <ul class="dropdown__list read-add-edit__dropdown-list">
+              <li class="dropdown__item active">
+                <span class="dropdown__text">-- Chọn danh mục --</span>
+              </li>
+              <li class="dropdown__item">
+                <span class="dropdown__text">Phụ kiện di động</span>
+              </li>
+              <li class="dropdown__item">
+                <span class="dropdown__text">Phụ kiện laptop</span>
+              </li>
+              <li class="dropdown__item">
+                <span class="dropdown__text">Phụ kiện âm thanh</span>
+              </li>
+              <li class="dropdown__item">
+                <span class="dropdown__text">Phụ kiện bộ nhớ</span>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="box statistical__box">
-          <i class='bx bx-repost statistical__box-icon'></i>
-          <div>
-            <h3 class="statistical__box-number">100</h3>
-            <span class="statistical__box-name">Tổng trả hàng</span>
-          </div>
+
+        <div class="btn-wrapper read-add-edit__line">
+          <button type="reset" class="btn reset__btn">Làm mới</button>
+          <button class="btn btn--primary">Thêm mới</button>
         </div>
-      </div>
+      </form>
     </div>
     <!-- end content -->
   </div>
