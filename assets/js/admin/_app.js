@@ -4,16 +4,44 @@ const resetFormBtn = $('.reset__btn')
 // end let - const
 
 // function
+const activeUpload = (upload, uploadImg, uploadInput, uploadContent) => {
+	upload.classList.add('active')
+	uploadImg.classList.add('active')
+	uploadContent.classList.add('hidden')
+	uploadInput.setAttribute('hidden', 'true')
+}
+
+const delUpload = (upload, uploadImg, uploadInput, uploadContent) => {
+	uploadImg.src = ''
+	upload.classList.remove('active')
+	uploadImg.classList.remove('active')
+	uploadContent.classList.remove('hidden')
+	uploadInput.removeAttribute('hidden')
+}
+
 const uploadFile = (uploadInputList) => {
 	uploadInputList.forEach((uploadInput) => {
+		const upload = uploadInput.parentNode
+		const uploadImg = upload.querySelector('.upload__img')
+		const uploadEditEmpty = upload.querySelector('.upload__edit-empty')
+
+		const uploadName = upload.querySelector('.upload__name')
+		const uploadCloseBtn = upload.querySelector('.upload__close')
+		const uploadContent = upload.querySelector('.upload__content')
+
+		if (uploadImg.src.split('admin/')[1] !== 'no-image') {
+			activeUpload(upload, uploadImg, uploadInput, uploadContent)
+
+			// delete upload file
+			uploadCloseBtn.onclick = () => {
+				delUpload(upload, uploadImg, uploadInput, uploadContent)
+				if (uploadEditEmpty) {
+					uploadEditEmpty.value = '1'
+				}
+			}
+		}
+
 		uploadInput.onchange = () => {
-			const upload = uploadInput.parentNode
-			const uploadName = upload.querySelector('.upload__name')
-
-			const uploadCloseBtn = upload.querySelector('.upload__close')
-			const uploadImg = upload.querySelector('.upload__img')
-			const uploadContent = upload.querySelector('.upload__content')
-
 			const file = uploadInput.files[0]
 			const filePath = uploadInput.value
 
@@ -25,18 +53,11 @@ const uploadFile = (uploadInputList) => {
 				}
 				reader.readAsDataURL(file)
 
-				upload.classList.add('active')
-				uploadImg.classList.add('active')
-				uploadContent.classList.add('hidden')
-				uploadInput.setAttribute('hidden', 'true')
+				activeUpload(upload, uploadImg, uploadInput, uploadContent)
 
 				// delete upload file
 				uploadCloseBtn.onclick = () => {
-					uploadImg.src = ''
-					upload.classList.remove('active')
-					uploadImg.classList.remove('active')
-					uploadContent.classList.remove('hidden')
-					uploadInput.removeAttribute('hidden')
+					delUpload(upload, uploadImg, uploadInput, uploadContent)
 				}
 			}
 
@@ -57,11 +78,8 @@ const resetForm = (resetFormBtn) => {
 			const uploadImg = upload.querySelector('.upload__img')
 			const uploadContent = upload.querySelector('.upload__content')
 			const uploadInput = upload.querySelector('.upload__input')
-			uploadImg.src = ''
-			upload.classList.remove('active')
-			uploadImg.classList.remove('active')
-			uploadContent.classList.remove('hidden')
-			uploadInput.removeAttribute('hidden')
+
+			delUpload(upload, uploadImg, uploadInput, uploadContent)
 		})
 
 		const dropdownList = form.querySelectorAll('.dropdown')

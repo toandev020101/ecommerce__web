@@ -181,6 +181,10 @@ img {
 	cursor: pointer;
 }
 
+.dropdown.readonly {
+	cursor: default;
+}
+
 .dropdown__select {
 	width: 100%;
 	padding: 10px 20px;
@@ -432,6 +436,10 @@ img {
 	align-items: center;
 }
 
+.pagination.hidden {
+	display: none;
+}
+
 .pagination__item {
 	margin: 0 5px;
 }
@@ -449,6 +457,11 @@ img {
 	--size: 30px;
 	height: var(--size);
 	line-height: var(--size);
+}
+
+.pagination__item.hidden .pagination__item-link {
+	cursor: default;
+	opacity: 0.3;
 }
 
 .pagination__item.active .pagination__item-link {
@@ -658,6 +671,7 @@ table tbody tr:hover {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 99;
 
 	display: none;
 	animation: fadeIn 0.1s linear;
@@ -774,7 +788,12 @@ table tbody tr:hover {
 	color: var(--white-color);
 }
 
+.box__status + .box__status {
+	margin-left: 10px;
+}
+
 .box--pending,
+.box--returned,
 .box--warning {
 	background-color: var(--warning-color);
 }
@@ -787,6 +806,7 @@ table tbody tr:hover {
 	background-color: var(--success-color);
 }
 
+.box--cancelled,
 .box--error {
 	background-color: var(--error-color);
 }

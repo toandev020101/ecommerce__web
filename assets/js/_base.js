@@ -7,7 +7,7 @@ const toastMain = $('#toast')
 
 const modal = $('.modal')
 const modalOverlay = $('.modal__overlay')
-const modalBtnOpen = $('.modal__btn-open')
+const modalBtnOpenList = $$('.modal__btn-open')
 const modalBtnClose = $('.modal__btn-close')
 
 const inputPasswordIconList = $$('.input-field__icon')
@@ -15,6 +15,8 @@ const tabItemList = $$('.tab__item')
 const tabPaneList = $$('.tab__pane')
 const tabItemActive = $('.tab__item.active')
 const tabLine = $('.tab__line')
+
+const paginationItemHiddenList = $$('.pagination__item.hidden')
 // end let - const
 
 // function
@@ -24,30 +26,40 @@ const removeActive = (list) => {
 
 const showDropdown = (dropdownList) => {
 	dropdownList.forEach((dropdown, index) => {
-		dropdown.onclick = (e) => {
-			dropdownList.forEach((item, idx) => {
-				if (idx !== index) {
-					item.classList.remove('active')
+		if (!dropdown.classList.contains('readonly')) {
+			dropdown.onclick = (e) => {
+				dropdownList.forEach((item, idx) => {
+					if (idx !== index) {
+						item.classList.remove('active')
+					}
+				})
+
+				dropdown.classList.toggle('active')
+				const dropdownSelected = dropdown.querySelector('.dropdown__selected')
+				const dropdownItemList = dropdown.querySelectorAll('.dropdown__item')
+				const dropdownInput = dropdown.querySelector('.dropdown__input')
+
+				dropdownSelectedClick(dropdownSelected, dropdownInput, dropdownItemList)
+
+				if (e.target.classList.contains('dropdown__item')) {
+					dropdown.classList.remove('active')
 				}
-			})
-
-			dropdown.classList.toggle('active')
-			const dropdownSelected = dropdown.querySelector('.dropdown__selected')
-			const dropdownItemList = dropdown.querySelectorAll('.dropdown__item')
-			dropdownSelectedClick(dropdownSelected, dropdownItemList)
-
-			if (e.target.classList.contains('dropdown__item')) {
-				dropdown.classList.remove('active')
 			}
 		}
 	})
 }
 
-const dropdownSelectedClick = (dropdownSelected, dropdownItemList) => {
+const dropdownSelectedClick = (
+	dropdownSelected,
+	dropdownInput,
+	dropdownItemList,
+) => {
 	dropdownItemList.forEach((dropdownItem) => {
 		dropdownItem.onclick = () => {
 			const dropdownItemText = dropdownItem.querySelector('.dropdown__text')
+
 			dropdownSelected.textContent = dropdownItemText.textContent
+			dropdownInput.value = dropdownItemText.dataset.value
 			removeActive(dropdownItemList)
 			dropdownItem.classList.add('active')
 		}
@@ -70,7 +82,17 @@ const closeDropdown = (dropdownList) => {
 	}
 }
 
-const toast = ({ type = 'success', message = '', duration = 4000 }) => {
+const hiddenPaginationItem = (paginationItemHiddenList) => {
+	paginationItemHiddenList.forEach((paginationItem) => {
+		const paginationItemLink = paginationItem.querySelector('.link')
+
+		paginationItemLink.onclick = (e) => {
+			e.preventDefault()
+		}
+	})
+}
+
+const toast = ({ type = 'success', message = '', duration = 3000 }) => {
 	if (toastMain) {
 		const toastElement = document.createElement('div')
 		const icons = {
@@ -143,10 +165,21 @@ const toast = ({ type = 'success', message = '', duration = 4000 }) => {
 	}
 }
 
-const openModal = (modal, modalBtnOpen) => {
-	modalBtnOpen.onclick = () => {
-		modal.classList.add('active')
-	}
+const openModal = (modal, modalBtnOpenList) => {
+	modalBtnOpenList.forEach((modalBtnOpen) => {
+		modalBtnOpen.onclick = () => {
+			modal.classList.add('active')
+
+			const modalDel = modal.querySelector('.delete__modal')
+			if (modalBtnOpen.dataset && modalDel) {
+				const modalDelName = modalDel.querySelector('.delete__modal-name')
+				const modalDelId = modalDel.querySelector('.delete__modal-id')
+
+				modalDelName.innerText = modalBtnOpen.dataset.name
+				modalDelId.value = modalBtnOpen.dataset.id
+			}
+		}
+	})
 }
 
 const closeModal = (modal, modalOverlay, modalBtnClose) => {
@@ -204,16 +237,9 @@ showDropdown(dropdownList)
 // close dropdown
 closeDropdown(dropdownList)
 
-// run toast
-toast({
-	type: 'success',
-	message: 'Xin chào, Đức Toàn',
-	duration: 4000,
-})
-
-if (modalBtnOpen) {
+if (modalBtnOpenList) {
 	// open modal
-	openModal(modal, modalBtnOpen)
+	openModal(modal, modalBtnOpenList)
 }
 
 if (modalOverlay && modalBtnClose) {
@@ -234,4 +260,9 @@ if (tabLine) {
 if (tabItemList && tabPaneList) {
 	// active tab
 	activeTab(tabItemList, tabPaneList, tabLine)
+}
+
+if (paginationItemHiddenList) {
+	// hidden pagination item
+	hiddenPaginationItem(paginationItemHiddenList)
 }

@@ -8,6 +8,7 @@ const fontName = $('#fontName')
 const fontSize = $('#fontSize')
 
 const textEditorContent = $('.text-editor__content')
+const textEditorContentInput = $('.text-editor__content-input')
 const linkBtn = $('#createLink')
 const imageBtn = $('#insertImage')
 const alignBtnList = $$('.align')
@@ -147,6 +148,8 @@ const highlighterRemover = (btnList) => {
 	})
 }
 
-// fontSize configs
+textEditorContent.onkeyup = () => {
+	textEditorContentInput.value = textEditorContent.innerHTML
+}
 
 window.onload = initializer()
