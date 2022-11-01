@@ -1,6 +1,17 @@
 <?php
   $url = $_SERVER['REQUEST_URI'];
-  $path = substr($url, 15, 15);
+  $path = substr($url, 14, 14);
+
+  if(isset($_POST['btnLogout'])){
+    unset($_SESSION['user']);
+    if($path == '/' || strpos($path, '/index.php') != false){
+      toast('index__toast-refresh', 'success', 'Đăng xuất thành công');
+      $_SESSION['refresh'] = false;
+    }else {
+      toast('index__toast', 'success', 'Đăng xuất thành công');
+    }
+    redirect('./index.php');
+  }
 ?>
 
 <header>
@@ -159,45 +170,54 @@
         </li>
         <li class="action__item">
           <div class="auth">
-            <!-- <a href="./login.php" class="link auth__login">Đăng nhập</a>
-            <span class="auth_slash">/</span>
-            <a href="./register.php" class="link auth__register">Đăng ký</a> -->
+            <?php
+              if(!checkAuth()){
+                echo '<a href="./login.php" class="link auth__login">Đăng nhập</a>
+                <span class="auth_slash">/</span>
+                <a href="./register.php" class="link auth__register">Đăng ký</a>';
+              }else {
+                $avatar = $_SESSION['user']['avatar'];
+                $fullname = $_SESSION['user']['fullname'];
 
-            <a href="./user.php" class="link auth__info">
-              <img src="./assets/images/avatar.jpg" alt="avatar" class="auth__info-avatar">
-              <span class="auth__info-fullname">Đức Toàn</span>
-            </a>
-
-            <!-- user menu -->
-            <ul class="dropdown__list auth__dropdown-list">
-              <!-- dropdown item -->
-              <li class="dropdown__item">
-                <a href="#" class="link auth__link">
-                  <i class='bx bx-cog dropdown__icon'></i>
-                  <span class="dropdown__text">Thông tin tài khoản</span>
-                </a>
-              </li>
-              <!-- end dropdown item -->
-
-              <!-- dropdown item -->
-              <li class="dropdown__item">
-                <a href="#" class="link auth__link">
-                  <i class='bx bx-detail dropdown__icon'></i>
-                  <span class="dropdown__text">Theo dõi đơn hàng</span>
-                </a>
-              </li>
-              <!-- end dropdown item -->
-
-              <!-- dropdown item -->
-              <li class="dropdown__item">
-                <a href="#" class="link auth__link">
-                  <i class='bx bx-log-out dropdown__icon'></i>
-                  <span class="dropdown__text">Đăng xuất</span>
-                </a>
-              </li>
-              <!-- end dropdown item -->
-            </ul>
-            <!-- end user menu -->
+                echo "<a href='#' class='link auth__info'>
+                <img src='./uploads/$avatar' alt='$avatar' class='auth__info-avatar'>
+                <span class='auth__info-fullname'>$fullname</span>
+              </a>
+  
+              <!-- user menu -->
+              <ul class='dropdown__list auth__dropdown-list'>
+                <!-- dropdown item -->
+                <li class='dropdown__item'>
+                  <a href='#' class='link auth__link'>
+                    <i class='bx bx-cog dropdown__icon'></i>
+                    <span class='dropdown__text'>Thông tin tài khoản</span>
+                  </a>
+                </li>
+                <!-- end dropdown item -->
+  
+                <!-- dropdown item -->
+                <li class='dropdown__item'>
+                  <a href='#' class='link auth__link'>
+                    <i class='bx bx-detail dropdown__icon'></i>
+                    <span class='dropdown__text'>Theo dõi đơn hàng</span>
+                  </a>
+                </li>
+                <!-- end dropdown item -->
+  
+                <!-- dropdown item -->
+                <li class='dropdown__item'>
+                  <form action='' method='post'>
+                    <button class='auth__link reset__btn' name='btnLogout'>
+                      <i class='bx bx-log-out dropdown__icon'></i>
+                      <span class='dropdown__text'>Đăng xuất</span>
+                    </button>
+                  </form>
+                </li>
+                <!-- end dropdown item -->
+              </ul>
+              <!-- end user menu -->";
+              }
+            ?>
           </div>
         </li>
       </ul>
@@ -209,10 +229,12 @@
   <div class="bg-second">
     <nav class="container bottom-header">
       <ul class="main-menu__list">
-        <li class="main-menu__item <?php echo  $path == '/' || $path == '/index.php' ? 'active' : ''; ?>">
+        <li
+          class="main-menu__item <?php echo  $path == '/' || strpos($path, '/index.php') != false ? 'active' : ''; ?>">
           <a href="./index.php" class="link main-menu__item-link">Trang chủ</a>
         </li>
-        <li class="main-menu__item mega-dropdown <?php echo  $path == '/products.php' ? 'active' : ''; ?>">
+        <li
+          class="main-menu__item mega-dropdown <?php echo strpos($path, '/products.php') != false ? 'active' : ''; ?>">
           <a href="./products.php" class="link main-menu__item-link">
             Sản phẩm
             <i class='bx bx-chevron-down main-menu__item-icon'></i>
@@ -339,13 +361,13 @@
             <!-- end mega content item -->
           </div>
         </li>
-        <li class="main-menu__item <?php echo  $path == '/news.php' ? 'active' : ''; ?>">
+        <li class="main-menu__item <?php echo strpos($path, '/news.php') != false ? 'active' : ''; ?>">
           <a href="./news.php" class="link main-menu__item-link">Tin tức</a>
         </li>
-        <li class="main-menu__item <?php echo  $path == '/about.php' ? 'active' : ''; ?>">
+        <li class="main-menu__item <?php echo strpos($path, '/about.php') != false ? 'active' : ''; ?>">
           <a href="./about.php" class="link main-menu__item-link">Giới thiệu</a>
         </li>
-        <li class="main-menu__item <?php echo  $path == '/contact.php' ? 'active' : ''; ?>">
+        <li class="main-menu__item <?php echo strpos($path, '/contact.php') != false ? 'active' : ''; ?>">
           <a href="./contact.php" class="link main-menu__item-link">Liên hệ</a>
         </li>
       </ul>

@@ -1,3 +1,13 @@
+<?php
+  require_once('./helper/function.php');
+  session_start();
+
+  if(isset($_SESSION['refresh'])){
+    // trang đã làm mới
+    $_SESSION['refresh'] = true;
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -362,6 +372,21 @@
 
   <!-- js -->
   <script src="./assets/js/_base.js"></script>
+  <script>
+  <?php
+    // hiển thị thông báo
+    if(isset($_SESSION['index__toast'])){
+      echo $_SESSION['index__toast'];
+      unset($_SESSION['index__toast']);
+    }
+
+    if(isset($_SESSION['index__toast-refresh']) && isset($_SESSION['refresh']) && $_SESSION['refresh']){
+      echo $_SESSION['index__toast-refresh'];
+      unset($_SESSION['index__toast-refresh']);
+      unset($_SESSION['refresh']);
+    }
+  ?>
+  </script>
   <script src="./assets/js/_app.js"></script>
   <script src="./assets/js/index.js"></script>
   <!-- end js -->

@@ -4,6 +4,17 @@
   
   session_start();
 
+  if(checkAuth()){
+    $role = checkPermission($conn);
+    if($role != 'admin'){
+      toast('index__toast', 'error', 'Bạn không có quyền truy cập');
+      redirect('../index.php');
+    }
+  }else {
+    toast('login__toast', 'error', 'Bạn chưa đăng nhập');
+    redirect('../login.php');
+  }
+
   if(isset($_SESSION['refresh'])){
     // trang đã làm mới
     $_SESSION['refresh'] = true;
@@ -48,7 +59,7 @@
     mysqli_autocommit($conn, false);
 
     try{
-      function deleteProductListByCategory($conn, $category_id){
+      function deleteProductListByCategoryId($conn, $category_id){
         // tìm sản phẩm thuộc danh mục
         $sql_product_list_by_category_id = "SELECT id FROM products WHERE category_id = $category_id";
         $query_product_list_by_category_id = mysqli_query($conn, $sql_product_list_by_category_id);
@@ -58,8 +69,9 @@
           while($row_product_by_category_id = mysqli_fetch_assoc($query_product_list_by_category_id)){
             $product_id = $row_product_by_category_id["id"];
 
-            // xóa sản phẩm theo id
-            deleteProductById($conn, $product_id);
+            // xóa sản phẩm
+            $sql_product_delete = "UPDATE products SET category_id = null, deleted = 1 WHERE id = $product_id";
+            mysqli_query($conn, $sql_product_delete);
           }
         }
       }
@@ -72,7 +84,7 @@
         // có danh mục con
         while($row_category_by_parent_id = mysqli_fetch_assoc($query_category_list_by_parent_id)){
           // xóa sản phẩm thuộc danh mục
-          deleteProductListByCategory($conn, $row_category_by_parent_id["id"]);
+          deleteProductListByCategoryId($conn, $row_category_by_parent_id["id"]);
 
           // xóa ảnh của danh mục con đã xóa
           unlink('../uploads/' . $row_category_by_parent_id["thumbnail"]);
@@ -84,7 +96,7 @@
       }
 
       // xóa sản phẩm thuộc danh mục
-      deleteProductListByCategory($conn, $id);
+      deleteProductListByCategoryId($conn, $id);
       
       // lấy ảnh danh mục theo id
       $sql_category_by_id = "SELECT thumbnail FROM categories WHERE id = $id";

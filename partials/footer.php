@@ -49,16 +49,16 @@
         <h4 class="footer-col__title">Cửa hàng trực tuyến</h4>
         <ul class="footer-col__list">
           <li class="footer-col__item">
-            <a href="#" class="link">Đồng hồ</a>
+            <a href="#" class="link">Sạc dự phòng</a>
           </li>
           <li class="footer-col__item">
-            <a href="#" class="link">Túi đồ</a>
+            <a href="#" class="link">Chuột, bàn phím</a>
           </li>
           <li class="footer-col__item">
-            <a href="#" class="link">Dày</a>
+            <a href="#" class="link">Tai nghe</a>
           </li>
           <li class="footer-col__item">
-            <a href="#" class="link">Quần áo</a>
+            <a href="#" class="link">Thẻ nhớ</a>
           </li>
         </ul>
       </div>

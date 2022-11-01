@@ -1,3 +1,20 @@
+<?php
+  require_once('../database/connectdb.php');
+  require_once('../helper/function.php');
+  session_start();
+
+  if(checkAuth()){
+    $role = checkPermission($conn);
+    if($role != 'admin'){
+      toast('index__toast', 'error', 'Bạn không có quyền truy cập');
+      redirect('../index.php');
+    }
+  }else {
+    toast('login__toast', 'error', 'Bạn chưa đăng nhập');
+    redirect('../login.php');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +32,7 @@
 </head>
 
 <body>
+  <div id="toast"></div>
   <div class="bg-main">
     <!-- sidebar -->
     <?php include_once('../partials/admin/sidebar.php') ?>
@@ -66,8 +84,22 @@
 
   <!-- js -->
   <script src="../assets/js/_base.js"></script>
+  <script>
+  <?php
+    // hiển thị thông báo
+    if(isset($_SESSION['admin-index__toast'])){
+      echo $_SESSION['admin-index__toast'];
+      unset($_SESSION['admin-index__toast']);
+    }
+  ?>
+  </script>
   <script src="../assets/js/admin/_app.js"></script>
   <!-- end js -->
 </body>
 
 </html>
+
+<?php
+  // Ngắt kết nối
+  mysqli_close($conn);
+?>

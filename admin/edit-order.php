@@ -3,6 +3,17 @@
   require_once('../helper/function.php');
   session_start();
 
+  if(checkAuth()){
+    $role = checkPermission($conn);
+    if($role != 'admin'){
+      toast('index__toast', 'error', 'Bạn không có quyền truy cập');
+      redirect('../index.php');
+    }
+  }else {
+    toast('login__toast', 'error', 'Bạn chưa đăng nhập');
+    redirect('../login.php');
+  }
+
   if(isset($_GET["id"])){
     // lấy id trên url
     $id = $_GET["id"];

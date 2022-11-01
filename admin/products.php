@@ -3,6 +3,17 @@
   require_once('../helper/function.php');
   session_start();
 
+  if(checkAuth()){
+    $role = checkPermission($conn);
+    if($role != 'admin'){
+      toast('index__toast', 'error', 'Bạn không có quyền truy cập');
+      redirect('../index.php');
+    }
+  }else {
+    toast('login__toast', 'error', 'Bạn chưa đăng nhập');
+    redirect('../login.php');
+  }
+
   if(isset($_SESSION['refresh'])){
     // trang đã làm mới
     $_SESSION['refresh'] = true;
@@ -21,7 +32,7 @@
   $offset = ($page - 1) * $limit;
 
   // lấy sản phẩm theo phân trang
-  $sql_product_list_pagination = "SELECT * FROM products limit $offset, $limit";
+  $sql_product_list_pagination = "SELECT * FROM products WHERE deleted = 0 limit $offset, $limit";
   $query_product_list_pagination = mysqli_query($conn, $sql_product_list_pagination);
   
   $row_num_product_list_pagination = mysqli_num_rows($query_product_list_pagination);
@@ -36,30 +47,23 @@
   }
 
   // lấy toàn bộ sản phẩm
-  $sql_product_all = "SELECT * FROM products";
+  $sql_product_all = "SELECT * FROM products WHERE deleted = 0";
   $query_product_all = mysqli_query($conn, $sql_product_all);
   $totalRecord = mysqli_num_rows($query_product_all);
   $totalPage = ceil($totalRecord / $limit);
 
   if(isset($_POST["btnDel"])){
     $id = $_POST["id"];
-    // tắt auto commit
-    mysqli_autocommit($conn, false);
+    // xóa sản phẩm
+    $sql_product_delete = "UPDATE products SET deleted = 1 WHERE id = $id";
+    $query_product_delete = mysqli_query($conn, $sql_product_delete);
 
-    try{
-      // xóa sản phẩm theo id
-      deleteProductById($conn, $id);
-      
-      // bật tự động commit sql
-      mysqli_autocommit($conn, true);
-
+    if($query_product_delete){
       toast('products__toast-refresh', 'success', 'Xóa thành công');
       $_SESSION['refresh'] = false;
       refresh();
-    }catch(mysqli_sql_exception $exception){
-      mysqli_rollback($conn);
+    }else{
       toast('products__toast-refresh', 'error', 'Xóa thất bại');
-      throw $exception;
     }
   }
 ?>
@@ -122,6 +126,7 @@
           </thead>
           <tbody>
             <?php echo $totalRecord <= 0 ? "<tr>
+            <td></td>
             <td></td>
             <td></td>
             <td>Không có sản phẩm nào</td>

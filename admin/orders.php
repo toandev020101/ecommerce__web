@@ -3,6 +3,17 @@
   require_once('../helper/function.php');
   session_start();
 
+  if(checkAuth()){
+    $role = checkPermission($conn);
+    if($role != 'admin'){
+      toast('index__toast', 'error', 'Bạn không có quyền truy cập');
+      redirect('../index.php');
+    }
+  }else {
+    toast('login__toast', 'error', 'Bạn chưa đăng nhập');
+    redirect('../login.php');
+  }
+
   if(isset($_SESSION['refresh'])){
     // trang đã làm mới
     $_SESSION['refresh'] = true;
@@ -47,18 +58,23 @@
     mysqli_autocommit($conn, false);
 
     try{
-      // xóa sản phẩm theo id
-      deleteProductById($conn, $id);
+      // xóa chi tiết đơn Hoàng
+      $sql_order_detail_list_by_order_id = "DELETE FROM order_details WHERE order_id = $id";
+      mysqli_query($conn, $sql_order_detail_list_by_order_id);
+
+      // xóa đơn Hoàng
+      $sql_order_by_id = "DELETE FROM orders WHERE id = $id";
+      mysqli_query($conn, $sql_order_by_id);
       
       // bật tự động commit sql
       mysqli_autocommit($conn, true);
 
-      toast('products__toast-refresh', 'success', 'Xóa thành công');
+      toast('orders__toast-refresh', 'success', 'Xóa thành công');
       $_SESSION['refresh'] = false;
       refresh();
     }catch(mysqli_sql_exception $exception){
       mysqli_rollback($conn);
-      toast('products__toast-refresh', 'error', 'Xóa thất bại');
+      toast('orders__toast-refresh', 'error', 'Xóa thất bại');
       throw $exception;
     }
   }
@@ -123,7 +139,9 @@
             <?php echo $totalRecord <= 0 ? "<tr>
             <td></td>
             <td></td>
+            <td></td>
             <td>Không có đơn hàng nào</td>
+            <td></td>
             <td></td>
             <td></td>
             </tr>" : '';
@@ -150,7 +168,7 @@
                   while($row_order_detail_list_by_order_id = mysqli_fetch_assoc($query_order_detail_list_by_order_id)){
                     $total_quantity += $row_order_detail_list_by_order_id['quantity'];
 
-                    $total_price += $row_order_detail_list_by_order_id['price'];
+                    $total_price += $row_order_detail_list_by_order_id['quantity']  * $row_order_detail_list_by_order_id['price'];
                   }
 
                   echo $total_quantity;
@@ -158,7 +176,7 @@
               </td>
               <td>
                 <div class="price">
-                  <?php echo number_format($total_quantity * $total_price); ?>đ
+                  <?php echo number_format($total_price); ?>đ
                 </div>
               </td>
               <td>

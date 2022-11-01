@@ -4,6 +4,17 @@
 
   session_start();
 
+  if(checkAuth()){
+    $role = checkPermission($conn);
+    if($role != 'admin'){
+      toast('index__toast', 'error', 'Bạn không có quyền truy cập');
+      redirect('../index.php');
+    }
+  }else {
+    toast('login__toast', 'error', 'Bạn chưa đăng nhập');
+    redirect('../login.php');
+  }
+
   $action = 'add';
   if(isset($_GET["action"])){
     // lấy action và id trên url
@@ -71,7 +82,7 @@
       
       $discount = !empty($_POST["discount"]) ? $_POST["discount"] : 0;
       $category_id = $_POST["category_id"];
-      if($categoryId == "0"){
+      if($category_id == "0"){
         if(!isset($_SESSION['read-add-edit-product__toast'])){
           toast('read-add-edit-product__toast', 'error', 'Vui lòng chọn danh mục');
         }

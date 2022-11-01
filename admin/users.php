@@ -4,6 +4,17 @@
   
   session_start();
 
+  if(checkAuth()){
+    $role = checkPermission($conn);
+    if($role != 'admin'){
+      toast('index__toast', 'error', 'Bạn không có quyền truy cập');
+      redirect('../index.php');
+    }
+  }else {
+    toast('login__toast', 'error', 'Bạn chưa đăng nhập');
+    redirect('../login.php');
+  }
+
   if(isset($_SESSION['refresh'])){
     // trang đã làm mới
     $_SESSION['refresh'] = true;
@@ -50,13 +61,15 @@
     $query_user_by_id = mysqli_query($conn, $sql_user_by_id);
     $row_user_by_id = mysqli_fetch_assoc($query_user_by_id);
 
-    // xóa danh mục
+    // xóa tài khoản
     $sql_delete_user_by_id = "DELETE FROM users WHERE id = $id";
     $query_delete_user_by_id = mysqli_query($conn, $sql_delete_user_by_id);
 
     if($query_delete_user_by_id){
-      // xóa ảnh danh mục đã xóa
-      unlink('../uploads/' . $row_user_by_id["avatar"]);
+      if($row_user_by_id['avatar'] != 'no_avatar.img'){
+        // xóa ảnh tài khoản đã xóa
+        unlink('../uploads/' . $row_user_by_id["avatar"]);
+      }
 
       toast('users__toast-refresh', 'success', 'Xóa thành công');
       $_SESSION['refresh'] = false;
@@ -127,7 +140,9 @@
             <?php echo $totalRecord <= 0 ? "<tr>
             <td></td>
             <td></td>
+            <td></td>
             <td>Không có tài khoản nào</td>
+            <td></td>
             <td></td>
             <td></td>
             </tr>" : '';?>

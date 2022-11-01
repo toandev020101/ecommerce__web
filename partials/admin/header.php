@@ -8,7 +8,8 @@
   </div>
 
   <div class="header__user">
-    <img src="../assets/images/avatar.jpg" alt="avatar" class="header__avatar">
+    <img src="../uploads/<?php echo $_SESSION['user']['avatar']?>" alt="<?php echo $_SESSION['user']['avatar']?>"
+      class="header__avatar">
     <span class="header__fullname">Đức Toàn</span>
   </div>
 </header>

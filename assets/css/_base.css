@@ -314,6 +314,14 @@ img {
 	background-color: var(--primary-color);
 	color: var(--white-color);
 }
+
+.reset__btn {
+	outline: none;
+	border: 0;
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	background-color: transparent;
+}
 /* end button */
 
 /* checkbox */
@@ -594,6 +602,7 @@ table tbody tr:hover {
 
 .toast__msg {
 	color: #333;
+	padding-right: 20px;
 }
 
 .toast__close {
