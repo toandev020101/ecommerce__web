@@ -1,10 +1,10 @@
 <?php
   $url = $_SERVER['REQUEST_URI'];
-  $path = substr($url, 14, 14);
+  $path = substr($url, 15);
 
   if(isset($_POST['btnLogout'])){
     unset($_SESSION['user']);
-    if($path == '/' || strpos($path, '/index.php') != false){
+    if($path == '/' || strpos($path, 'index.php') != false){
       toast('index__toast-refresh', 'success', 'Đăng xuất thành công');
       $_SESSION['refresh'] = false;
     }else {
@@ -178,9 +178,10 @@
               }else {
                 $avatar = $_SESSION['user']['avatar'];
                 $fullname = $_SESSION['user']['fullname'];
+                $src = $avatar == 'no_avatar.jpg' ? "./assets/images/$avatar" : "./uploads/$avatar";
 
                 echo "<a href='#' class='link auth__info'>
-                <img src='./uploads/$avatar' alt='$avatar' class='auth__info-avatar'>
+                <img src='$src' alt='$avatar' class='auth__info-avatar'>
                 <span class='auth__info-fullname'>$fullname</span>
               </a>
   
@@ -229,147 +230,78 @@
   <div class="bg-second">
     <nav class="container bottom-header">
       <ul class="main-menu__list">
-        <li
-          class="main-menu__item <?php echo  $path == '/' || strpos($path, '/index.php') != false ? 'active' : ''; ?>">
-          <a href="./index.php" class="link main-menu__item-link">Trang chủ</a>
-        </li>
-        <li
-          class="main-menu__item mega-dropdown <?php echo strpos($path, '/products.php') != false ? 'active' : ''; ?>">
-          <a href="./products.php" class="link main-menu__item-link">
-            Sản phẩm
-            <i class='bx bx-chevron-down main-menu__item-icon'></i>
+        <?php
+          $sql_category_all = "SELECT * FROM categories";
+          $query_category_all = mysqli_query($conn, $sql_category_all);
+
+          while($row_category = mysqli_fetch_assoc($query_category_all)){
+            if($row_category['parent_id'] == 0){
+        ?>
+
+        <?php
+          $category_id = $row_category['id'];
+          
+          $sql_category_list_by_parent_id = "SELECT * FROM categories WHERE parent_id = $category_id";
+          $query_category_list_by_parent_id = mysqli_query($conn, $sql_category_list_by_parent_id);
+          $num_category_list_by_parent_id = mysqli_num_rows($query_category_list_by_parent_id);
+        ?>
+        <li class="main-menu__item <?php echo $num_category_list_by_parent_id > 0 ? "mega-dropdown" : '' ?> <?php 
+          $category_slug = $row_category['slug'];
+          if($category_slug == 'index'){
+            echo $path == '/' || strpos($path, 'index.php') != false ? 'active' : '';
+          }else{
+            echo strpos($path, "$category_slug.php") != false ? 'active' : '';
+          }
+        ?>">
+          <a href="./<?php echo $row_category['slug']; ?>.php"
+            class="link main-menu__item-link"><?php echo $row_category['name'];?>
+            <?php echo $num_category_list_by_parent_id > 0 ? "<i class='bx bx-chevron-down main-menu__item-icon'></i>" : '' ?>
           </a>
+          <?php
+            if($num_category_list_by_parent_id > 0){
+          ?>
           <div class="mega-content">
+            <?php
+              while($row_category_by_parent_id = mysqli_fetch_assoc($query_category_list_by_parent_id)){
+            ?>
             <!-- mega content item -->
             <div class="mega-content__item">
               <h3 class="mega-content__title">
-                Phụ kiện di động
+                <?php echo $row_category_by_parent_id['name']; ?>
               </h3>
               <ul class="mega-content__menu-list">
+                <?php
+                  $category_2_id = $row_category_by_parent_id['id'];
+          
+                  $sql_category_list_2_by_parent_id = "SELECT * FROM categories WHERE parent_id = $category_2_id";
+                  $query_category_list_2_by_parent_id = mysqli_query($conn, $sql_category_list_2_by_parent_id);
+                  
+                  while ($row_category_2_by_parent_id = mysqli_fetch_assoc($query_category_list_2_by_parent_id)) {
+                ?>
                 <li class="mega-content__menu-item">
-                  <a href="./products.php?category=sac-du-phong" class="link mega-content__menu-item-link">
-                    Sạc dự phòng
+                  <a href="./products.php?category_slug=<?php echo $row_category_2_by_parent_id['slug'];?>"
+                    class="link mega-content__menu-item-link">
+                    <?php echo $row_category_2_by_parent_id['name'];?>
                   </a>
                 </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=sac-cap" class="link mega-content__menu-item-link">
-                    Sạc,cáp
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=op-lung-dien-thoai" class="link mega-content__menu-item-link">
-                    Ốp lưng điện thoại
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=mieng-dan-dien-thoai" class="link mega-content__menu-item-link">
-                    Miếng dán điện thoại
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=gay-chup-anh" class="link mega-content__menu-item-link">
-                    Gậy chụp ảnh
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=de-moc-dien-thoai" class="link mega-content__menu-item-link">
-                    Đế, móc điện thoại
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=gia-do-dien-thoai" class="link mega-content__menu-item-link">
-                    Giá đỡ điện thoại
-                  </a>
-                </li>
+                <?php
+                  }
+                ?>
               </ul>
             </div>
             <!-- end mega content item -->
-
-            <!-- mega content item -->
-            <div class="mega-content__item">
-              <h3 class="mega-content__title">
-                Phụ kiện laptop
-              </h3>
-              <ul class="mega-content__menu-list">
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=chuot-ban-phim" class="link mega-content__menu-item-link">
-                    Chuột, bàn phím
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=balo-tui-chong-soc" class="link mega-content__menu-item-link">
-                    Balo, túi chống sốc
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=gia-do-laptop" class="link mega-content__menu-item-link">
-                    Giá đỡ laptop
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=phan-mem" class="link mega-content__menu-item-link">
-                    Phần mềm
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <!-- end mega content item -->
-
-            <!-- mega content item -->
-            <div class="mega-content__item">
-              <h3 class="mega-content__title">
-                Thiết bị âm thanh
-              </h3>
-              <ul class="mega-content__menu-list">
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=tai-nghe" class="link mega-content__menu-item-link">
-                    Tai nghe
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=loa" class="link mega-content__menu-item-link">
-                    Loa
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <!-- end mega content item -->
-
-            <!-- mega content item -->
-            <div class="mega-content__item">
-              <h3 class="mega-content__title">
-                Thiết bị lưu trữ
-              </h3>
-              <ul class="mega-content__menu-list">
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=o-cung-di-dong" class="link mega-content__menu-item-link">
-                    Ổ cứng di động
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=the-nho" class="link mega-content__menu-item-link">
-                    Thẻ nhớ
-                  </a>
-                </li>
-                <li class="mega-content__menu-item">
-                  <a href="./products.php?category=usb" class="link mega-content__menu-item-link">
-                    USB
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <!-- end mega content item -->
+            <?php
+              }
+            ?>
           </div>
+          <?php
+            }
+          ?>
         </li>
-        <li class="main-menu__item <?php echo strpos($path, '/news.php') != false ? 'active' : ''; ?>">
-          <a href="./news.php" class="link main-menu__item-link">Tin tức</a>
-        </li>
-        <li class="main-menu__item <?php echo strpos($path, '/about.php') != false ? 'active' : ''; ?>">
-          <a href="./about.php" class="link main-menu__item-link">Giới thiệu</a>
-        </li>
-        <li class="main-menu__item <?php echo strpos($path, '/contact.php') != false ? 'active' : ''; ?>">
-          <a href="./contact.php" class="link main-menu__item-link">Liên hệ</a>
-        </li>
+        <?php
+            }
+          }
+        ?>
       </ul>
     </nav>
   </div>

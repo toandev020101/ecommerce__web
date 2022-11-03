@@ -14,8 +14,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -23,8 +21,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -32,8 +28,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -41,8 +35,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -50,8 +42,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -59,8 +49,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -68,8 +56,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -77,8 +63,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -86,8 +70,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 ]
 
@@ -130,8 +112,6 @@ const renderProductList = (products) => {
 									</div>
 
 									<div class="product-item__action">
-										<i class='bx bx-heart product-item__heart'></i>
-
 										<div class="rating product-item__rating">
 											<i class='bx bxs-star'></i>
 											<i class='bx bxs-star'></i>
@@ -143,14 +123,9 @@ const renderProductList = (products) => {
 										<span class="product-item__sold">${product.sold} đã bán</span>
 									</div>
 
-									<div class="product-item__origin-wrapper">
-										<span class="product-item__brand">${product.brand}</span>
-										<span class="product-item__origin">${product.origin}</span>
-									</div>
-
-									<div class="product-item__favourite">
+									<div class="product-item__best-selling">
 										<i class='bx bx-check'></i>
-										<span>Yêu thích</span>
+										<span>Bán chạy</span>
 									</div>
 
 									<div class="product-item__sale-off">

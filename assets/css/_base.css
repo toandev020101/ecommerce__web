@@ -233,7 +233,7 @@ img {
 }
 
 .dropdown__item:hover {
-	background-color: #f9f9f9;
+	background-color: #f0f0f0;
 }
 
 .dropdown__item:first-child {

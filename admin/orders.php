@@ -216,6 +216,9 @@
         <!-- end table -->
 
         <!-- pagination -->
+        <?php
+          if($totalPage > 1){
+        ?>
         <ul class="pagination table__pagination <?php echo $totalRecord <= 0 ? 'hidden' : '';?>">
           <li class="pagination__item <?php echo $page == 1 ? 'hidden' : ''; ?>">
             <a href="./orders.php?page=<?php echo $page - 1; ?>&limit=<?php echo $limit; ?>"
@@ -242,6 +245,9 @@
             </a>
           </li>
         </ul>
+        <?php
+          }
+        ?>
         <!-- end pagination -->
       </div>
     </div>

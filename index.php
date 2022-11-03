@@ -1,4 +1,5 @@
 <?php
+  require_once('./database/connectdb.php');
   require_once('./helper/function.php');
   session_start();
 
@@ -60,7 +61,8 @@
           </div>
 
           <div class="slide__img top-down">
-            <img src="./assets/images/JBL_E55BT_KEY_RED_6063_FS_x1-1605x1605px.webp" alt="">
+            <img src="./assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png"
+              alt="">
           </div>
         </div>
         <!-- end slide item -->
@@ -201,8 +203,6 @@
           </div>
 
           <div class="product-item__action">
-            <i class='bx bx-heart product-item__heart'></i>
-
             <span class="rating product-item__rating">
               <i class='bx bxs-star'></i>
               <i class='bx bxs-star'></i>
@@ -214,14 +214,9 @@
             <span class="product-item__sold">88 đã bán</span>
           </div>
 
-          <div class="product-item__origin-wrapper">
-            <span class="product-item__brand">JBL</span>
-            <span class="product-item__origin">Nhật bản</span>
-          </div>
-
-          <div class="product-item__favourite">
+          <div class="product-item__best-selling">
             <i class='bx bx-check'></i>
-            <span>Yêu thích</span>
+            <span>Bán chạy</span>
           </div>
 
           <div class="product-item__sale-off">
@@ -283,9 +278,7 @@
           </div>
 
           <div class="product-item__action">
-            <i class='bx bx-heart product-item__heart'></i>
-
-            <div class="product-item__rating">
+            <div class="rating product-item__rating">
               <i class='bx bxs-star product-item__star--gold'></i>
               <i class='bx bxs-star product-item__star--gold'></i>
               <i class='bx bxs-star product-item__star--gold'></i>
@@ -296,14 +289,9 @@
             <span class="product-item__sold">88 đã bán</span>
           </div>
 
-          <div class="product-item__origin-wrapper">
-            <span class="product-item__brand">JBL</span>
-            <span class="product-item__origin">Nhật bản</span>
-          </div>
-
-          <div class="product-item__favourite">
+          <div class="product-item__best-selling">
             <i class='bx bx-check'></i>
-            <span>Yêu thích</span>
+            <span>Bán chạy</span>
           </div>
 
           <div class="product-item__sale-off">
@@ -393,3 +381,8 @@
 </body>
 
 </html>
+
+<?php
+  // Ngắt kết nối
+  mysqli_close($conn);
+?>

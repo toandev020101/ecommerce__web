@@ -50,7 +50,7 @@
       }
 
       if(empty($avatar)){
-        $avatar = 'no_avatar.img';
+        $avatar = 'no_avatar.jpg';
       }
 
       $fullname = $_POST["fullname"];

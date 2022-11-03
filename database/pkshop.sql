@@ -212,6 +212,8 @@ CREATE TABLE `users` (
   `role_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+INSERT INTO `users` (`avatar`, `fullname`, `username`, `password`, `phone_num`, `gender`, `role_id`) VALUES
+('no_avatar.jpg', 'Admin', 'admin', '$2y$10$jEP4Szm2bh16hegJGQ2x2.y0TWIpokp0LCLO2q2CwN2zWhrCu2/1W', 0, 2);
 --
 -- Chỉ mục cho các bảng đã đổ
 --

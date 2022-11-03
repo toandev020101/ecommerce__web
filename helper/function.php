@@ -103,4 +103,88 @@
     }
     return $file_name_list;
   }
+
+  // config query string
+  function queryString($query_string, $key, $value_item, $type = 'item' | 'list'){
+    // tách key=value
+    $query_array = explode('&',$query_string);
+
+    $query_array_new = [];
+    $checkKey = false;
+    foreach($query_array as $query_item){
+      // tách key,value
+      $query_item_array = explode('=', $query_item);
+      if($query_item_array[0] != 'page' && $query_item_array[0] != 'limit'){
+        if($type == 'item'){
+          if($query_item_array[0] == $key){
+            $checkKey = true;
+            $query_item = "$key=$value_item";
+          }
+        }else {
+          // có key hay không ?
+          if($query_item_array[0] == $key){
+            $checkKey = true;
+
+            // get list
+            $value_list_string = $_GET["$key"];
+            
+            // tách value
+            $value_array = explode('%', $value_list_string);
+
+            // tìm kiếm value trùng
+            $pos = array_search($value_item, $value_array);
+            if(!is_bool($pos)){
+              // trùng value xóa trong mảng
+              array_splice($value_array, $pos, 1);
+            }else {
+              // không trùng value thêm vào mảng
+              array_push($value_array, $value_item);
+            }
+
+            if(count($value_array) == 0){
+              continue;
+            }else {
+              $query_item = $key . '=';
+              foreach($value_array as $index => $value){
+                $query_item .= $value;
+                if($index != count($value_array) - 1){
+                  $query_item .= '%';
+                }
+              }
+            }
+          }
+        }
+
+        // thêm key=value vào mảng
+        array_push($query_array_new, $query_item);
+      }
+    }
+
+    if(!$checkKey){
+      array_push($query_array_new, "$key=$value_item");
+    }
+
+    $query_string = '';
+    foreach($query_array_new as $index => $query_item){
+      // gộp key=value
+      $query_string .= $query_item;
+      if($index != count($query_array_new) - 1){
+        $query_string .= '&';
+      }
+    }
+
+    return $query_string;
+  }
+
+  // lấy list id bằng query string
+  function queryListId($key){
+    if(isset($_GET["$key"])){
+      $list_id_string = $_GET["$key"];
+      $list_id = explode('%', $list_id_string);
+    }else {
+      $list_id = [];
+    }
+
+    return $list_id;
+  }
 ?>

@@ -152,7 +152,7 @@
             <tr>
               <td>
                 <img
-                  src="<?php echo $row_user['avatar'] != 'no_avatar.img' ? '../uploads/' . $row_user['avatar'] : '../assets/images/no_avatar.jpg';?>"
+                  src="<?php echo $row_user['avatar'] != 'no_avatar.jpg' ? '../uploads/' . $row_user['avatar'] : '../assets/images/no_avatar.jpg';?>"
                   alt="<?php echo $row_user['avatar'];?>" class="img">
               </td>
               <td>
@@ -203,6 +203,9 @@
         <!-- end table -->
 
         <!-- pagination -->
+        <?php
+          if($totalPage > 1){
+        ?>
         <ul class="pagination table__pagination <?php echo $totalRecord <= 0 ? 'hidden' : '';?>">
           <li class="pagination__item <?php echo $page == 1 ? 'hidden' : ''; ?>">
             <a href="./users.php?page=<?php echo $page - 1; ?>&limit=<?php echo $limit; ?>"
@@ -229,6 +232,9 @@
             </a>
           </li>
         </ul>
+        <?php
+          }
+        ?>
         <!-- end pagination -->
       </div>
     </div>
