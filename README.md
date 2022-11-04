@@ -11,8 +11,8 @@
   - Giao diện chính:
     . Trang chủ
     . Sản phẩm (hiển thị, lọc)
-    . Giỏ hàng
-    . Thanh toán
+    . Giỏ hàng (xem chi tiết, xóa)
+    . Thanh toán (thêm, sửa thông tin, thanh toán)
 - Công nghệ: HTML - CSS - JavaScript - PHP - MySQL
 - Thành viên:
   - Đậu Đức Toàn
