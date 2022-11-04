@@ -6,6 +6,7 @@
 	--second-color: #445aff;
 
 	--black-color: #000;
+	--gray-color: #f0f0f0;
 	--white-color: #fff;
 	--red-color: #f63d30;
 	--star-color: #ffc107;
@@ -297,6 +298,7 @@ img {
 
 	text-decoration: none;
 	color: var(--black-color);
+	background-color: var(--gray-color);
 
 	display: inline-flex;
 	justify-content: center;
@@ -708,6 +710,41 @@ table tbody tr:hover {
 	position: relative;
 	z-index: 1;
 	animation: scale 0.1s linear;
+}
+
+.delete__modal {
+	padding: 30px;
+}
+
+.delete__modal-text-wrapper {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	max-width: 500px;
+}
+
+.delete__modal-icon {
+	color: var(--error-color);
+	font-size: 40px;
+	margin-right: 10px;
+}
+
+.delete__modal-text {
+	display: block;
+	font-size: 20px;
+}
+
+.delete__modal-name {
+	font-weight: 500;
+}
+
+.delete__modal-form {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.delete__btn + .delete__btn {
+	margin-left: 20px;
 }
 /* end modal */
 

@@ -2,8 +2,8 @@
 const imgShow = $('.product-detail__img-item:first-child > img')
 const imgList = $$('.product-detail__img-item:not(:first-child) > img')
 
-const colorBtnList = $$('.product-detail__info-color-item > button')
-const descriptionBtn = $('.product-detail__description-btn > button')
+const colorBtnList = $$('.product-detail__info-color-item')
+const descriptionBtn = $('.product-detail__description-btn > a')
 const descriptionContent = $('.product-detail__description-content')
 
 const products = [
@@ -13,8 +13,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -22,8 +20,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -31,8 +27,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -40,8 +34,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -49,8 +41,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -58,8 +48,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -67,8 +55,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -76,8 +62,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 	{
 		img: './assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png',
@@ -85,8 +69,6 @@ const products = [
 		old_price: '1.000.0000',
 		curr_price: '890.000',
 		sold: 88,
-		brand: 'JBL',
-		origin: 'Nhật bản',
 	},
 ]
 
@@ -112,29 +94,6 @@ const changeImgShow = (imgShow, imgList) => {
 	})
 }
 
-const changeColorImgShow = (imgShow, colorBtnList) => {
-	colorBtnList.forEach((colorBtn) => {
-		const colorImgBtn = colorBtn.parentNode
-		const colorImg = colorImgBtn.querySelector('img')
-		const imgShowSrcDefault = imgShow.src
-
-		colorBtn.onmouseover = () => {
-			imgShow.src = colorImg.src
-		}
-
-		colorBtn.onmouseleave = () => {
-			imgShow.src = imgShowSrcDefault
-		}
-
-		colorBtn.onclick = () => {
-			if (!colorBtn.closest('.disabled')) {
-				removeActiveBtn(colorBtnList)
-				colorImgBtn.classList.add('active')
-			}
-		}
-	})
-}
-
 const showHideDescription = (descriptionBtn, descriptionContent) => {
 	descriptionBtn.onclick = () => {
 		descriptionContent.classList.toggle('active')
@@ -145,6 +104,23 @@ const showHideDescription = (descriptionBtn, descriptionContent) => {
 			descriptionBtn.textContent = 'Xem thêm'
 		}
 	}
+}
+
+const changeColorBtn = (colorBtnList) => {
+	colorBtnList.forEach((colorBtn) => {
+		colorBtn.onclick = () => {
+			colorBtnList.forEach((colorBtn) => {
+				colorBtn.classList.remove('active')
+			})
+			colorBtn.classList.add('active')
+
+			const colorBtnInput = colorBtn.querySelector(
+				'.product-detail__info-color-item > input',
+			)
+
+			colorBtnInput.click()
+		}
+	})
 }
 
 const renderProductList = (products) => {
@@ -164,8 +140,6 @@ const renderProductList = (products) => {
 									</div>
 
 									<div class="product-item__action">
-										<i class='bx bx-heart product-item__heart'></i>
-
 										<span class="rating product-item__rating">
 											<i class='bx bxs-star'></i>
 											<i class='bx bxs-star'></i>
@@ -177,14 +151,9 @@ const renderProductList = (products) => {
 										<span class="product-item__sold">${product.sold} đã bán</span>
 									</div>
 
-									<div class="product-item__origin-wrapper">
-										<span class="product-item__brand">${product.brand}</span>
-										<span class="product-item__origin">${product.origin}</span>
-									</div>
-
-									<div class="product-item__favourite">
+									<div class="product-item__best-selling">
 										<i class='bx bx-check'></i>
-										<span>Yêu thích</span>
+										<span>Bán chạy</span>
 									</div>
 
 									<div class="product-item__sale-off">
@@ -199,10 +168,13 @@ const renderProductList = (products) => {
 
 // run img show
 changeImgShow(imgShow, imgList)
-changeColorImgShow(imgShow, colorBtnList)
+
+changeColorBtn(colorBtnList)
 
 // show hide description
-showHideDescription(descriptionBtn, descriptionContent)
+if (descriptionBtn) {
+	showHideDescription(descriptionBtn, descriptionContent)
+}
 
 // render product
 renderProductList(products)

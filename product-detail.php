@@ -1,3 +1,56 @@
+<?php
+  require_once('./database/connectdb.php');
+  require_once('./helper/function.php');
+
+  session_start();
+
+  if(!isset($_SESSION['product_list'])){
+    $_SESSION['product_list'] = [];
+  }
+
+  if(isset($_GET['slug'])){
+    $slug = $_GET['slug'];
+  }else{
+    toast('products__toast', 'error', 'Sai đường dẫn sản phẩm');
+    redirect('./products.php');
+  }
+
+  $sql_product_by_slug = "SELECT * FROM products WHERE slug = '$slug'";
+  $query_product_by_slug = mysqli_query($conn, $sql_product_by_slug);
+  $row_product_by_slug = mysqli_fetch_assoc($query_product_by_slug);
+
+  if(isset($_POST['btnAdd']) || isset($_POST['btnSubmit'])){
+    $product_submit = [
+      "id" => $row_product_by_slug['id'],
+      "price" => $row_product_by_slug['price'] - $row_product_by_slug['discount'],
+      "color" => $_POST['color_name'],
+      "quantity" => $_POST['quantity'],
+      "checked" => false
+    ];
+
+    // kiểm tra đã có sản phẩm hay chưa ?
+    $check_is_product = false;
+    foreach ($_SESSION['product_list'] as $index => $product){
+      if($product_submit['id'] == $product['id'] && $product_submit['price'] == $product['price'] && $product_submit['color'] == $product['color']){
+        $check_is_product = true;
+        $_SESSION['product_list'][$index]['quantity'] += $product_submit['quantity'];
+        break;
+      }
+    }
+
+    if(!$check_is_product){
+      array_push($_SESSION['product_list'], $product_submit);
+    }
+
+    if(isset($_POST['btnAdd'])){
+      toast('product-detail__toast', 'success', 'Thêm vào giỏ hàng thành công');
+    }else {
+      $_SESSION['product_list'][count($_SESSION['product_list']) - 1]['checked'] = true;
+      redirect('./payment.php');
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +68,8 @@
 </head>
 
 <body>
+  <div id="toast"></div>
+
   <!-- header -->
   <?php include_once('./partials/header.php') ?>
   <!-- end header -->
@@ -28,7 +83,7 @@
         <span><i class="bx bxs-chevrons-right"></i></span>
         <a href="./products.php" class="link">Tất cả sản phẩm</a>
         <span><i class="bx bxs-chevrons-right"></i></span>
-        <a href="/" class="link active">JBL Tune 750TNC</a>
+        <a href="/" class="link active"><?php echo $row_product_by_slug['name'];?></a>
       </div>
       <!-- end breadcumb -->
 
@@ -37,152 +92,162 @@
           <!-- list image -->
           <ul class="product-detail__img-list">
             <li class="product-detail__img-item">
-              <img src="./assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png"
-                alt="">
+              <img src="./uploads/<?php echo $row_product_by_slug['thumbnail'];?>"
+                alt="<?php echo $row_product_by_slug['thumbnail'];?>">
             </li>
             <li class="product-detail__img-item active">
-              <img src="./assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png"
-                alt="">
+              <img src="./uploads/<?php echo $row_product_by_slug['thumbnail'];?>"
+                alt="<?php echo $row_product_by_slug['thumbnail'];?>">
             </li>
+            <?php 
+              $product_id = $row_product_by_slug['id'];
+
+              $sql_image_list_by_product_id = "SELECT thumbnail FROM images WHERE product_id = $product_id";
+              $query_image_list_by_product_id = mysqli_query($conn, $sql_image_list_by_product_id);
+
+              while($row_image_by_product_id = mysqli_fetch_assoc($query_image_list_by_product_id)){
+            ?>
             <li class="product-detail__img-item">
-              <img src="./assets/images/JBL_E55BT_KEY_BLACK_6175_FS_x1-1605x1605px.png" alt="">
+              <img src="./uploads/<?php echo $row_image_by_product_id['thumbnail'];?>"
+                alt="<?php echo $row_image_by_product_id['thumbnail'];?>">
             </li>
-            <li class="product-detail__img-item">
-              <img src="./assets/images/JBL_Endurance-SPRINT_Product-Image_Red_front-1605x1605px.webp" alt="">
-            </li>
-            <li class="product-detail__img-item">
-              <img src="./assets/images/190402_E1_FW19_EarbudsWCase_S13_0033-1_1605x1605_BACK.png" alt="">
-            </li>
-            <li class="product-detail__img-item">
-              <img src="./assets/images/JBL-Endurance-Sprint_Alt_Red-1605x1605px.webp" alt="">
-            </li>
+            <?php
+              }
+            ?>
           </ul>
           <!-- list image -->
 
           <!-- info -->
           <div class="product-detail__info">
-            <div class="product-detail__info-line">
-              <span class="product-detail__info-box"><i class='bx bx-check'></i>Yêu thích</span>
-              <h3 class="product-detail__info-name">
-                JBL TUNE 750TNC
-              </h3>
-            </div>
-            <div class="product-detail__info-price">
-              <span class="product-detail__info-price-old">1.200.000đ</span>
-              <span class="product-detail__info-price-current">
-                890.000đ
-              </span>
-              <span class="product-detail__info-box">20% giảm</span>
-            </div>
-            <div class="product-detail__info-line">
-              <span class="product-detail__info-line-name">
-                Màu sắc
-              </span>
-              <span class="product-detail__info-line-content">
-                <ul class="product-detail__info-color-list">
-                  <li class="product-detail__info-color-item active">
-                    <button>Đen</button>
-                    <img
-                      src="./assets/images/kisspng-beats-electronics-headphones-apple-beats-studio-red-headphones.png"
-                      alt="" hidden>
-                  </li>
-                  <li class="product-detail__info-color-item">
-                    <button>Trắng</button>
-                    <img src="./assets/images/JBL_E55BT_KEY_BLACK_6175_FS_x1-1605x1605px.png" alt="" hidden>
-                  </li>
-                  <li class="product-detail__info-color-item">
-                    <button>Hồng</button>
-                    <img src="./assets/images/JBL_QUANTUM ONE_Product Image_Angle.png" alt="" hidden>
-                  </li>
-                  <li class="product-detail__info-color-item disabled">
-                    <button>Xanh</button>
-                    <img src="./assets/images/JBL-Endurance-Sprint_Alt_Red-1605x1605px.webp" alt="" hidden>
-                  </li>
-                </ul>
-              </span>
-            </div>
-            <div class="product-detail__info-line">
-              <span class="product-detail__info-line-name">
-                Số lượng
-              </span>
-              <span class="product-detail__info-line-content">
-                <span class="quantity">
-                  <span class="quantity__btn quantity__btn-plus">
-                    <i class='bx bx-plus'></i>
-                  </span>
-                  <span class="quantity__number">1</span>
-                  <span class="quantity__btn quantity__btn-minus disabled">
-                    <i class='bx bx-minus'></i>
+            <form action="" method="post">
+              <div class="product-detail__info-line">
+                <h3 class="product-detail__info-name">
+                  <?php
+                    $product_id = $row_product_by_slug['id'];
+
+                    // lấy status id
+                    $sql_product_status_list_by_product_id = "SELECT status_id FROM product_status WHERE product_id = $product_id";
+                    $query_product_status_list_by_product_id = mysqli_query($conn, $sql_product_status_list_by_product_id);
+
+                    while($row_product_status_by_product_id = mysqli_fetch_assoc($query_product_status_list_by_product_id)){
+                      $status_id = $row_product_status_by_product_id['status_id'];
+
+                      // lấy name status
+                      $sql_status_list_by_id = "SELECT name FROM status WHERE id = $status_id";
+                      $query_status_list_by_id = mysqli_query($conn, $sql_status_list_by_id);
+                      $row_status_by_id = mysqli_fetch_assoc($query_status_list_by_id);
+
+                      if($row_status_by_id['name'] == 'Bán chạy'){
+                        echo "<span class='product-detail__info-box'><i class='bx bx-check'></i>Bán chạy</span>";
+                        break;
+                      }
+                    }
+                  ?>
+                  <span><?php echo $row_product_by_slug['name'];?></span>
+                </h3>
+              </div>
+              <div class="product-detail__info-price">
+                <?php
+                $discount = $row_product_by_slug['discount'];
+                if($discount > 0){
+                  $price = $row_product_by_slug['price'];
+                  echo "<span class='product-detail__info-price-old'>" . number_format($price) . "đ</span>";
+                }
+              ?>
+
+                <span class="product-detail__info-price-current">
+                  <?php echo number_format($row_product_by_slug['price'] - $row_product_by_slug['discount'])?>đ
+                </span>
+
+                <?php
+                $discount = $row_product_by_slug['discount'];
+                if($discount > 0){
+                  $price = $row_product_by_slug['price'];
+                  $percent = (int)($discount / $price * 100);
+                  
+                  echo "<span class='product-detail__info-box'>" . $percent . "% giảm</span>";
+                }
+              ?>
+              </div>
+              <div class="product-detail__info-line">
+                <span class="product-detail__info-line-name">
+                  Màu sắc
+                </span>
+                <span class="product-detail__info-line-content">
+                  <ul class="product-detail__info-color-list">
+                    <?php
+                    $product_id = $row_product_by_slug['id'];
+
+                    // lấy color id
+                    $sql_product_color_list_by_product_id = "SELECT color_id FROM product_colors WHERE product_id = $product_id";
+                    $query_product_color_list_by_product_id = mysqli_query($conn, $sql_product_color_list_by_product_id);
+
+                    while($row_product_color_list_by_product_id = mysqli_fetch_assoc($query_product_color_list_by_product_id)){
+                      $color_id = $row_product_color_list_by_product_id['color_id'];
+
+                      // lấy color
+                      $sql_color_by_id = "SELECT * FROM colors WHERE id = $color_id";
+                      $query_color_by_id = mysqli_query($conn, $sql_color_by_id);
+                      $row_color_by_id = mysqli_fetch_assoc($query_color_by_id);
+                  ?>
+                    <li class="product-detail__info-color-item">
+                      <input type="radio" name="color_name" value="<?php echo $row_color_by_id['name'];?>" required>
+                      <button type="button"><?php echo $row_color_by_id['name'];?></button>
+                    </li>
+                    <?php
+                    }
+                  ?>
+                  </ul>
+                </span>
+              </div>
+              <div class="product-detail__info-line">
+                <span class="product-detail__info-line-name">
+                  Số lượng
+                </span>
+                <span class="product-detail__info-line-content">
+                  <span class="quantity">
+                    <span class="quantity__btn quantity__btn-plus">
+                      <i class='bx bx-plus'></i>
+                    </span>
+                    <span class="quantity__number">1</span>
+                    <span class="quantity__btn quantity__btn-minus disabled">
+                      <i class='bx bx-minus'></i>
+                    </span>
+                    <input type="text" name="quantity" class="quantity__input" value="1" hidden>
                   </span>
                 </span>
-              </span>
 
-              <span class="product-detail__info-quantity-current-wrapper">
-                <span class="product-detail__info-quantity-current">100</span> sản phẩm có sẵn
-              </span>
-            </div>
-            <div class="product-detail__info-line">
-              <button class="btn product-detail__info-btn-add-cart">
-                <i class='bx bx-cart'></i>
-                Thêm vào giỏ hàng
-              </button>
-              <button class="btn btn--primary">
-                Mua ngay
-              </button>
-            </div>
+                <span class="product-detail__info-quantity-current-wrapper">
+                  <span
+                    class="product-detail__info-quantity-current"><?php echo $row_product_by_slug['quantity']; ?></span>
+                  sản phẩm có sẵn
+                </span>
+              </div>
+              <div class="product-detail__info-line">
+                <button class="btn product-detail__info-btn-add-cart" name="btnAdd">
+                  <i class='bx bx-cart'></i>
+                  Thêm vào giỏ hàng
+                </button>
+                <button class="btn btn--primary" name="btnSubmit">
+                  Mua ngay
+                </button>
+              </div>
+            </form>
           </div>
           <!-- end info -->
         </div>
 
         <div class="product-detail__more">
           <!-- description -->
-          <div class="section product-detail__description">
+          <div class="section product-detail__description" id="product-detail__description">
             <h3 class="section__title">Mô tả sản phẩm</h3>
-            <p class="product-detail__description-content">
-              Pin sạc dự phòng Polymer 5000mAh Không dây Magnetic Type C Anker MagGo A1611 sở hữu ngoại hình đẹp mắt,
-              khối lượng gọn nhẹ, tích hợp sạc không dây tiện lợi,...
-              • Thiết kế pin sạc đẹp mắt, kiểu dáng sang chảnh, khối lượng gọn nhẹ.
-
-              • Chiếc pin sạc dự phòng Anker này vừa có thể sạc không dây, vừa hỗ trợ sạc có dây qua cổng Type-C vô cùng
-              tiện lợi, do vậy, bạn có thể linh hoạt sử dụng để sạc cho nhiều dòng điện thoại.
-
-              • Sử dụng lõi pin Li-on chất lượng giúp giữ năng lượng lâu và an toàn khi dùng, cho thời gian sử dụng lâu
-              dài.
-
-              • Đèn báo pin ở mặt dưới giúp theo dõi mức pin còn lại để kịp thời sạc.
-
-              • Giá đỡ tiện lợi, bạn có thể vừa sạc pin vừa dễ dàng xử lý phần việc chưa hoàn thành xong.
-              Pin sạc dự phòng Polymer 5000mAh Không dây Magnetic Type C Anker MagGo A1611 sở hữu ngoại hình đẹp mắt,
-              khối lượng gọn nhẹ, tích hợp sạc không dây tiện lợi,...
-              • Thiết kế pin sạc đẹp mắt, kiểu dáng sang chảnh, khối lượng gọn nhẹ.
-
-              • Chiếc pin sạc dự phòng Anker này vừa có thể sạc không dây, vừa hỗ trợ sạc có dây qua cổng Type-C vô cùng
-              tiện lợi, do vậy, bạn có thể linh hoạt sử dụng để sạc cho nhiều dòng điện thoại.
-
-              • Sử dụng lõi pin Li-on chất lượng giúp giữ năng lượng lâu và an toàn khi dùng, cho thời gian sử dụng lâu
-              dài.
-
-              • Đèn báo pin ở mặt dưới giúp theo dõi mức pin còn lại để kịp thời sạc.
-
-              • Giá đỡ tiện lợi, bạn có thể vừa sạc pin vừa dễ dàng xử lý phần việc chưa hoàn thành xong.
-              Pin sạc dự phòng Polymer 5000mAh Không dây Magnetic Type C Anker MagGo A1611 sở hữu ngoại hình đẹp mắt,
-              khối lượng gọn nhẹ, tích hợp sạc không dây tiện lợi,...
-              • Thiết kế pin sạc đẹp mắt, kiểu dáng sang chảnh, khối lượng gọn nhẹ.
-
-              • Chiếc pin sạc dự phòng Anker này vừa có thể sạc không dây, vừa hỗ trợ sạc có dây qua cổng Type-C vô cùng
-              tiện lợi, do vậy, bạn có thể linh hoạt sử dụng để sạc cho nhiều dòng điện thoại.
-
-              • Sử dụng lõi pin Li-on chất lượng giúp giữ năng lượng lâu và an toàn khi dùng, cho thời gian sử dụng lâu
-              dài.
-
-              • Đèn báo pin ở mặt dưới giúp theo dõi mức pin còn lại để kịp thời sạc.
-
-              • Giá đỡ tiện lợi, bạn có thể vừa sạc pin vừa dễ dàng xử lý phần việc chưa hoàn thành xong.
-            </p>
-
-            <div class="product-detail__description-btn">
-              <button class="btn btn--primary">Xem thêm</button>
+            <div class="product-detail__description-content">
+              <?php echo $row_product_by_slug['description'];?>
             </div>
+
+            <?php echo !empty($row_product_by_slug['description']) ? '<div class="product-detail__description-btn">
+              <a href="#product-detail__description" class="link btn btn--primary">Xem thêm</a>
+            </div>' : '';?>
           </div>
           <!-- end description -->
           <!-- specifications -->
@@ -435,7 +500,7 @@
             <!-- item rating -->
             <li class="product-detail__rating-item">
               <div class="product-detail__rating-user">
-                <img src="./assets/images/avatar.jpg" alt="" class="product-detail__rating-avatar">
+                <img src="./assets/images/no_avatar.jpg" alt="" class="product-detail__rating-avatar">
                 <div>
                   <div class="product-detail__rating-name">Đức Toàn</div>
                   <div class="product-detail__rating-book">
@@ -454,7 +519,8 @@
               </span>
 
               <div class="product-detail__rating-content">
-                Mình gọi video được có 2h10p tai nghe đã báo còn 20% pin rồi tai nghe mới mua được 1tuần. liệu tai nghe
+                Mình gọi video được có 2h10p tai nghe đã báo còn 20% pin rồi tai nghe mới mua được 1tuần. liệu tai
+                nghe
                 có lỗi gì không
               </div>
 
@@ -500,7 +566,7 @@
             <!-- item rating -->
             <li class="product-detail__rating-item">
               <div class="product-detail__rating-user">
-                <img src="./assets/images/avatar.jpg" alt="" class="product-detail__rating-avatar">
+                <img src="./assets/images/no_avatar.jpg" alt="" class="product-detail__rating-avatar">
                 <div>
                   <div class="product-detail__rating-name">Đức Toàn</div>
                   <div class="product-detail__rating-book">
@@ -519,7 +585,8 @@
               </span>
 
               <div class="product-detail__rating-content">
-                Mình gọi video được có 2h10p tai nghe đã báo còn 20% pin rồi tai nghe mới mua được 1tuần. liệu tai nghe
+                Mình gọi video được có 2h10p tai nghe đã báo còn 20% pin rồi tai nghe mới mua được 1tuần. liệu tai
+                nghe
                 có lỗi gì không
               </div>
 
@@ -553,7 +620,7 @@
             <!-- item rating -->
             <li class="product-detail__rating-item">
               <div class="product-detail__rating-user">
-                <img src="./assets/images/avatar.jpg" alt="" class="product-detail__rating-avatar">
+                <img src="./assets/images/no_avatar.jpg" alt="" class="product-detail__rating-avatar">
                 <div>
                   <div class="product-detail__rating-name">Đức Toàn</div>
                   <div class="product-detail__rating-book">
@@ -572,7 +639,8 @@
               </span>
 
               <div class="product-detail__rating-content">
-                Mình gọi video được có 2h10p tai nghe đã báo còn 20% pin rồi tai nghe mới mua được 1tuần. liệu tai nghe
+                Mình gọi video được có 2h10p tai nghe đã báo còn 20% pin rồi tai nghe mới mua được 1tuần. liệu tai
+                nghe
                 có lỗi gì không
               </div>
 
@@ -685,9 +753,7 @@
               </div>
 
               <div class="product-item__action">
-                <i class='bx bx-heart product-item__heart'></i>
-
-                <div class="product-item__rating">
+                <div class="rating product-item__rating">
                   <i class='bx bxs-star product-item__star--gold'></i>
                   <i class='bx bxs-star product-item__star--gold'></i>
                   <i class='bx bxs-star product-item__star--gold'></i>
@@ -698,14 +764,9 @@
                 <span class="product-item__sold">88 đã bán</span>
               </div>
 
-              <div class="product-item__origin-wrapper">
-                <span class="product-item__brand">JBL</span>
-                <span class="product-item__origin">Nhật bản</span>
-              </div>
-
-              <div class="product-item__favourite">
+              <div class="product-item__best-selling">
                 <i class='bx bx-check'></i>
-                <span>Yêu thích</span>
+                <span>Bán chạy</span>
               </div>
 
               <div class="product-item__sale-off">
@@ -728,9 +789,22 @@
 
   <!-- js -->
   <script src="./assets/js/_base.js"></script>
+  <script>
+  <?php
+    if(isset($_SESSION['product-detail__toast'])){
+      echo $_SESSION['product-detail__toast'];
+      unset($_SESSION['product-detail__toast']);
+    }
+  ?>
+  </script>
   <script src="./assets/js/_app.js"></script>
   <script src="./assets/js/product-detail.js"></script>
   <!-- end js -->
 </body>
 
 </html>
+
+<?php
+  // Ngắt kết nối
+  mysqli_close($conn);
+?>

@@ -2,31 +2,19 @@
 	margin-top: 40px;
 }
 
-.cart__no {
+.no__cart {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 }
 
-.cart__no-img {
+.no__cart-img {
 	width: 22%;
-	display: none;
 }
 
-.cart__no-text {
+.no__cart-text {
 	margin: 15px 0;
-	display: none;
-}
-
-.cart__no-btn {
-	display: none;
-}
-
-.cart__no .cart__no-img,
-.cart__no .cart__no-text,
-.cart__no .cart__no-btn {
-	display: block;
 }
 
 .cart__checkbox,
@@ -53,22 +41,15 @@ table tbody tr.active {
 }
 
 .cart__product-name {
-	max-width: 300px;
+	max-width: 250px;
 }
 
 .cart__color {
 	padding: 5px 10px;
 }
 
-.cart__old-price {
-	color: #777;
-	text-decoration: line-through;
-	font-size: 14px;
-	margin-right: 5px;
-}
-
 .cart__current-price,
-.cart__price {
+.cart__total-price {
 	color: var(--primary-color);
 	font-weight: 500;
 }
@@ -117,25 +98,6 @@ table tbody tr.active {
 	justify-content: space-between;
 }
 
-.cart__action-table {
-	display: flex;
-	align-items: center;
-}
-
-.cart__action-table-remove {
-	font-size: 22px;
-	margin-left: 20px;
-	transition: color 0.2s ease;
-
-	display: flex;
-	align-items: center;
-}
-
-.cart__action-table-remove:hover {
-	color: var(--primary-color);
-	cursor: pointer;
-}
-
 .cart__action-order {
 	display: flex;
 	align-items: center;
@@ -147,12 +109,16 @@ table tbody tr.active {
 }
 
 .cart__action-voucher-price {
-	display: flex;
+	display: none;
 	justify-content: flex-end;
 
 	font-size: 15px;
 	font-weight: 500;
 	color: var(--primary-color);
+}
+
+.cart__action-voucher-price.active {
+	display: flex;
 }
 
 .cart__action-total-price {

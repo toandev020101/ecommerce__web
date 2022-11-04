@@ -2,15 +2,32 @@
   $url = $_SERVER['REQUEST_URI'];
   $path = substr($url, 15);
 
+  $product_list = [];
+  if(isset($_SESSION['product_list'])){
+    $product_list = $_SESSION['product_list'];
+  }
+
+  if(isset($_POST['btnDel'])){
+    $index = $_POST['btnDel'];
+    array_splice($_SESSION['product_list'], $index, 1);
+
+    $pos = strpos($path, '.php');
+    if(!is_bool($pos)){
+      $file_name = substr($path, 1, $pos - 1);
+      toast($file_name . '__toast', 'success', 'Xóa thành công');
+    }
+
+    $product_list = $_SESSION['product_list'];
+  }
+
   if(isset($_POST['btnLogout'])){
     unset($_SESSION['user']);
-    if($path == '/' || strpos($path, 'index.php') != false){
-      toast('index__toast-refresh', 'success', 'Đăng xuất thành công');
-      $_SESSION['refresh'] = false;
-    }else {
-      toast('index__toast', 'success', 'Đăng xuất thành công');
+    
+    $pos = strpos($path, '.php');
+    if(!is_bool($pos)){
+      $file_name = substr($path, 1, $pos - 1);
+      toast($file_name . '__toast', 'success', 'Đăng xuất thành công');
     }
-    redirect('./index.php');
   }
 ?>
 
@@ -60,104 +77,79 @@
           <div class="link action__cart">
             <a href="./cart.php" class="link badge">
               <i class='bx bx-cart action__icon'></i>
-              <span class="badge__count badge__count--primary">3</span>
+              <span class="badge__count badge__count--primary">
+                <?php echo count($product_list);?>
+              </span>
             </a>
 
             <!-- cart menu -->
-            <div class="cart__list">
-              <!-- no cart: ul class cart__list--no-cart -->
+            <div class="cart__list <?php echo count($product_list) == 0 ? 'cart__list--no-cart' : ''; ?>">
+              <?php
+                if(count($product_list) == 0){
+              ?>
+              <!-- no cart -->
               <div class="cart__item--no-cart cart__item--arrow">
-                <img src="./assets/images/no-cart.png" alt="no-cart" class="cart__item--no-cart-img">
+                <img src="./assets/images/no_cart.png" alt="no-cart" class="cart__item--no-cart-img">
                 <span class="cart__item--no-cart-text">Chưa có sản phẩm</span>
               </div>
               <!-- end no cart -->
+
+              <?php
+                }else{
+              ?>
 
               <h4 class="cart__item-title cart__item--arrow">
                 Sản phẩm đã thêm
               </h4>
               <ul class="cart__list-item">
+                <?php
+                  foreach ($product_list as  $index => $product){
+                    $product_id = $product['id'];
+
+                    $sql_product_by_id = "SELECT * FROM products WHERE id = $product_id";
+                    $query_product_by_id = mysqli_query($conn, $sql_product_by_id);
+                    $row_product_by_id = mysqli_fetch_assoc($query_product_by_id);
+                ?>
                 <!-- cart item -->
                 <li class="cart__item">
-                  <img src="./assets/images/avatar.jpg" alt="cart__item-img" class="cart__item-img">
+                  <img src="./uploads/<?php echo $row_product_by_id['thumbnail'];?>"
+                    alt="<?php echo $row_product_by_id['thumbnail'];?>" class="cart__item-img">
                   <div class="cart__item-info">
                     <div class="cart__item-head">
                       <h5 class="cart__item-name">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, labore modi reprehenderit
+                        <?php echo $row_product_by_id['name'];?>
                       </h5>
                       <div class="cart__item-price-wrapper">
-                        <span class="cart__item-price">2.000.000đ</span>
+                        <span class="cart__item-price"><?php echo number_format($product['price']);?>đ</span>
                         <span class="cart__item-multiply">x</span>
-                        <span class="cart__item-quantity">2</span>
+                        <span class="cart__item-quantity"><?php echo $product['quantity'];?></span>
                       </div>
                     </div>
 
                     <div class="cart__item-body">
                       <div class="cart__item-description">
-                        <span>Nhãn hiệu: JBL</span>
-                        <span>Màu sắc: Đỏ</span>
+                        <span>Màu sắc: <?php echo $product['color'];?></span>
                       </div>
-                      <span class="cart__item-remove">Xóa</span>
+                      <form action="" method="post">
+                        <span class="cart__item-remove">Xóa</span>
+                        <input type="submit" name="btnDel" value="<?php echo $index;?>" hidden>
+                      </form>
                     </div>
                   </div>
                 </li>
                 <!-- end cart item -->
-
-                <!-- cart item -->
-                <li class="cart__item">
-                  <img src="./assets/images/avatar.jpg" alt="cart__item-img" class="cart__item-img">
-                  <div class="cart__item-info">
-                    <div class="cart__item-head">
-                      <h5 class="cart__item-name">
-                        JBL_E55BT_KEY_BLACK
-                      </h5>
-                      <div class="cart__item-price-wrapper">
-                        <span class="cart__item-price">2.000.000đ</span>
-                        <span class="cart__item-multiply">x</span>
-                        <span class="cart__item-quantity">2</span>
-                      </div>
-                    </div>
-
-                    <div class="cart__item-body">
-                      <div class="cart__item-description">
-                        <span>Nhãn hiệu: JBL</span>
-                        <span>Màu sắc: Đỏ</span>
-                      </div>
-                      <span class="cart__item-remove">Xóa</span>
-                    </div>
-                  </div>
-                </li>
-                <!-- end cart item -->
-
-                <!-- cart item -->
-                <li class="cart__item">
-                  <img src="./assets/images/avatar.jpg" alt="cart__item-img" class="cart__item-img">
-                  <div class="cart__item-info">
-                    <div class="cart__item-head">
-                      <h5 class="cart__item-name">
-                        JBL_E55BT_KEY_BLACK
-                      </h5>
-                      <div class="cart__item-price-wrapper">
-                        <span class="cart__item-price">2.000.000đ</span>
-                        <span class="cart__item-multiply">x</span>
-                        <span class="cart__item-quantity">2</span>
-                      </div>
-                    </div>
-
-                    <div class="cart__item-body">
-                      <div class="cart__item-description">
-                        <span>Nhãn hiệu: JBL</span>
-                        <span>Màu sắc: Đỏ</span>
-                      </div>
-                      <span class="cart__item-remove">Xóa</span>
-                    </div>
-                  </div>
-                </li>
-                <!-- end cart item -->
+                <?php
+                  }
+                ?>
               </ul>
 
               <a href="./cart.php" class="link btn btn--primary cart__view">
                 Xem giỏ hàng
               </a>
+
+              <?php
+                }
+              ?>
             </div>
             <!-- end cart menu -->
           </div>

@@ -62,6 +62,14 @@ const dropdownSelectedClick = (
 			dropdownInput.value = dropdownItemText.dataset.value
 			removeActive(dropdownItemList)
 			dropdownItem.classList.add('active')
+
+			const cartRowForm = dropdownSelected.parentNode.parentNode.parentNode
+			if (cartRowForm) {
+				const cartRowInput = cartRowForm.querySelector('.cart__row-submit')
+				if (cartRowInput) {
+					cartRowInput.click()
+				}
+			}
 		}
 	})
 }

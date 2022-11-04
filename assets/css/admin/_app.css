@@ -194,10 +194,6 @@ div.search--right {
 	justify-content: flex-end;
 }
 
-.btn + .btn {
-	margin-left: 20px;
-}
-
 .table__head {
 	margin-bottom: 20px;
 	display: flex;
@@ -255,37 +251,6 @@ div.search--right {
 .price {
 	color: var(--primary-color);
 	font-weight: 500;
-}
-
-.delete__modal {
-	padding: 30px;
-}
-
-.delete__modal-text-wrapper {
-	display: flex;
-	align-items: center;
-	margin-bottom: 20px;
-	max-width: 500px;
-}
-
-.delete__modal-icon {
-	color: var(--error-color);
-	font-size: 40px;
-	margin-right: 10px;
-}
-
-.delete__modal-text {
-	display: block;
-	font-size: 20px;
-}
-
-.delete__modal-name {
-	font-weight: 500;
-}
-
-.delete__modal-form {
-	display: flex;
-	justify-content: flex-end;
 }
 
 /* text editor */

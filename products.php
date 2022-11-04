@@ -112,6 +112,7 @@
 </head>
 
 <body>
+  <div id="toast"></div>
   <!-- header -->
   <?php include_once('./partials/header.php') ?>
   <!-- end header -->
@@ -563,7 +564,7 @@
 
                 if($discount > 0){
                   $price = $row_product['price'];
-                  $percent = (int)($row_product['discount'] / $row_product['price'] * 100);
+                  $percent = (int)($discount / $price * 100);
 
                   echo "<div class='product-item__sale-off'>
                     <span class='product-item__percent'>$percent%</span>
@@ -657,6 +658,14 @@
 
   <!-- js -->
   <script src="./assets/js/_base.js"></script>
+  <script>
+  <?php
+    if(isset($_SESSION['products__toast'])){
+      echo $_SESSION['products__toast'];
+      unset($_SESSION['products__toast']);
+    }
+  ?>
+  </script>
   <script src="./assets/js/_app.js"></script>
   <script src="./assets/js/products.js"></script>
   <!-- end js -->

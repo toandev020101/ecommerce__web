@@ -2,11 +2,6 @@
   require_once('./database/connectdb.php');
   require_once('./helper/function.php');
   session_start();
-
-  if(isset($_SESSION['refresh'])){
-    // trang đã làm mới
-    $_SESSION['refresh'] = true;
-  }
 ?>
 
 <!DOCTYPE html>
@@ -366,12 +361,6 @@
     if(isset($_SESSION['index__toast'])){
       echo $_SESSION['index__toast'];
       unset($_SESSION['index__toast']);
-    }
-
-    if(isset($_SESSION['index__toast-refresh']) && isset($_SESSION['refresh']) && $_SESSION['refresh']){
-      echo $_SESSION['index__toast-refresh'];
-      unset($_SESSION['index__toast-refresh']);
-      unset($_SESSION['refresh']);
     }
   ?>
   </script>

@@ -254,8 +254,8 @@
         </div>
         <form action="" method="post" class="delete__modal-form">
           <input type="text" name="id" class="delete__modal-id" hidden>
-          <button class="btn btn--primary" name="btnDel">Đồng ý</button>
-          <button type="button" class="btn modal__btn-close">Hủy</button>
+          <button class="btn btn--primary delete__btn" name="btnDel">Đồng ý</button>
+          <button type="button" class="btn modal__btn-close delete__btn">Hủy</button>
         </form>
       </div>
     </div>
