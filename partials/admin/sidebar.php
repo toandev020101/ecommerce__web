@@ -12,7 +12,7 @@
 <!-- sidebar -->
 <nav class="sidebar">
   <div class="sidebar__head">
-    <a href="/admin/index.php" class="link sidebar__logo-wrapper">
+    <a href="./index.php" class="link sidebar__logo-wrapper">
       <i class='bx bx-shopping-bag sidebar__logo-icon'></i>
       <span>PKShop</span>
     </a>
