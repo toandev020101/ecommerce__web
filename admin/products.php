@@ -14,9 +14,17 @@
     redirect('../login.php');
   }
 
-  if(isset($_SESSION['refresh'])){
-    // trang đã làm mới
-    $_SESSION['refresh'] = true;
+  if(isset($_POST["btnDel"])){
+    $id = $_POST["id"];
+    // xóa sản phẩm
+    $sql_product_delete = "UPDATE products SET deleted = 1 WHERE id = $id";
+    $query_product_delete = mysqli_query($conn, $sql_product_delete);
+
+    if($query_product_delete){
+      toast('products__toast', 'success', 'Xóa thành công');
+    }else{
+      toast('products__toast', 'error', 'Xóa thất bại');
+    }
   }
 
   if(isset($_GET['page'])){
@@ -40,7 +48,6 @@
     $page--;
     if($page >= 1){
       // tự động lùi trang nếu bị xóa hết sản phẩm tại trang đó
-      $_SESSION['refresh'] = false;
       redirect("products.php?page=$page&limit=$limit");
       exit();
     }
@@ -51,21 +58,6 @@
   $query_product_all = mysqli_query($conn, $sql_product_all);
   $totalRecord = mysqli_num_rows($query_product_all);
   $totalPage = ceil($totalRecord / $limit);
-
-  if(isset($_POST["btnDel"])){
-    $id = $_POST["id"];
-    // xóa sản phẩm
-    $sql_product_delete = "UPDATE products SET deleted = 1 WHERE id = $id";
-    $query_product_delete = mysqli_query($conn, $sql_product_delete);
-
-    if($query_product_delete){
-      toast('products__toast-refresh', 'success', 'Xóa thành công');
-      $_SESSION['refresh'] = false;
-      refresh();
-    }else{
-      toast('products__toast-refresh', 'error', 'Xóa thất bại');
-    }
-  }
 ?>
 
 <!DOCTYPE html>
@@ -117,8 +109,9 @@
           <thead>
             <tr>
               <th>Ảnh sản phẩm</th>
-              <th>Tên sản phẩm</th>
+              <th width="350px">Tên sản phẩm</th>
               <th>Giá</th>
+              <th>Giảm giá</th>
               <th>Số lượng</th>
               <th>Trạng thái</th>
               <th>Thao tác</th>
@@ -147,6 +140,9 @@
               </td>
               <td>
                 <div class="price"><?php echo number_format($row_product["price"]);?>đ</div>
+              </td>
+              <td>
+                <?php echo number_format($row_product["discount"]);?>đ
               </td>
               <td>
                 <?php echo number_format($row_product["quantity"]);?>
@@ -264,12 +260,6 @@
     if(isset($_SESSION['products__toast'])){
       echo $_SESSION['products__toast'];
       unset($_SESSION['products__toast']);
-    }
-
-    if(isset($_SESSION['products__toast-refresh']) && isset($_SESSION['refresh']) && $_SESSION['refresh']){
-      echo $_SESSION['products__toast-refresh'];
-      unset($_SESSION['products__toast-refresh']);
-      unset($_SESSION['refresh']);
     }
   ?>
   </script>

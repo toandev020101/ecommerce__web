@@ -15,44 +15,6 @@
     redirect('../login.php');
   }
 
-  if(isset($_SESSION['refresh'])){
-    // trang đã làm mới
-    $_SESSION['refresh'] = true;
-  }
-
-  if(isset($_GET['page'])){
-    // lấy page và limit trên url
-    $page = $_GET['page'];
-    $limit = $_GET['limit'];
-  }else {
-    // page và limit mặc định
-    $page = 1;
-    $limit = 5;
-  }
-
-  $offset = ($page - 1) * $limit;
-
-  // lấy danh mục theo phân trang
-  $sql_category_list_pagination = "SELECT * FROM categories limit $offset, $limit";
-  $query_category_list_pagination = mysqli_query($conn, $sql_category_list_pagination);
-  
-  $row_num_category_list_pagination = mysqli_num_rows($query_category_list_pagination);
-  if($row_num_category_list_pagination <= 0){
-    $page--;
-    if($page >= 1){
-      // tự động lùi trang nếu bị xóa hết danh mục tại trang đó
-      $_SESSION['refresh'] = false;
-      redirect("categories.php?page=$page&limit=$limit");
-      exit();
-    }
-  }
-  
-  // lấy toàn bộ danh mục
-  $sql_category_all = "SELECT * FROM categories";
-  $query_category_all = mysqli_query($conn, $sql_category_all);
-  $totalRecord = mysqli_num_rows($query_category_all);
-  $totalPage = ceil($totalRecord / $limit);
-
   if(isset($_POST["btnDel"])){
     $id = $_POST["id"];
     // tắt auto commit
@@ -113,15 +75,45 @@
       // bật tự động commit sql
       mysqli_autocommit($conn, true);
 
-      toast('categories__toast-refresh', 'success', 'Xóa thành công');
-      $_SESSION['refresh'] = false;
-      refresh();
+      toast('categories__toast', 'success', 'Xóa thành công');
     }catch(mysqli_sql_exception $exception){
       mysqli_rollback($conn);
-      toast('categories__toast-refresh', 'error', 'Xóa thất bại');
+      toast('categories__toast', 'error', 'Xóa thất bại');
       throw $exception;
     }
   }
+
+  if(isset($_GET['page'])){
+    // lấy page và limit trên url
+    $page = $_GET['page'];
+    $limit = $_GET['limit'];
+  }else {
+    // page và limit mặc định
+    $page = 1;
+    $limit = 5;
+  }
+
+  $offset = ($page - 1) * $limit;
+
+  // lấy danh mục theo phân trang
+  $sql_category_list_pagination = "SELECT * FROM categories ORDER BY id DESC limit $offset, $limit";
+  $query_category_list_pagination = mysqli_query($conn, $sql_category_list_pagination);
+  
+  $row_num_category_list_pagination = mysqli_num_rows($query_category_list_pagination);
+  if($row_num_category_list_pagination <= 0){
+    $page--;
+    if($page >= 1){
+      // tự động lùi trang nếu bị xóa hết danh mục tại trang đó
+      redirect("categories.php?page=$page&limit=$limit");
+      exit();
+    }
+  }
+  
+  // lấy toàn bộ danh mục
+  $sql_category_all = "SELECT * FROM categories";
+  $query_category_all = mysqli_query($conn, $sql_category_all);
+  $totalRecord = mysqli_num_rows($query_category_all);
+  $totalPage = ceil($totalRecord / $limit);
 ?>
 
 <!DOCTYPE html>
@@ -304,12 +296,6 @@
     if(isset($_SESSION['categories__toast'])){
       echo $_SESSION['categories__toast'];
       unset($_SESSION['categories__toast']);
-    }
-
-    if(isset($_SESSION['categories__toast-refresh']) && isset($_SESSION['refresh']) && $_SESSION['refresh']){
-      echo $_SESSION['categories__toast-refresh'];
-      unset($_SESSION['categories__toast-refresh']);
-      unset($_SESSION['refresh']);
     }
   ?>
   </script>

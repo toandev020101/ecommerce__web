@@ -6,13 +6,6 @@
     }
   }
 
-  // refresh trang sau $seconds giây
-  function refresh($seconds = 0){
-    if($seconds >= 0){
-      header("Refresh: $seconds");
-    }
-  }
-
   // kiểm tra đăng nhập
   function checkAuth(){
     if(isset($_SESSION['user'])){

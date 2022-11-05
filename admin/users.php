@@ -15,9 +15,30 @@
     redirect('../login.php');
   }
 
-  if(isset($_SESSION['refresh'])){
-    // trang đã làm mới
-    $_SESSION['refresh'] = true;
+  if(isset($_POST["btnDel"])){
+    $id = $_POST["id"];
+      
+    // lấy ảnh tài khoản theo id
+    $sql_user_by_id = "SELECT avatar FROM users WHERE id = $id";
+    $query_user_by_id = mysqli_query($conn, $sql_user_by_id);
+    $row_user_by_id = mysqli_fetch_assoc($query_user_by_id);
+
+    // xóa tài khoản
+    $sql_delete_user_by_id = "DELETE FROM users WHERE id = $id";
+    $query_delete_user_by_id = mysqli_query($conn, $sql_delete_user_by_id);
+
+    if($query_delete_user_by_id){
+      if($row_user_by_id['avatar'] != 'no_avatar.img'){
+        // xóa ảnh tài khoản đã xóa
+        if($row_user_by_id["avatar"] != 'no_avatar.jpg'){
+          unlink('../uploads/' . $row_user_by_id["avatar"]);
+        }
+      }
+
+      toast('users__toast', 'success', 'Xóa thành công');
+    }else{
+      toast('users__toast', 'error', 'Xóa thất bại');
+    }
   }
 
   if(isset($_GET['page'])){
@@ -41,7 +62,6 @@
     $page--;
     if($page >= 1){
       // tự động lùi trang nếu bị xóa hết tài khoản tại trang đó
-      $_SESSION['refresh'] = false;
       redirect("users.php?page=$page&limit=$limit");
       exit();
     }
@@ -52,32 +72,6 @@
   $query_user_all = mysqli_query($conn, $sql_user_all);
   $totalRecord = mysqli_num_rows($query_user_all);
   $totalPage = ceil($totalRecord / $limit);
-
-  if(isset($_POST["btnDel"])){
-    $id = $_POST["id"];
-      
-    // lấy ảnh tài khoản theo id
-    $sql_user_by_id = "SELECT avatar FROM users WHERE id = $id";
-    $query_user_by_id = mysqli_query($conn, $sql_user_by_id);
-    $row_user_by_id = mysqli_fetch_assoc($query_user_by_id);
-
-    // xóa tài khoản
-    $sql_delete_user_by_id = "DELETE FROM users WHERE id = $id";
-    $query_delete_user_by_id = mysqli_query($conn, $sql_delete_user_by_id);
-
-    if($query_delete_user_by_id){
-      if($row_user_by_id['avatar'] != 'no_avatar.img'){
-        // xóa ảnh tài khoản đã xóa
-        unlink('../uploads/' . $row_user_by_id["avatar"]);
-      }
-
-      toast('users__toast-refresh', 'success', 'Xóa thành công');
-      $_SESSION['refresh'] = false;
-      refresh();
-    }else{
-      toast('users__toast-refresh', 'error', 'Xóa thất bại');
-    }
-  }
 ?>
 
 <!DOCTYPE html>
@@ -269,12 +263,6 @@
     if(isset($_SESSION['users__toast'])){
       echo $_SESSION['users__toast'];
       unset($_SESSION['users__toast']);
-    }
-
-    if(isset($_SESSION['users__toast-refresh']) && isset($_SESSION['refresh']) && $_SESSION['refresh']){
-      echo $_SESSION['users__toast-refresh'];
-      unset($_SESSION['users__toast-refresh']);
-      unset($_SESSION['refresh']);
     }
   ?>
   </script>

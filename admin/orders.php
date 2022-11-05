@@ -14,9 +14,29 @@
     redirect('../login.php');
   }
 
-  if(isset($_SESSION['refresh'])){
-    // trang đã làm mới
-    $_SESSION['refresh'] = true;
+  if(isset($_POST["btnDel"])){
+    $id = $_POST["id"];
+    // tắt auto commit
+    mysqli_autocommit($conn, false);
+
+    try{
+      // xóa chi tiết đơn Hoàng
+      $sql_order_detail_list_by_order_id = "DELETE FROM order_details WHERE order_id = $id";
+      mysqli_query($conn, $sql_order_detail_list_by_order_id);
+
+      // xóa đơn Hoàng
+      $sql_order_by_id = "DELETE FROM orders WHERE id = $id";
+      mysqli_query($conn, $sql_order_by_id);
+      
+      // bật tự động commit sql
+      mysqli_autocommit($conn, true);
+
+      toast('orders__toast', 'success', 'Xóa thành công');
+    }catch(mysqli_sql_exception $exception){
+      mysqli_rollback($conn);
+      toast('orders__toast', 'error', 'Xóa thất bại');
+      throw $exception;
+    }
   }
 
   if(isset($_GET['page'])){
@@ -40,7 +60,6 @@
     $page--;
     if($page >= 1){
       // tự động lùi trang nếu bị xóa hết đơn hàng tại trang đó
-      $_SESSION['refresh'] = false;
       redirect("orders.php?page=$page&limit=$limit");
       exit();
     }
@@ -51,33 +70,6 @@
   $query_order_all = mysqli_query($conn, $sql_order_all);
   $totalRecord = mysqli_num_rows($query_order_all);
   $totalPage = ceil($totalRecord / $limit);
-
-  if(isset($_POST["btnDel"])){
-    $id = $_POST["id"];
-    // tắt auto commit
-    mysqli_autocommit($conn, false);
-
-    try{
-      // xóa chi tiết đơn Hoàng
-      $sql_order_detail_list_by_order_id = "DELETE FROM order_details WHERE order_id = $id";
-      mysqli_query($conn, $sql_order_detail_list_by_order_id);
-
-      // xóa đơn Hoàng
-      $sql_order_by_id = "DELETE FROM orders WHERE id = $id";
-      mysqli_query($conn, $sql_order_by_id);
-      
-      // bật tự động commit sql
-      mysqli_autocommit($conn, true);
-
-      toast('orders__toast-refresh', 'success', 'Xóa thành công');
-      $_SESSION['refresh'] = false;
-      refresh();
-    }catch(mysqli_sql_exception $exception){
-      mysqli_rollback($conn);
-      toast('orders__toast-refresh', 'error', 'Xóa thất bại');
-      throw $exception;
-    }
-  }
 ?>
 
 <!DOCTYPE html>
@@ -284,12 +276,6 @@
     if(isset($_SESSION['orders__toast'])){
       echo $_SESSION['orders__toast'];
       unset($_SESSION['orders__toast']);
-    }
-
-    if(isset($_SESSION['orders__toast-refresh']) && isset($_SESSION['refresh']) && $_SESSION['refresh']){
-      echo $_SESSION['orders__toast-refresh'];
-      unset($_SESSION['orders__toast-refresh']);
-      unset($_SESSION['refresh']);
     }
   ?>
   </script>
