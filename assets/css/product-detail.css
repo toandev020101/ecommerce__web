@@ -94,7 +94,6 @@
 .product-detail__info-price {
 	display: flex;
 	align-items: flex-end;
-	margin-bottom: 30px;
 }
 
 .product-detail__info-price-old {

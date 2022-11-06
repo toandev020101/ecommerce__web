@@ -23,7 +23,7 @@
     // điều kiện
     $price_from = $_GET['price_from'];
     $price_to = $_GET['price_to'];
-    $sql_by_price_from_to = "and price BETWEEN $price_from and $price_to";
+    $sql_by_price_from_to = "and (price - discount) BETWEEN $price_from and $price_to";
   }
 
   $status_list_id = queryListId('status_list_id');
@@ -79,7 +79,7 @@
   }else {
     // page và limit mặc định
     $page = 1;
-    $limit = 2;
+    $limit = 8;
   }
 
   $offset = ($page - 1) * $limit;
@@ -443,9 +443,9 @@
               <div class="dropdown__select">
                 <span class="dropdown__selected">
                   <?php
-                    if($sql_order_by == 'price ASC'){
+                    if($sql_order_by == '(price - discount) ASC'){
                       echo 'Giá: từ thấp đến cao';
-                    }else if($sql_order_by == 'price DESC'){
+                    }else if($sql_order_by == '(price - discount) DESC'){
                       echo 'Giá: từ cao đến thấp';
                     }else {
                       echo 'Giá';
@@ -455,15 +455,15 @@
                 <i class='bx bxs-chevron-down'></i>
               </div>
               <ul class="dropdown__list products-sort__price-list">
-                <li class="dropdown__item <?php echo $sql_order_by == 'price ASC' ? 'active' : '';?>">
+                <li class="dropdown__item <?php echo $sql_order_by == '(price - discount) ASC' ? 'active' : '';?>">
                   <a href="./products.php?<?php
                     // lấy query string
                     $query_string = $_SERVER['QUERY_STRING']; 
                     if(!empty($query_string)){
-                      $query_string = queryString($query_string, 'order_by', 'price+ASC', 'item');
+                      $query_string = queryString($query_string, 'order_by', '(price+-+discount)+ASC', 'item');
                       echo $query_string;
                     }else {
-                      echo "order_by=price+ASC";
+                      echo "order_by=(price+-+discount)+ASC";
                     }
                   ?>" class="link">
                     <span class="dropdown__text">
@@ -472,15 +472,15 @@
                   </a>
                 </li>
 
-                <li class="dropdown__item <?php echo $sql_order_by == 'price DESC' ? 'active' : '';?>">
+                <li class="dropdown__item <?php echo $sql_order_by == '(price - discount) DESC' ? 'active' : '';?>">
                   <a href="./products.php?<?php
                     // lấy query string
                     $query_string = $_SERVER['QUERY_STRING']; 
                     if(!empty($query_string)){
-                      $query_string = queryString($query_string, 'order_by', 'price+DESC', 'item');
+                      $query_string = queryString($query_string, 'order_by', '(price+-+discount)+DESC', 'item');
                       echo $query_string;
                     }else {
-                      echo "order_by=price+DESC";
+                      echo "order_by=(price+-+discount)+DESC";
                     }
                   ?>" class="link">
                     <span class="dropdown__text">
@@ -592,7 +592,7 @@
                   if(!is_bool($pos)){
                     $query_string = substr($query_string, 0, $pos);
                   }
-                  echo "$query_string&";
+                  echo "$query_string";
                 }
 
                 $page_prev = $page - 1;
@@ -613,7 +613,7 @@
                   if(!is_bool($pos)){
                     $query_string = substr($query_string, 0, $pos);
                   }
-                  echo "$query_string&";
+                  echo "$query_string";
                 }
 
                 echo "page=$i&limit=$limit";
@@ -631,7 +631,7 @@
                   if(!is_bool($pos)){
                     $query_string = substr($query_string, 0, $pos);
                   }
-                  echo "$query_string&";
+                  echo "$query_string";
                 }
 
                 $page_next = $page + 1;

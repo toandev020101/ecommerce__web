@@ -2,13 +2,13 @@
   $url = $_SERVER['REQUEST_URI'];
   $path = substr($url, 15);
 
-  $product_list = [];
+  $product_header_list = [];
   if(isset($_SESSION['product_list'])){
-    $product_list = $_SESSION['product_list'];
+    $product_header_list = $_SESSION['product_list'];
   }
 
-  if(isset($_POST['btnDel'])){
-    $index = $_POST['btnDel'];
+  if(isset($_POST['btnHeaderDel'])){
+    $index = $_POST['btnHeaderDel'];
     array_splice($_SESSION['product_list'], $index, 1);
 
     $pos = strpos($path, '.php');
@@ -17,7 +17,7 @@
       toast($file_name . '__toast', 'success', 'Xóa thành công');
     }
 
-    $product_list = $_SESSION['product_list'];
+    $product_header_list = $_SESSION['product_list'];
   }
 
   if(isset($_POST['btnLogout'])){
@@ -78,14 +78,14 @@
             <a href="./cart.php" class="link badge">
               <i class='bx bx-cart action__icon'></i>
               <span class="badge__count badge__count--primary">
-                <?php echo count($product_list);?>
+                <?php echo count($product_header_list);?>
               </span>
             </a>
 
             <!-- cart menu -->
-            <div class="cart__list <?php echo count($product_list) == 0 ? 'cart__list--no-cart' : ''; ?>">
+            <div class="cart__list <?php echo count($product_header_list) == 0 ? 'cart__list--no-cart' : ''; ?>">
               <?php
-                if(count($product_list) == 0){
+                if(count($product_header_list) == 0){
               ?>
               <!-- no cart -->
               <div class="cart__item--no-cart cart__item--arrow">
@@ -103,8 +103,8 @@
               </h4>
               <ul class="cart__list-item">
                 <?php
-                  foreach ($product_list as  $index => $product){
-                    $product_id = $product['id'];
+                  foreach ($product_header_list as  $index => $product_header){
+                    $product_id = $product_header['id'];
 
                     $sql_product_by_id = "SELECT * FROM products WHERE id = $product_id";
                     $query_product_by_id = mysqli_query($conn, $sql_product_by_id);
@@ -120,19 +120,19 @@
                         <?php echo $row_product_by_id['name'];?>
                       </h5>
                       <div class="cart__item-price-wrapper">
-                        <span class="cart__item-price"><?php echo number_format($product['price']);?>đ</span>
+                        <span class="cart__item-price"><?php echo number_format($product_header['price']);?>đ</span>
                         <span class="cart__item-multiply">x</span>
-                        <span class="cart__item-quantity"><?php echo $product['quantity'];?></span>
+                        <span class="cart__item-quantity"><?php echo $product_header['quantity'];?></span>
                       </div>
                     </div>
 
                     <div class="cart__item-body">
                       <div class="cart__item-description">
-                        <span>Màu sắc: <?php echo $product['color'];?></span>
+                        <span>Màu sắc: <?php echo $product_header['color'];?></span>
                       </div>
                       <form action="" method="post">
                         <span class="cart__item-remove">Xóa</span>
-                        <input type="submit" name="btnDel" value="<?php echo $index;?>" hidden>
+                        <input type="submit" name="btnHeaderDel" value="<?php echo $index;?>" hidden>
                       </form>
                     </div>
                   </div>

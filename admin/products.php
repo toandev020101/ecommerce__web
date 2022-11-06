@@ -34,13 +34,13 @@
   }else {
     // page và limit mặc định
     $page = 1;
-    $limit = 2;
+    $limit = 5;
   }
 
   $offset = ($page - 1) * $limit;
 
   // lấy sản phẩm theo phân trang
-  $sql_product_list_pagination = "SELECT * FROM products WHERE deleted = 0 limit $offset, $limit";
+  $sql_product_list_pagination = "SELECT * FROM products WHERE deleted = 0 ORDER BY id DESC limit $offset, $limit";
   $query_product_list_pagination = mysqli_query($conn, $sql_product_list_pagination);
   
   $row_num_product_list_pagination = mysqli_num_rows($query_product_list_pagination);
@@ -123,6 +123,7 @@
             <td></td>
             <td></td>
             <td>Không có sản phẩm nào</td>
+            <td></td>
             <td></td>
             <td></td>
             </tr>" : '';

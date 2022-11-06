@@ -46,13 +46,13 @@
   }else {
     // page và limit mặc định
     $page = 1;
-    $limit = 2;
+    $limit = 10;
   }
 
   $offset = ($page - 1) * $limit;
 
   // lấy đơn hàng theo phân trang
-  $sql_order_list_pagination = "SELECT * FROM orders limit $offset, $limit";
+  $sql_order_list_pagination = "SELECT * FROM orders ORDER BY id DESC limit $offset, $limit";
   $query_order_list_pagination = mysqli_query($conn, $sql_order_list_pagination);
   
   $row_num_order_list_pagination = mysqli_num_rows($query_order_list_pagination);

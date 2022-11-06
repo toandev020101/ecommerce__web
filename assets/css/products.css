@@ -55,6 +55,7 @@
 	min-width: max-content;
 	max-width: 400px;
 
+	text-align: center;
 	flex-wrap: wrap;
 	padding: 20px;
 	border-radius: 10px;
@@ -93,6 +94,7 @@
 
 .products-category__sub-item {
 	margin: 0 10px 10px 0;
+	width: calc((400px - 70px) / 4);
 }
 
 .products-category__sub-item:nth-of-type(4n) {

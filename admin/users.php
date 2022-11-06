@@ -48,13 +48,13 @@
   }else {
     // page và limit mặc định
     $page = 1;
-    $limit = 2;
+    $limit = 5;
   }
 
   $offset = ($page - 1) * $limit;
 
   // lấy tài khoản theo phân trang
-  $sql_user_list_pagination = "SELECT * FROM users limit $offset, $limit";
+  $sql_user_list_pagination = "SELECT * FROM users ORDER BY id DESC limit $offset, $limit";
   $query_user_list_pagination = mysqli_query($conn, $sql_user_list_pagination);
   
   $row_num_user_list_pagination = mysqli_num_rows($query_user_list_pagination);

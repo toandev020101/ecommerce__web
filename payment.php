@@ -19,14 +19,18 @@
     $_SESSION['info']['address'] = $user['address'];
   }
 
-  if(isset($_SESSION['product_list'])){
-    $product_list = [];
+  $product_list = [];
+  if(isset($_SESSION['product_order'])){
+    array_push($product_list, $_SESSION['product_order']);
+  }else if(isset($_SESSION['product_list'])){
     foreach ($_SESSION['product_list'] as $product){
       if($product['checked']){
         array_push($product_list, $product);
       }
     }
-  }else {
+  }
+  
+  if(count($product_list) == 0){
     toast('cart__toast', 'error', 'Vui lòng chọn sản phẩm');
     redirect('./cart.php');
   }
@@ -80,10 +84,14 @@
         if(!isset($_SESSION['payment__toast'])){
           unset($_SESSION['info']);
 
-          // xóa sản phẩm trong giỏ hàng
-          foreach ($_SESSION['product_list'] as $index => $product){
-            if($product['checked']){
-              array_splice($_SESSION['product_list'], $index, 1);
+          if(isset($_SESSION['product_order'])) {
+            unset($_SESSION['product_order']);
+          }else {
+            // xóa sản phẩm trong giỏ hàng
+            foreach ($_SESSION['product_list'] as $index => $product){
+              if($product['checked']){
+                array_splice($_SESSION['product_list'], $index, 1);
+              }
             }
           }
 

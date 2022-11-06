@@ -28,24 +28,24 @@
       "checked" => false
     ];
 
-    // kiểm tra đã có sản phẩm hay chưa ?
-    $check_is_product = false;
-    foreach ($_SESSION['product_list'] as $index => $product){
-      if($product_submit['id'] == $product['id'] && $product_submit['price'] == $product['price'] && $product_submit['color'] == $product['color']){
-        $check_is_product = true;
-        $_SESSION['product_list'][$index]['quantity'] += $product_submit['quantity'];
-        break;
-      }
-    }
-
-    if(!$check_is_product){
-      array_push($_SESSION['product_list'], $product_submit);
-    }
-
     if(isset($_POST['btnAdd'])){
+      // kiểm tra đã có sản phẩm hay chưa ?
+      $check_is_product = false;
+      foreach ($_SESSION['product_list'] as $index => $product){
+        if($product_submit['id'] == $product['id'] && $product_submit['price'] == $product['price'] && $product_submit['color'] == $product['color']){
+          $check_is_product = true;
+          $_SESSION['product_list'][$index]['quantity'] += $product_submit['quantity'];
+          break;
+        }
+      }
+
+      if(!$check_is_product){
+        array_push($_SESSION['product_list'], $product_submit);
+      }
+    
       toast('product-detail__toast', 'success', 'Thêm vào giỏ hàng thành công');
     }else {
-      $_SESSION['product_list'][count($_SESSION['product_list']) - 1]['checked'] = true;
+      $_SESSION['product_order'] = $product_submit;
       redirect('./payment.php');
     }
   }
@@ -146,28 +146,35 @@
                   <span><?php echo $row_product_by_slug['name'];?></span>
                 </h3>
               </div>
-              <div class="product-detail__info-price">
-                <?php
-                $discount = $row_product_by_slug['discount'];
-                if($discount > 0){
-                  $price = $row_product_by_slug['price'];
-                  echo "<span class='product-detail__info-price-old'>" . number_format($price) . "đ</span>";
-                }
-              ?>
-
-                <span class="product-detail__info-price-current">
-                  <?php echo number_format($row_product_by_slug['price'] - $row_product_by_slug['discount'])?>đ
+              <div class="product-detail__info-line">
+                <span class="product-detail__info-line-name">
+                  Giá
                 </span>
+                <span class="product-detail__info-line-content">
+                  <span class="product-detail__info-price">
+                    <?php
+                      $discount = $row_product_by_slug['discount'];
+                      if($discount > 0){
+                        $price = $row_product_by_slug['price'];
+                        echo "<span class='product-detail__info-price-old'>" . number_format($price) . "đ</span>";
+                      }
+                    ?>
 
-                <?php
-                $discount = $row_product_by_slug['discount'];
-                if($discount > 0){
-                  $price = $row_product_by_slug['price'];
-                  $percent = (int)($discount / $price * 100);
-                  
-                  echo "<span class='product-detail__info-box'>" . $percent . "% giảm</span>";
-                }
-              ?>
+                    <span class="product-detail__info-price-current">
+                      <?php echo number_format($row_product_by_slug['price'] - $row_product_by_slug['discount'])?>đ
+                    </span>
+
+                    <?php
+                      $discount = $row_product_by_slug['discount'];
+                      if($discount > 0){
+                        $price = $row_product_by_slug['price'];
+                        $percent = (int)($discount / $price * 100);
+                        
+                        echo "<span class='product-detail__info-box'>" . $percent . "% giảm</span>";
+                      }
+                    ?>
+                  </span>
+                </span>
               </div>
               <div class="product-detail__info-line">
                 <span class="product-detail__info-line-name">

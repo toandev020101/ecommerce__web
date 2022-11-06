@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 01, 2022 lúc 10:06 AM
+-- Thời gian đã tạo: Th10 05, 2022 lúc 03:05 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -202,7 +202,7 @@ INSERT INTO `status` (`id`, `name`, `box_name`, `type`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no_avatar.img',
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no_avatar.jpg',
   `fullname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -212,8 +212,13 @@ CREATE TABLE `users` (
   `role_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `users` (`avatar`, `fullname`, `username`, `password`, `phone_num`, `gender`, `role_id`) VALUES
-('no_avatar.jpg', 'Admin', 'admin', '$2y$10$jEP4Szm2bh16hegJGQ2x2.y0TWIpokp0LCLO2q2CwN2zWhrCu2/1W', 0, 2);
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `avatar`, `fullname`, `username`, `password`, `phone_num`, `address`, `gender`, `role_id`) VALUES
+(6, 'no_avatar.jpg', 'Admin', 'admin', '$2y$10$jEP4Szm2bh16hegJGQ2x2.y0TWIpokp0LCLO2q2CwN2zWhrCu2/1W', '0987xxxxxx', 'Đà Nẵng', 0, 2);
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -365,7 +370,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

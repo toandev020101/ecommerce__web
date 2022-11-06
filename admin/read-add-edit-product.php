@@ -50,7 +50,7 @@
       }
 
       // upload files
-      $file_name_list = uploadFileMultiple('../uploads', 'image_list', 'read-add-edit-product__toast', $action == 'add' ? true : false);
+      $file_name_list = uploadFileMultiple('../uploads', 'image_list', 'read-add-edit-product__toast');
 
       // xử lý file
       if($action == "edit"){
@@ -117,14 +117,18 @@
             // thêm ảnh mới
             $values = '';
             foreach($image_list as $index => $image){
-              $values .= "('$image', $product_add_id)";
-              if($index != count($image_list) - 1){
-                $values .= ',';
+              if(!empty($image)){
+                $values .= "('$image', $product_add_id)";
+                if($index != count($image_list) - 1){
+                  $values .= ',';
+                }
               }
             }
     
-            $sql_image_list_add = "INSERT INTO images(thumbnail, product_id) VALUES $values";
-            mysqli_query($conn, $sql_image_list_add);
+            if(!empty($values)){
+              $sql_image_list_add = "INSERT INTO images(thumbnail, product_id) VALUES $values";
+              mysqli_query($conn, $sql_image_list_add);
+            }
       
             if(isset($status_list)){
               // thêm trạng thái mới
@@ -277,7 +281,7 @@
 
         <div class="read-add-edit__line">
           <div class="read-add-edit__name">
-            Thư viện ảnh <span class="required">*</span>
+            Thư viện ảnh
           </div>
           <div class="read-add-edit__row">
             <?php
