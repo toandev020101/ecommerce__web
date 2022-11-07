@@ -45,7 +45,8 @@
 
         if($action == "edit"){
           // xóa ảnh cũ nếu chỉnh sửa
-          unlink('../uploads/' . $row_user_by_id["avatar"]);
+          if(!empty( $row_user_by_id["avatar"]))
+            unlink('../uploads/' . $row_user_by_id["avatar"]);
         }
       }
 

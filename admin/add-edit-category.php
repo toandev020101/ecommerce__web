@@ -2,6 +2,7 @@
   require_once('../database/connectdb.php');
   require_once('../helper/function.php');
 
+  // session trong lưu dữ liệu dung cho tất cả các trang khác trong 1 phiên truy cập
   session_start();
 
   if(checkAuth()){
@@ -42,7 +43,8 @@
 
       if($action == "edit"){
         // xóa ảnh cũ nếu chỉnh sửa
-        unlink('../uploads/' . $row_category_by_id["thumbnail"]);
+        if(!empty($row_category_by_id["thumbnail"]))
+          unlink('../uploads/' . $row_category_by_id["thumbnail"]);
       }
     }
 

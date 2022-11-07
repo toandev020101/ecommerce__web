@@ -49,7 +49,8 @@
           deleteProductListByCategoryId($conn, $row_category_by_parent_id["id"]);
 
           // xóa ảnh của danh mục con đã xóa
-          unlink('../uploads/' . $row_category_by_parent_id["thumbnail"]);
+          if(!empty($row_category_by_parent_id["thumbnail"]))
+            unlink('../uploads/' . $row_category_by_parent_id["thumbnail"]);
         }
 
         // xóa danh mục con
@@ -70,7 +71,8 @@
       mysqli_query($conn, $sql_delete_category_by_id);
 
       // xóa ảnh danh mục đã xóa
-      unlink('../uploads/' . $row_category_by_id["thumbnail"]);
+      if(!empty($row_category_by_id["thumbnail"]))
+        unlink('../uploads/' . $row_category_by_id["thumbnail"]);
 
       // bật tự động commit sql
       mysqli_autocommit($conn, true);
@@ -93,6 +95,7 @@
     $limit = 5;
   }
 
+  // bỏ qua bao nhiêu item
   $offset = ($page - 1) * $limit;
 
   // lấy danh mục theo phân trang

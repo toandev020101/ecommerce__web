@@ -588,11 +588,11 @@
               <a href="./products.php?<?php
                 $query_string = $_SERVER['QUERY_STRING'];
                 if(!empty($query_string)) {
-                  $pos = strpos($query_string, 'page');
+                  $pos = strpos($query_string, '&page');
                   if(!is_bool($pos)){
                     $query_string = substr($query_string, 0, $pos);
                   }
-                  echo "$query_string";
+                  echo "$query_string&";
                 }
 
                 $page_prev = $page - 1;
@@ -609,11 +609,11 @@
               <a href="./products.php?<?php
                 $query_string = $_SERVER['QUERY_STRING'];
                 if(!empty($query_string)) {
-                  $pos = strpos($query_string, 'page');
+                  $pos = strpos($query_string, '&page');
                   if(!is_bool($pos)){
                     $query_string = substr($query_string, 0, $pos);
                   }
-                  echo "$query_string";
+                  echo "$query_string&";
                 }
 
                 echo "page=$i&limit=$limit";
@@ -627,11 +627,11 @@
               <a href="./products.php?<?php
                 $query_string = $_SERVER['QUERY_STRING'];
                 if(!empty($query_string)) {
-                  $pos = strpos($query_string, 'page');
+                  $pos = strpos($query_string, '&page');
                   if(!is_bool($pos)){
                     $query_string = substr($query_string, 0, $pos);
                   }
-                  echo "$query_string";
+                  echo "$query_string&";
                 }
 
                 $page_next = $page + 1;

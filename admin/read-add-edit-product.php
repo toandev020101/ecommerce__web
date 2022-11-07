@@ -45,7 +45,8 @@
 
         if($action == "edit"){
           // xóa ảnh cũ nếu chỉnh sửa
-          unlink('../uploads/' . $row_product_by_id["thumbnail"]);
+          if(!empty($row_product_by_id["thumbnail"]))
+            unlink('../uploads/' . $row_product_by_id["thumbnail"]);
         }
       }
 
@@ -67,7 +68,8 @@
             $file_name_list[$index] = $row_image_list_by_product_id[$index][0];
           }else {
             // xóa ảnh cũ nếu chỉnh sửa
-            unlink('../uploads/' . $row_image_list_by_product_id[$index][0]);
+            if(!empty($row_image_list_by_product_id[$index][0]))
+              unlink('../uploads/' . $row_image_list_by_product_id[$index][0]);
           }
         }
       }
