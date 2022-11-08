@@ -28,11 +28,9 @@
     $query_delete_user_by_id = mysqli_query($conn, $sql_delete_user_by_id);
 
     if($query_delete_user_by_id){
-      if($row_user_by_id['avatar'] != 'no_avatar.img'){
-        // xóa ảnh tài khoản đã xóa
-        if($row_user_by_id["avatar"] != 'no_avatar.jpg'){
-          unlink('../uploads/' . $row_user_by_id["avatar"]);
-        }
+      // xóa ảnh tài khoản đã xóa
+      if($row_user_by_id["avatar"] != 'no_avatar.jpg'){
+        unlink('../uploads/' . $row_user_by_id["avatar"]);
       }
 
       toast('users__toast', 'success', 'Xóa thành công');
