@@ -20,9 +20,9 @@
   }
 
   $product_list = [];
-  if(isset($_SESSION['product_order'])){
+  if(isset($_GET['action'])){
     array_push($product_list, $_SESSION['product_order']);
-  }else if(isset($_SESSION['product_list'])){
+  }else {
     foreach ($_SESSION['product_list'] as $product){
       if($product['checked']){
         array_push($product_list, $product);
@@ -84,7 +84,7 @@
         if(!isset($_SESSION['payment__toast'])){
           unset($_SESSION['info']);
 
-          if(isset($_SESSION['product_order'])) {
+          if(isset($_GET['action'])) {
             unset($_SESSION['product_order']);
           }else {
             // xóa sản phẩm trong giỏ hàng
@@ -132,9 +132,9 @@
     <div class="container">
       <!-- breadcumb -->
       <div class="breadcumb">
-        <a href="/" class="link">Trang chủ</a>
+        <a href="./index.php" class="link">Trang chủ</a>
         <span><i class="bx bxs-chevrons-right"></i></span>
-        <a href="./cart.php" class="link">Giỏ hàng</a>
+        <?php echo isset($_GET['action']) ? '<a href="./products.php" class="link">Tất cả sản phẩm</a>' : '<a href="./cart.php" class="link">Giỏ hàng</a>';?>
         <span><i class="bx bxs-chevrons-right"></i></span>
         <a href="./payment.php" class="link active">Thanh toán</a>
       </div>

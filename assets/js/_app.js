@@ -49,14 +49,6 @@ const quantityPlusBtnClick = (quantityPlusBtnList) => {
 						totalPriceCurrent.toLocaleString('en-US') + 'đ'
 				}
 			}
-
-			const cartRowForm = quantity.parentNode
-			if (cartRowForm) {
-				const cartRowInput = cartRowForm.querySelector('.cart__row-submit')
-				if (cartRowInput) {
-					cartRowInput.click()
-				}
-			}
 		}
 	})
 }
@@ -101,14 +93,6 @@ const quantityMinusBtnClick = (quantityMinusBtnList) => {
 					const totalPriceCurrent = currentPriceNum * (quantityNumContent - 1)
 					totalPrice.textContent =
 						totalPriceCurrent.toLocaleString('en-US') + 'đ'
-				}
-			}
-
-			const cartRowForm = quantity.parentNode
-			if (cartRowForm) {
-				const cartRowInput = cartRowForm.querySelector('.cart__row-submit')
-				if (cartRowInput) {
-					cartRowInput.click()
 				}
 			}
 		}

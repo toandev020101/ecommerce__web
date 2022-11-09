@@ -266,7 +266,7 @@
         </div>
 
         <div class="btn-wrapper read-add-edit__line">
-          <?php echo $action == 'add' ? '<button type="reset" class="btn reset__btn">Làm mới</button>' : '';?>
+          <?php echo $action == 'add' ? '<button type="reset" class="btn reset-form__btn">Làm mới</button>' : '';?>
 
           <button class="btn btn--primary" name="btnSubmit"><?php
           if($action == 'read'){

@@ -9,26 +9,6 @@
     $product_list = $_SESSION['product_list'];
   }
 
-  if(isset($_POST['btnColorSubmit'])){
-    $index = $_POST['index'];
-    $color_name = $_POST['color_name'];
-
-    $_SESSION['product_list'][$index]['color'] = $color_name; 
-
-    // cập nhật product_list
-    $product_list = $_SESSION['product_list'];
-  }
-
-  if(isset($_POST['btnQuantitySubmit'])){
-    $index = $_POST['index'];
-    $quantity = $_POST['quantity'];
-
-    $_SESSION['product_list'][$index]['quantity'] = $quantity;
-
-    // cập nhật product_list
-    $product_list = $_SESSION['product_list'];
-  }
-
   if(isset($_POST['btnDel'])){
     $index = $_POST['index'];
 
@@ -43,9 +23,18 @@
   if(isset($_POST['btnSubmit'])){
     if(isset($_POST['index_list'])){
       $index_list = $_POST['index_list'];
+      $color_list = $_POST['color_name_list'];
+      $quantity_list = $_POST['quantity_list'];
+
+      print_r($color_list);
+      print_r($quantity_list);
+
       foreach($index_list as $index){
         $_SESSION['product_list'][$index]['checked'] = true;
+        $_SESSION['product_list'][$index]['color'] = $color_list[$index];
+        $_SESSION['product_list'][$index]['quantity'] = $quantity_list[$index];
       }
+
       redirect('./payment.php');
     }else {
       toast('cart__toast', 'error', 'Vui lòng chọn sản phẩm');
@@ -80,7 +69,7 @@
     <div class="container">
       <!-- breadcumb -->
       <div class="breadcumb">
-        <a href="/" class="link">Trang chủ</a>
+        <a href="./index.php" class="link">Trang chủ</a>
         <span><i class="bx bxs-chevrons-right"></i></span>
         <a href="./cart.php" class="link active">Giỏ hàng</a>
       </div>
@@ -144,20 +133,19 @@
                   </div>
                 </td>
                 <td>
-                  <form action="" method="post">
-                    <input type="number" name="index" value="<?php echo $index; ?>" hidden>
-                    <div class="dropdown">
-                      <div class="dropdown__select cart__color">
-                        <span class="dropdown__selected">
-                          <?php echo $product['color'];?>
-                        </span>
-                        <i class='bx bx-chevron-down'></i>
-                        <input type="text" name="color_name" class="dropdown__input"
-                          value="<?php echo $product['color'];?>" hidden>
-                      </div>
+                  <input type="number" name="index" value="<?php echo $index; ?>" hidden>
+                  <div class="dropdown">
+                    <div class="dropdown__select cart__color">
+                      <span class="dropdown__selected">
+                        <?php echo $product['color'];?>
+                      </span>
+                      <i class='bx bx-chevron-down'></i>
+                      <input type="text" name="color_name_list[]" class="dropdown__input"
+                        value="<?php echo $product['color'];?>" hidden>
+                    </div>
 
-                      <ul class="dropdown__list">
-                        <?php
+                    <ul class="dropdown__list">
+                      <?php
                         // lấy color id
                         $sql_product_color_list_by_product_id = "SELECT color_id FROM product_colors WHERE product_id = $product_id";
                         $query_product_color_list_by_product_id = mysqli_query($conn, $sql_product_color_list_by_product_id);
@@ -170,40 +158,35 @@
                           $query_color_by_id = mysqli_query($conn, $sql_color_by_id);
                           $row_color_by_id = mysqli_fetch_assoc($query_color_by_id);
                       ?>
-                        <li
-                          class="dropdown__item <?php echo $product['color'] == $row_color_by_id['name'] ? 'active' : '';?>">
-                          <span class=" dropdown__text" data-value="<?php echo $row_color_by_id['name']; ?>">
-                            <?php echo $row_color_by_id['name'];?>
-                          </span>
-                        </li>
-                        <?php
+                      <li
+                        class="dropdown__item <?php echo $product['color'] == $row_color_by_id['name'] ? 'active' : '';?>">
+                        <span class=" dropdown__text" data-value="<?php echo $row_color_by_id['name']; ?>">
+                          <?php echo $row_color_by_id['name'];?>
+                        </span>
+                      </li>
+                      <?php
                           }
                         ?>
-                      </ul>
-                    </div>
-                    <input type="submit" name="btnColorSubmit" class="cart__row-submit" hidden>
-                  </form>
+                    </ul>
+                  </div>
                 </td>
                 <td>
                   <span class="cart__current-price"><?php echo number_format($product['price']);?>đ</span>
                 </td>
                 <td>
-                  <form action="" method="post">
-                    <input type="number" name="index" value="<?php echo $index; ?>" hidden>
-                    <span class="quantity">
-                      <span class="quantity__btn quantity__btn-plus">
-                        <i class='bx bx-plus'></i>
-                      </span>
-                      <span class="quantity__number"><?php echo $product['quantity'];?></span>
-                      <span
-                        class="quantity__btn quantity__btn-minus <?php echo $product['quantity'] == 1 ? 'disabled' : ''?>">
-                        <i class='bx bx-minus'></i>
-                      </span>
-                      <input type="number" name="quantity" class="quantity__input"
-                        value="<?php echo $product['quantity']; ?>" hidden>
+                  <input type="number" name="index" value="<?php echo $index; ?>" hidden>
+                  <span class="quantity">
+                    <span class="quantity__btn quantity__btn-plus">
+                      <i class='bx bx-plus'></i>
                     </span>
-                    <input type="submit" name="btnQuantitySubmit" class="cart__row-submit" hidden>
-                  </form>
+                    <span class="quantity__number"><?php echo $product['quantity'];?></span>
+                    <span
+                      class="quantity__btn quantity__btn-minus <?php echo $product['quantity'] == 1 ? 'disabled' : ''?>">
+                      <i class='bx bx-minus'></i>
+                    </span>
+                    <input type="number" name="quantity_list[]" class="quantity__input"
+                      value="<?php echo $product['quantity']; ?>" hidden>
+                  </span>
                 </td>
                 <td>
                   <span

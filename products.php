@@ -122,7 +122,7 @@
     <div class="container">
       <!-- breadcumb -->
       <div class="breadcumb">
-        <a href="/" class="link">Trang chủ</a>
+        <a href="./index.php" class="link">Trang chủ</a>
         <span><i class="bx bxs-chevrons-right"></i></span>
         <a href="./products.php" class="link active">Tất cả sản phẩm</a>
       </div>
@@ -189,14 +189,18 @@
 
             <div class="products-filter__input-wrapper">
               <div class="input-field">
-                <input type="number" class="input-field__input products-filter__input" placeholder=" ">
+                <input type="number" class="input-field__input products-filter__input" value="<?php
+                  echo isset($_GET['price_from']) ? $_GET['price_from'] : '';
+                ?>" placeholder=" ">
                 <label class="input-field__label">Từ</label>
               </div>
 
               <span class="products-filter__hyphen">-</span>
 
               <div class="input-field">
-                <input type="number" class="input-field__input products-filter__input" placeholder=" ">
+                <input type="number" class="input-field__input products-filter__input" value="<?php
+                  echo isset($_GET['price_to']) ? $_GET['price_to'] : '';
+                ?>" placeholder=" ">
                 <label class="input-field__label">Đến</label>
               </div>
             </div>

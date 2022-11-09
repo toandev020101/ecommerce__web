@@ -46,7 +46,7 @@
       toast('product-detail__toast', 'success', 'Thêm vào giỏ hàng thành công');
     }else {
       $_SESSION['product_order'] = $product_submit;
-      redirect('./payment.php');
+      redirect('./payment.php?action=buy_now');
     }
   }
 ?>
@@ -79,11 +79,12 @@
     <div class="bg-main">
       <!-- breadcumb -->
       <div class="breadcumb">
-        <a href="/" class="link">Trang chủ</a>
+        <a href="./index.php" class="link">Trang chủ</a>
         <span><i class="bx bxs-chevrons-right"></i></span>
         <a href="./products.php" class="link">Tất cả sản phẩm</a>
         <span><i class="bx bxs-chevrons-right"></i></span>
-        <a href="/" class="link active"><?php echo $row_product_by_slug['name'];?></a>
+        <a href="./product-detail.php?slug=<?php echo $row_product_by_slug['slug'];?>"
+          class="link active"><?php echo $row_product_by_slug['name'];?></a>
       </div>
       <!-- end breadcumb -->
 

@@ -1,6 +1,6 @@
 // let - const
 const uploadInputList = $$('.upload__input')
-const resetFormBtn = $('.reset__btn')
+const resetFormBtn = $('.reset-form__btn')
 // end let - const
 
 // function
@@ -71,8 +71,9 @@ const uploadFile = (uploadInputList) => {
 }
 
 const resetForm = (resetFormBtn) => {
-	resetFormBtn.onclick = () => {
-		const form = resetFormBtn.parentNode.parentNode
+	const form = resetFormBtn.parentNode.parentNode
+	console.log(form)
+	form.onreset = () => {
 		const uploadList = form.querySelectorAll('.upload')
 		uploadList.forEach((upload) => {
 			const uploadImg = upload.querySelector('.upload__img')

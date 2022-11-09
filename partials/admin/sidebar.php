@@ -52,7 +52,7 @@
   </ul>
 
   <form action="" method="post">
-    <button class="reset__btn" name="btnLogout">
+    <button class="reset__btn-logout" name="btnLogout">
       <div class="sidebar__logout sidebar__menu-item">
         <span class="sidebar__menu-link" tooltip-title="Đăng xuất">
           <i class='bx bx-log-out sidebar__menu-icon'></i>

@@ -253,6 +253,10 @@ div.search--right {
 	font-weight: 500;
 }
 
+.reset-form__btn {
+	margin-right: 15px;
+}
+
 /* text editor */
 .text-editor__header {
 	background-color: #f0f0f0;

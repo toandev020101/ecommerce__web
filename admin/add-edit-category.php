@@ -202,7 +202,7 @@
         </div>
 
         <div class="btn-wrapper read-add-edit__line">
-          <?php echo $action != 'edit' ? '<button type="reset" class="btn reset__btn">Làm mới</button>' : '';?>
+          <?php echo $action != 'edit' ? '<button type="reset" class="btn reset-form__btn">Làm mới</button>' : '';?>
           <button class="btn btn--primary" name="btnSubmit"
             value="submit"><?php echo $action == 'edit' ? 'Lưu lại' : 'Thêm mới';?></button>
         </div>
