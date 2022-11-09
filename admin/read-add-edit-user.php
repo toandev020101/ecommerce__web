@@ -129,7 +129,7 @@
           </div>
           <div class="upload">
             <img
-              src="<?php echo $action != "add" && $row_user_by_id["avatar"] != 'no_avatar.img' ? '../uploads/' . $row_user_by_id["avatar"] : 'no-image'; ?>"
+              src="<?php echo $action != "add" && $row_user_by_id["avatar"] != 'no_avatar.jpg' ? '../uploads/' . $row_user_by_id["avatar"] : 'no-image'; ?>"
               alt="<?php echo $action != "add" ? $row_user_by_id["avatar"] : ''; ?>" class="upload__img">
             <div class="upload__content">
               <i class='bx bx-cloud-upload upload__icon'></i>
