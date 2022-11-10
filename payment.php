@@ -88,11 +88,14 @@
             unset($_SESSION['product_order']);
           }else {
             // xóa sản phẩm trong giỏ hàng
+            $product_list_new = [];
             foreach ($_SESSION['product_list'] as $index => $product){
               if($product['checked']){
-                array_splice($_SESSION['product_list'], $index, 1);
+                array_push($product_list_new);
               }
             }
+
+            $_SESSION['product_list'] = $product_list_new;
           }
 
           toast('payment__toast', 'error', 'Đặt hàng thành công');
