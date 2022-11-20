@@ -10,8 +10,8 @@
     . Quản lý tài khoản (thêm, sửa, xóa)
   - Giao diện chính:
     . Trang chủ
-    . Sản phẩm (hiển thị, lọc)
-    . Giỏ hàng (xem chi tiết, xóa)
+    . Sản phẩm (hiển thị, lọc, xem chi tiết)
+    . Giỏ hàng (hiển thị danh sách sản phẩm, xóa)
     . Thanh toán (thêm, sửa thông tin, thanh toán)
 - Công nghệ: HTML - CSS - JavaScript - PHP - MySQL
 - Thành viên:
